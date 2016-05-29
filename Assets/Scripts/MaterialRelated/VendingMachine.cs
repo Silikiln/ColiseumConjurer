@@ -1,17 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class VendingMachine : MonoBehaviour {
+public class VendingMachine {
     private List<PortalMaterial> visiblePMs = new List<PortalMaterial>();
     public int variableMachineSize = 3;
 
-    //this object will need to be in the game manager class but for now it is here
-    MaterialHandler mh = new MaterialHandler();
-
     void Start()
     {
-        //this would be in the game manager class
-        mh.ImportMaterials();
 
         RefreshVendingMachine();
     }
@@ -24,7 +19,7 @@ public class VendingMachine : MonoBehaviour {
             requestedPM = visiblePMs[vpmIndex];
             if (replace){
                 //generate a new random material and stick it in the list
-                PortalMaterial replacementMaterial = mh.GenerateRandomMaterial();
+                PortalMaterial replacementMaterial = GameManager.mh.GenerateRandomMaterial();
                 visiblePMs[vpmIndex] = replacementMaterial;
             }
         }
@@ -36,8 +31,8 @@ public class VendingMachine : MonoBehaviour {
     public void RefreshVendingMachine()
     {
         for (int i=0; i<variableMachineSize; i++){
-            PortalMaterial replacementMaterial = mh.GenerateRandomMaterial();
-            visiblePMs[i] = replacementMaterial;
+            PortalMaterial tempMaterial = GameManager.mh.GenerateRandomMaterial();
+            visiblePMs[i] = tempMaterial;
         }
     }
 }
