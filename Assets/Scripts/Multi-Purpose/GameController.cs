@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameManager : MonoBehaviour {
+public class GameController : MonoBehaviour {
     //set by the inspector
+    public GameObject vendingPanel;
 
     //random other variables
     public static MaterialHandler mh = new MaterialHandler();
+    public static VendingMachine vendor;
 
     void Start () {
         //load the materials from the xml
         mh.ImportMaterials();
+        vendor = new VendingMachine(vendingPanel);
+        vendor.RefreshVendingMachine();
         //Debug.Log(mh.GetMaterialByName("PMOne").toString());
         //Debug.Log(mh.GetMaterialByName("PMTwo").toString());
         //Debug.Log(mh.GetMaterialByName("PMThree").toString());

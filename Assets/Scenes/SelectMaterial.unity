@@ -169,7 +169,7 @@ GameObject:
   - 222: {fileID: 139676448}
   - 114: {fileID: 139676447}
   m_Layer: 5
-  m_Name: Text
+  m_Name: RightMaterialText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -243,7 +243,7 @@ GameObject:
   - 114: {fileID: 249652399}
   - 114: {fileID: 249652398}
   m_Layer: 5
-  m_Name: LeftOption
+  m_Name: VendLeftOption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -305,7 +305,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 249652399}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1811920265}
+        m_MethodName: ButtonClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 249652396}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &249652399
@@ -707,7 +718,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 625427831}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1811920265}
+        m_MethodName: ButtonClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 625427828}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &625427831
@@ -918,7 +940,7 @@ RectTransform:
   m_Children:
   - {fileID: 1974933521}
   m_Father: {fileID: 1497747258}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 360}
@@ -985,6 +1007,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 123224011}
+  - {fileID: 1880204591}
   m_Father: {fileID: 1497747258}
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0}
@@ -1177,7 +1200,7 @@ GameObject:
   - 222: {fileID: 958453919}
   - 114: {fileID: 958453918}
   m_Layer: 5
-  m_Name: Text
+  m_Name: LeftMaterialText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1268,7 +1291,7 @@ RectTransform:
   m_Children:
   - {fileID: 1385510622}
   m_Father: {fileID: 1497747258}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 320}
@@ -1495,7 +1518,7 @@ RectTransform:
   m_Children:
   - {fileID: 260747237}
   m_Father: {fileID: 1497747258}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 240}
@@ -1545,7 +1568,7 @@ GameObject:
   - 222: {fileID: 1195363591}
   - 114: {fileID: 1195363590}
   m_Layer: 5
-  m_Name: Text
+  m_Name: MidMaterialText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1753,7 +1776,7 @@ GameObject:
   - 114: {fileID: 1347555512}
   - 114: {fileID: 1347555511}
   m_Layer: 5
-  m_Name: RightOption
+  m_Name: VendRightOption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1815,7 +1838,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1347555512}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1811920265}
+        m_MethodName: ButtonClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1347555509}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1347555512
@@ -1935,7 +1969,7 @@ GameObject:
   - 222: {fileID: 1476919655}
   - 114: {fileID: 1476919654}
   m_Layer: 5
-  m_Name: Text
+  m_Name: PMDescriptText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2027,7 +2061,6 @@ RectTransform:
   - {fileID: 912156033}
   - {fileID: 1530091737}
   - {fileID: 782495893}
-  - {fileID: 1880204591}
   - {fileID: 1933266233}
   - {fileID: 1152630254}
   - {fileID: 1959939198}
@@ -2085,7 +2118,7 @@ GameObject:
   - 222: {fileID: 1511630606}
   - 114: {fileID: 1511630605}
   m_Layer: 5
-  m_Name: DescriptionArea
+  m_Name: VendDescriptionArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2222,7 +2255,7 @@ GameObject:
   - 114: {fileID: 1604242848}
   - 114: {fileID: 1604242847}
   m_Layer: 5
-  m_Name: MidOption
+  m_Name: VendMidOption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2284,7 +2317,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1604242848}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1811920265}
+        m_MethodName: ButtonClick
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1604242845}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1604242848
@@ -2441,7 +2485,7 @@ RectTransform:
   m_Children:
   - {fileID: 1319558610}
   m_Father: {fileID: 1497747258}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 400}
@@ -2489,8 +2533,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 1811920264}
   - 114: {fileID: 1811920263}
+  - 114: {fileID: 1811920265}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: GameController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2507,6 +2552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60508bed00175644aa0b62b58ce6208d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vendingPanel: {fileID: 471752498}
 --- !u!4 &1811920264
 Transform:
   m_ObjectHideFlags: 0
@@ -2519,6 +2565,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!114 &1811920265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1811920262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb199907cb7b6f04bb94a518bcf3a9a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1880204590
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,11 +2604,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 689191221}
-  m_Father: {fileID: 1497747258}
-  m_RootOrder: 3
+  m_Father: {fileID: 782495893}
+  m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 160}
+  m_AnchoredPosition: {x: 0, y: 57.5}
   m_SizeDelta: {x: 265, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1880204592
@@ -2616,7 +2673,7 @@ RectTransform:
   m_Children:
   - {fileID: 367811165}
   m_Father: {fileID: 1497747258}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 200}
@@ -2684,7 +2741,7 @@ RectTransform:
   m_Children:
   - {fileID: 2005188951}
   m_Father: {fileID: 1497747258}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 280}
