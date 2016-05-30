@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using System.Collections;
 
 public class GameController : MonoBehaviour {
     //set by the inspector
     public GameObject vendingPanel;
+    public GameObject portalPanel;
 
     //random other variables
+    public static List<PortalMaterial> stageMaterials = new List<PortalMaterial>();
     public static MaterialHandler mh = new MaterialHandler();
     public static VendingMachine vendor;
 
     void Start () {
         //load the materials from the xml
         mh.ImportMaterials();
-        vendor = new VendingMachine(vendingPanel);
+        vendor = new VendingMachine(portalPanel, vendingPanel);
         vendor.RefreshVendingMachine();
         //Debug.Log(mh.GetMaterialByName("PMOne").toString());
         //Debug.Log(mh.GetMaterialByName("PMTwo").toString());
@@ -28,4 +31,5 @@ public class GameController : MonoBehaviour {
 	void Update () {
 	
 	}
+
 }

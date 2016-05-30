@@ -5,14 +5,20 @@ using UnityEngine.UI;
 
 public class VendingMachine {
     private GameObject vendPanel;
+    private GameObject portalPanel;
     private List<PortalMaterial> visiblePMs = new List<PortalMaterial>();
     private PortalMaterial displayMaterial;
+    private int displayMaterialIndex = -1;
     public int variableMachineSize = 3;
-
+    private Text displayText, left, mid, right;
+    private int maxPortalSize = 10;
+    private int stageIndex = 1;
     //contructor
-    public VendingMachine(GameObject panel)
+    public VendingMachine(GameObject pPanel, GameObject vPanel)
     {
-        this.vendPanel = panel;
+        this.portalPanel = pPanel;
+        this.vendPanel = vPanel;
+        displayText = vendPanel.transform.Find("VendDescriptionArea/PMDescriptText").GetComponent<Text>();
     }
 
     //Return the requested material index, then determine if it needs to be replaced
@@ -49,7 +55,6 @@ public class VendingMachine {
         //this needs to not be hard coded so it can be scalable later
         if (vendPanel != null)
         {
-            Text left, mid, right;
             left = vendPanel.transform.Find("VendLeftOption/LeftMaterialText").GetComponent<Text>();
             mid = vendPanel.transform.Find("VendMidOption/MidMaterialText").GetComponent<Text>();
             right = vendPanel.transform.Find("VendRightOption/RightMaterialText").GetComponent<Text>();
@@ -74,6 +79,7 @@ public class VendingMachine {
         else {
             //a material selector was clicked
             displayMaterial = AccessVendingMachine(buttonIndex, false);
+            displayMaterialIndex = buttonIndex;
             DisplayMaterialDescription();
         }
     }
@@ -81,7 +87,6 @@ public class VendingMachine {
     //displays the material information
     public void DisplayMaterialDescription()
     {
-       Text displayText = vendPanel.transform.Find("VendDescriptionArea/PMDescriptText").GetComponent<Text>();
         if(displayText != null)
             displayText.text = displayMaterial.toString();
     }
@@ -89,7 +94,50 @@ public class VendingMachine {
     //use the selected material for the next portal stage
     public void ConfirmMaterialSelection()
     {
-        //clear description
-        
+        if (displayText != null && displayMaterial != null && displayMaterialIndex != -1 && stageIndex <= maxPortalSize){
+            //add to the list
+            //Debug.Log("Display material index: " + displayMaterialIndex);
+            GameController.stageMaterials.Add(AccessVendingMachine(displayMaterialIndex, true));
+            //update the vending display
+            DisplayPMChoices();
+            //update the portal display
+            DisplayPortalChoices();
+        }
+        //clear material
+        ClearDisplayMaterial();
+    }
+
+    public void DisplayPortalChoices()
+    {
+        //remove everything from portalPanel
+        foreach (Transform child in portalPanel.transform){
+            GameObject.Destroy(child.gameObject);
+        }
+        int yPos = 0;
+        stageIndex = 1;
+        //access the list of materials, loop over each one and display
+        foreach (PortalMaterial tempMaterial in GameController.stageMaterials){
+            //this 10 needs to be changed for scaleability
+            if(stageIndex <= maxPortalSize){
+                yPos += 40;
+                //instantiate a portalblock prefab
+                GameObject portalStageInfo = GameObject.Instantiate(Resources.Load("PortalScreen/PortalStageInfo")) as GameObject;
+                if (portalStageInfo != null){
+                    //set rect transform parent
+                    portalStageInfo.GetComponent<RectTransform>().SetParent(portalPanel.GetComponent<RectTransform>(), false);
+                    portalStageInfo.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, yPos, 0);
+                    //set text to be the tempMaterial info
+                    portalStageInfo.transform.Find("StageText").GetComponent<Text>().text = "Stage " + stageIndex + " : " + tempMaterial.toString();
+                    stageIndex++;
+                }
+            }
+        }
+    }
+
+    public void ClearDisplayMaterial()
+    {
+        displayText.text = "";
+        displayMaterial = null;
+        displayMaterialIndex = -1;
     }
 }
