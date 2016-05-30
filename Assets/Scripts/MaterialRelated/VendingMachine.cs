@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+
 public class VendingMachine {
     private GameObject vendPanel;
     private List<PortalMaterial> visiblePMs = new List<PortalMaterial>();
@@ -17,7 +19,7 @@ public class VendingMachine {
     public PortalMaterial AccessVendingMachine(int vpmIndex, bool replace)
     {
         PortalMaterial requestedPM = null;
-        if (vpmIndex >= 0 && visiblePMs.Count <= vpmIndex){
+        if (vpmIndex >= 0 && visiblePMs.Count - 1 >= vpmIndex){
             requestedPM = visiblePMs[vpmIndex];
             if (replace){
                 //generate a new random material and stick it in the list
@@ -44,18 +46,21 @@ public class VendingMachine {
     //Displays the available vending machine choices
     public void DisplayPMChoices()
     {
-        Transform test = vendPanel.transform.FindChild("LeftMaterialText");
-        Debug.Log(test.name);
-
         //this needs to not be hard coded so it can be scalable later
-        GUIText left, mid, right;
-        left = vendPanel.transform.FindChild("LeftMaterialText").GetComponent<GUIText>();
-        mid = vendPanel.transform.Find("MidMaterialText").GetComponent<GUIText>();
-        right = vendPanel.transform.Find("RightMaterialText").GetComponent<GUIText>();
+        if (vendPanel != null)
+        {
+            Text left, mid, right;
+            left = vendPanel.transform.Find("VendLeftOption/LeftMaterialText").GetComponent<Text>();
+            mid = vendPanel.transform.Find("VendMidOption/MidMaterialText").GetComponent<Text>();
+            right = vendPanel.transform.Find("VendRightOption/RightMaterialText").GetComponent<Text>();
 
-        left.text = AccessVendingMachine(0, false).toString();
-        mid.text = AccessVendingMachine(1, false).toString();
-        right.text = AccessVendingMachine(2, false).toString();
+            if (left != null && mid != null && right != null)
+            {
+                left.text = AccessVendingMachine(0, false).toString();
+                mid.text = AccessVendingMachine(1, false).toString();
+                right.text = AccessVendingMachine(2, false).toString();
+            }
+        }
     }
 
     //button was clicked, called from ui button clicker
@@ -76,13 +81,15 @@ public class VendingMachine {
     //displays the material information
     public void DisplayMaterialDescription()
     {
-       TextMesh displayText = vendPanel.transform.Find("PMDescriptText").GetComponent<TextMesh>();
-       displayText.text = displayMaterial.toString();
+       Text displayText = vendPanel.transform.Find("VendDescriptionArea/PMDescriptText").GetComponent<Text>();
+        if(displayText != null)
+            displayText.text = displayMaterial.toString();
     }
 
     //use the selected material for the next portal stage
     public void ConfirmMaterialSelection()
     {
-
+        //clear description
+        
     }
 }
