@@ -97,7 +97,7 @@ GameObject:
   - 114: {fileID: 582384261}
   - 58: {fileID: 582384265}
   - 50: {fileID: 582384264}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,6 +117,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 20
   MaxSpeed: 4
+  fireballPrefab: {fileID: 192154, guid: 37117fd4e6a81434ca34ddf073130528, type: 2}
+  projectileSpeed: 500
 --- !u!212 &582384262
 SpriteRenderer:
   m_ObjectHideFlags: 0
