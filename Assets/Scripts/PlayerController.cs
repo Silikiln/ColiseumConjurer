@@ -1,33 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
-    public float MoveSpeed = 1;
-    public float MaxSpeed = 1.5f;
-
+public class PlayerController : MovingEntity {
     public GameObject fireballPrefab;
     public float projectileSpeed = 500;
 
-    new Rigidbody2D rigidbody;
-
-	// Use this for initialization
-	void Start () {
-        rigidbody = GetComponent<Rigidbody2D>();
-	}
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-        {
-            GameObject fireball = (GameObject)Instantiate(fireballPrefab, transform.position, Quaternion.identity);
-
-            Vector2 angle = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            fireball.GetComponent<Rigidbody2D>().AddForce(angle.normalized * projectileSpeed);
-        }
+        Attack();
     }
 	
 	void FixedUpdate () {
         Movement();
+    }
+
+    void Attack()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        {
+            GameObject fireball = (GameObject)Instantiate(fireballPrefab, transform.position, Quaternion.identity);
+            fireball.GetComponent<FireballController>().parent = GetComponent<Entity>();
+            Vector2 angle = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            fireball.GetComponent<Rigidbody2D>().AddForce(angle.normalized * projectileSpeed);
+        }
     }
 
     void Movement()

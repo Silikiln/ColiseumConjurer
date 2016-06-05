@@ -1,19 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyController : MonoBehaviour {
+public class EnemyController : MovingEntity {
     public float knockbackPower = 5;
-    public float MoveSpeed = .75f;
-    public float MaxSpeed = 1;
 
     public Transform target;
-
-    new Rigidbody2D rigidbody;
-
-	// Use this for initialization
-	void Start () {
-        rigidbody = GetComponent<Rigidbody2D>();
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -22,6 +13,8 @@ public class EnemyController : MonoBehaviour {
 
     void FixedUpdate()
     {
+        if (target == null) return;
+
         Vector2 moveDirection = target.position - transform.position;
         rigidbody.AddForce(moveDirection.normalized * MoveSpeed);
         if (rigidbody.velocity.magnitude > MaxSpeed)
@@ -33,9 +26,9 @@ public class EnemyController : MonoBehaviour {
         if (coll.gameObject.layer != 8) return;
 
         GameObject player = coll.gameObject;
+        player.SendMessage("Hurt", Damage, SendMessageOptions.DontRequireReceiver);
         Rigidbody2D otherRigid = player.GetComponent<Rigidbody2D>();
         otherRigid.velocity = Vector2.zero;
         otherRigid.AddForce(((Vector2)(player.transform.position - transform.position)).normalized * knockbackPower);
-
     }
 }
