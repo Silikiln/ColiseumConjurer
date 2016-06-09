@@ -5,6 +5,8 @@ using System;
 using Random = UnityEngine.Random;
 
 public class PointMove : Trial {
+    static float MinimumDistance = 1;
+
     public PointMove()
     {
         Name = "Move to Point";
@@ -15,7 +17,7 @@ public class PointMove : Trial {
         pointPrefab = LoadResource<GameObject>("Point");
     }
 
-    Vector3 lastPosition;
+    Vector2 lastPosition = PlayerController.Instance.transform.position;
     int objectivesComplete = 0;
     GameObject pointPrefab;
 
@@ -23,18 +25,18 @@ public class PointMove : Trial {
     {
         objectivesComplete++;
         if (RequirementsMet)
-            Finish();
+            TrialHandler.Instance.EventFinished();
         else
             Setup();
     }
 
     public override void Setup()
     {
-        Vector3 position;
+        Vector2 position;
         do
         {
             position = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), 0);
-        } while (lastPosition != null && Vector3.Distance(lastPosition, position) > 1);
+        } while (Vector3.Distance(lastPosition, position) <= MinimumDistance);
         lastPosition = position;
         Instantiate(pointPrefab, position, Quaternion.identity);
     }

@@ -54,7 +54,7 @@ public class SimonSays : Trial
             StartCoroutine(shownPattern);
         }
         else if (RequirementsMet)
-            Finish();
+            TrialHandler.Instance.EventFinished();
     }
 
     bool InvalidPattern
@@ -110,11 +110,10 @@ public class SimonSays : Trial
         StartCoroutine(shownPattern);
     }
 
-    public override void Finish()
+    public override void Cleanup()
     {
         for (int i = 0; i < PointColors.Length; i++)
             Destroy(points[i].gameObject);
-        base.Finish();
     }
 
     public override bool RequirementsMet

@@ -27,10 +27,7 @@ public abstract class Trial : MonoBehaviour {
 
     public abstract void Setup();
     public abstract bool RequirementsMet { get; }
-    public virtual void Finish()
-    {
-        TrialHandler.main.EventFinished();
-    }
+    public virtual void Cleanup() { }
 
     protected T LoadResource<T>(string resource) where T : UnityEngine.Object
     {

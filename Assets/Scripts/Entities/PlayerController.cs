@@ -2,9 +2,16 @@
 using System.Collections;
 
 public class PlayerController : MovingEntity {
+    public static PlayerController Instance { get; private set; }
+
     public GameObject fireballPrefab;
     public float projectileSpeed = 500;
 
+    override protected void Start()
+    {
+        base.Start();
+        Instance = this;
+    }
 
     void Update()
     {
