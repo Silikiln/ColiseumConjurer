@@ -36,7 +36,7 @@ public class PointMove : Trial {
             position = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), 0);
         } while (lastPosition != null && Vector3.Distance(lastPosition, position) > 1);
         lastPosition = position;
-        GameObject.Instantiate(pointPrefab, position, Quaternion.identity);
+        Instantiate(pointPrefab, position, Quaternion.identity);
     }
 
     public override bool RequirementsMet

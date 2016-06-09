@@ -15,7 +15,7 @@ public class PointController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        ((PointMove)TrialHandler.main.currentTrial).PointReached();
+        ((PointMove)TrialHandler.CurrentTrial).PointReached();
         Destroy(gameObject);
     }
 }

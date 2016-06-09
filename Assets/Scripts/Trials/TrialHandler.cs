@@ -7,11 +7,11 @@ using Random = UnityEngine.Random;
 public class TrialHandler : MonoBehaviour {
 
     public static TrialHandler main;
-    public static Type[] PossibleEvents = { typeof(PointMove) };
+    public static Type[] PossibleEvents = { typeof(SimonSays) };
 
-    public Trial currentTrial;
+    public static Trial CurrentTrial { get { return main.GetComponent<Trial>(); } }
 
-    public Trial RandomTrial { get { return CreateTrial(PossibleEvents[Random.Range(0, PossibleEvents.Length)]); } }
+    public Type RandomTrial { get { return PossibleEvents[Random.Range(0, PossibleEvents.Length)]; } }
 
     // Use this for initialization
     void Start() {
@@ -21,17 +21,24 @@ public class TrialHandler : MonoBehaviour {
 
     public Trial CreateTrial(Type t) { return (Trial)Activator.CreateInstance(t); }
 
-    public void BeginEvent(Trial t)
+    public void BeginEvent(Type t)
     {
-        currentTrial = t;
-        currentTrial.Setup();
-
         Debug.Log("Beginning Trial: " + t.Name);
+
+        gameObject.AddComponent(t);
+        CurrentTrial.Setup();
     }
 
     public void EventFinished()
     {
         Debug.Log("Trial Complete!");
+        StartCoroutine(SwapEvent());
+    }
+
+    IEnumerator SwapEvent()
+    {
+        Destroy(CurrentTrial);
+        yield return new WaitForEndOfFrame();
         BeginEvent(RandomTrial);
     }
 }

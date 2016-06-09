@@ -23,6 +23,7 @@ public class PlayerController : MovingEntity {
             fireball.GetComponent<FireballController>().parent = GetComponent<Entity>();
             Vector2 angle = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             fireball.GetComponent<Rigidbody2D>().AddForce(angle.normalized * projectileSpeed);
+            Physics2D.IgnoreCollision(fireball.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
     }
 
