@@ -88,7 +88,7 @@ public class VendingMachine {
     public void DisplayMaterialDescription()
     {
         if(displayText != null)
-            displayText.text = displayMaterial.toString();
+            displayText.text = displayMaterial.toString() + "\n" + displayMaterial.GetAllEffects();
     }
 
     //use the selected material for the next portal stage

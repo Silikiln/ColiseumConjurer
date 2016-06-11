@@ -15,6 +15,7 @@ public class MaterialHandler {
         using (XmlReader reader = XmlReader.Create("Assets/PortalMaterials.xml"))
         {
             PortalMaterial tempPM = new PortalMaterial();
+            MaterialEffect tempME = new MaterialEffect();
             reader.ReadToFollowing("Material");
             while (!reader.EOF)
             {
@@ -28,12 +29,25 @@ public class MaterialHandler {
                         case "Name":
                             tempPM.materialName = reader.ReadInnerXml();
                             break;
+                        case "Effect":
+                            tempME = new MaterialEffect();
+                            break;
+                        case "Effect-Type":
+                            tempME.effectType = int.Parse(reader.ReadInnerXml());
+                            break;
+                        case "Effect-Value":
+                            tempME.effectValue = float.Parse(reader.ReadInnerXml());
+                            break;
+
                     }
                 else
                     switch (reader.Name)
                     {
                         case "Material":
                             pmList.Add(tempPM.materialName, tempPM);
+                            break;
+                        case "Effect":
+                            tempPM.AddEffect(tempME);
                             break;
                     }
             }
