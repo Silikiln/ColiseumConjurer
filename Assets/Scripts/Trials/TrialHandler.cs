@@ -17,7 +17,9 @@ public class TrialHandler : MonoBehaviour {
     // Use this for initialization
     void Start() {
         Instance = this;
+
         PossibleEvents = typeof(Trial).Assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(Trial))).ToArray();
+        //PossibleEvents = new Type[]{ typeof(ShapeSlot) };
     }
 
     void Update()
