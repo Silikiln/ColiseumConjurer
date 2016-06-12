@@ -29,6 +29,9 @@ public class MaterialHandler {
                         case "Name":
                             tempPM.materialName = reader.ReadInnerXml();
                             break;
+                        case "Color":
+                            tempPM.color = char.Parse(reader.ReadInnerXml());
+                            break;
                         case "Effect":
                             tempME = new MaterialEffect();
                             break;
@@ -62,6 +65,18 @@ public class MaterialHandler {
         return randomMaterial;
     }
 
+    //select a random material of the given color
+    public PortalMaterial GenerateRandomMaterial(char color)
+    {
+        PortalMaterial randomMaterial = new PortalMaterial();
+        do
+        {
+            randomMaterial = GetMaterialByNumber(Random.Range(0, pmList.Count));
+        } while (randomMaterial.color != color && randomMaterial.color != 'M');
+
+        return randomMaterial;
+    }
+
     //get material by providing a name
     public PortalMaterial GetMaterialByName(string givenName)
     {
@@ -74,5 +89,27 @@ public class MaterialHandler {
     {
         PortalMaterial requestedMaterial = pmList.Values[givenNumber];
         return requestedMaterial;
+    }
+
+    public Color GetMaterialColor(char color)
+    {
+        Color tempColorHex = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        switch (color)
+        {
+            case 'R':
+                tempColorHex = new Color(1.0f, 0.4f, 0.4f, 1.0f);
+                break;
+            case 'G':
+                tempColorHex = new Color(0.4f, 1.0f, 0.4f, 1.0f);
+                break;
+            case 'B':
+                tempColorHex = new Color(0.4f, 0.4f, 1.0f, 1.0f);
+                break;
+            case 'M':
+                tempColorHex = new Color(1.0f, 1.0f, 0.4f, 1.0f);
+                break;
+        }
+        //Debug.Log("Access Color: " + tempColorHex);
+        return tempColorHex;
     }
 }

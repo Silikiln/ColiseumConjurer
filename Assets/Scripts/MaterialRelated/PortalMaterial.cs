@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class PortalMaterial {
     public string materialName { get; set; }
     public string imageLocation { get; set; }
+    public char color { get; set; }
     private List<MaterialEffect> effects = new List<MaterialEffect>();
 
     public string toString(){
