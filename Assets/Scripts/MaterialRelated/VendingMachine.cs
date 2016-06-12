@@ -10,7 +10,9 @@ public class VendingMachine {
     private PortalMaterial displayMaterial;
     private int displayMaterialIndex = -1;
     public int variableMachineSize = 3;
-    private Text displayText, left, mid, right;
+    private Text displayText;
+    private char[] colorArray = {'R','G','B'};
+    private Text[] visibleMaterialsText = new Text[3];
     private int maxPortalSize = 10;
     private int stageIndex = 1;
     //contructor
@@ -27,9 +29,27 @@ public class VendingMachine {
         PortalMaterial requestedPM = null;
         if (vpmIndex >= 0 && visiblePMs.Count - 1 >= vpmIndex){
             requestedPM = visiblePMs[vpmIndex];
+            //determine if we want to generate a new random material and stick it in the list
             if (replace){
-                //generate a new random material and stick it in the list
-                PortalMaterial replacementMaterial = GameController.mh.GenerateRandomMaterial();
+                //check the color
+                char replacementMaterialColor = requestedPM.color;
+                if (requestedPM.color == 'M'){
+                    //we want to generate a color based on the index instead, this may need to be changed to something else later.
+                    //as of now, we could just run this switch everytime to always generate the replacement by index
+                    switch(vpmIndex)
+                    {
+                        case 0:
+                            replacementMaterialColor = 'R';
+                            break;
+                        case 1:
+                            replacementMaterialColor = 'G';
+                            break;
+                        case 2:
+                            replacementMaterialColor = 'B';
+                            break;
+                    }
+                }
+                PortalMaterial replacementMaterial = GameController.mh.GenerateRandomMaterial(replacementMaterialColor);
                 visiblePMs[vpmIndex] = replacementMaterial;
             }
         }
@@ -40,8 +60,8 @@ public class VendingMachine {
     //refresh the vending machine with x new random materials
     public void RefreshVendingMachine()
     {
-        for (int i=0; i<variableMachineSize; i++){
-            PortalMaterial tempMaterial = GameController.mh.GenerateRandomMaterial();
+        foreach (char color in colorArray) {
+            PortalMaterial tempMaterial = GameController.mh.GenerateRandomMaterial(color);
             visiblePMs.Add(tempMaterial);
         }
 
@@ -55,15 +75,16 @@ public class VendingMachine {
         //this needs to not be hard coded so it can be scalable later
         if (vendPanel != null)
         {
-            left = vendPanel.transform.Find("VendLeftOption/LeftMaterialText").GetComponent<Text>();
-            mid = vendPanel.transform.Find("VendMidOption/MidMaterialText").GetComponent<Text>();
-            right = vendPanel.transform.Find("VendRightOption/RightMaterialText").GetComponent<Text>();
+            visibleMaterialsText[0] = vendPanel.transform.Find("VendLeftOption/LeftMaterialText").GetComponent<Text>();
+            visibleMaterialsText[1] = vendPanel.transform.Find("VendMidOption/MidMaterialText").GetComponent<Text>();
+            visibleMaterialsText[2] = vendPanel.transform.Find("VendRightOption/RightMaterialText").GetComponent<Text>();
 
-            if (left != null && mid != null && right != null)
+            if (visibleMaterialsText[0] != null && visibleMaterialsText[1] != null && visibleMaterialsText[2] != null)
             {
-                left.text = AccessVendingMachine(0, false).toString();
-                mid.text = AccessVendingMachine(1, false).toString();
-                right.text = AccessVendingMachine(2, false).toString();
+                for (int x=0; x<visibleMaterialsText.Length; x++){
+                    visibleMaterialsText[x].text = AccessVendingMachine(x, false).toString();
+                    visibleMaterialsText[x].color = GameController.mh.GetMaterialColor(AccessVendingMachine(x, false).color);
+                }
             }
         }
     }
@@ -88,7 +109,7 @@ public class VendingMachine {
     public void DisplayMaterialDescription()
     {
         if(displayText != null)
-            displayText.text = displayMaterial.toString();
+            displayText.text = displayMaterial.toString() + "\n" + "Color: " + displayMaterial.color + "\n" + displayMaterial.GetAllEffects();
     }
 
     //use the selected material for the next portal stage
@@ -128,6 +149,7 @@ public class VendingMachine {
                     portalStageInfo.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, yPos, 0);
                     //set text to be the tempMaterial info
                     portalStageInfo.transform.Find("StageText").GetComponent<Text>().text = "Stage " + stageIndex + " : " + tempMaterial.toString();
+                    portalStageInfo.transform.Find("StageText").GetComponent<Text>().color = GameController.mh.GetMaterialColor(tempMaterial.color);
                     stageIndex++;
                 }
             }
