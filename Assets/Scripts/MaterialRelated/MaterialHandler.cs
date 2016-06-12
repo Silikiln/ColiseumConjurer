@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Linq;
 
+/* TODO: Move most of this functionality to static methods on PortalMaterial */
 public class MaterialHandler {
 
     private SortedList<string, PortalMaterial> pmList = new SortedList<string, PortalMaterial>();
@@ -27,7 +28,7 @@ public class MaterialHandler {
                             tempPM = new PortalMaterial();
                             break;
                         case "Name":
-                            tempPM.materialName = reader.ReadInnerXml();
+                            tempPM.MaterialName = reader.ReadInnerXml();
                             break;
                         case "Color":
                             tempPM.color = char.Parse(reader.ReadInnerXml());
@@ -47,7 +48,7 @@ public class MaterialHandler {
                     switch (reader.Name)
                     {
                         case "Material":
-                            pmList.Add(tempPM.materialName, tempPM);
+                            pmList.Add(tempPM.MaterialName, tempPM);
                             break;
                         case "Effect":
                             tempPM.AddEffect(tempME);

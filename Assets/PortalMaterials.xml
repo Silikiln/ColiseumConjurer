@@ -4,8 +4,8 @@
     <Color>R</Color>
     <Effects>
       <Effect>
-        <Effect-Type>1</Effect-Type>
-        <Effect-Value>1</Effect-Value>
+        <Effect-Type>0</Effect-Type>
+        <Effect-Value>.5</Effect-Value>
       </Effect>
     </Effects>
 	</Material>
@@ -30,19 +30,19 @@
     <Color>R</Color>
     <Effects>
       <Effect>
-        <Effect-Type>1</Effect-Type>
-        <Effect-Value>1</Effect-Value>
+        <Effect-Type>0</Effect-Type>
+        <Effect-Value>5</Effect-Value>
       </Effect>
     </Effects>
     <Effects>
       <Effect>
-        <Effect-Type>2</Effect-Type>
+        <Effect-Type>1</Effect-Type>
         <Effect-Value>2</Effect-Value>
       </Effect>
     </Effects>
     <Effects>
       <Effect>
-        <Effect-Type>3</Effect-Type>
+        <Effect-Type>2</Effect-Type>
         <Effect-Value>3</Effect-Value>
       </Effect>
     </Effects>
@@ -52,7 +52,7 @@
     <Color>G</Color>
     <Effects>
       <Effect>
-        <Effect-Type>4</Effect-Type>
+        <Effect-Type>0</Effect-Type>
         <Effect-Value>4</Effect-Value>
       </Effect>
     </Effects>
@@ -62,7 +62,7 @@
     <Color>G</Color>
     <Effects>
       <Effect>
-        <Effect-Type>5</Effect-Type>
+        <Effect-Type>1</Effect-Type>
         <Effect-Value>5</Effect-Value>
       </Effect>
     </Effects>
@@ -72,7 +72,7 @@
     <Color>G</Color>
     <Effects>
       <Effect>
-        <Effect-Type>6</Effect-Type>
+        <Effect-Type>2</Effect-Type>
         <Effect-Value>6</Effect-Value>
       </Effect>
     </Effects>
@@ -82,7 +82,7 @@
     <Color>B</Color>
     <Effects>
       <Effect>
-        <Effect-Type>7</Effect-Type>
+        <Effect-Type>0</Effect-Type>
         <Effect-Value>7</Effect-Value>
       </Effect>
     </Effects>
@@ -92,7 +92,7 @@
     <Color>B</Color>
     <Effects>
       <Effect>
-        <Effect-Type>8</Effect-Type>
+        <Effect-Type>1</Effect-Type>
         <Effect-Value>8</Effect-Value>
       </Effect>
     </Effects>
@@ -102,7 +102,7 @@
     <Color>B</Color>
     <Effects>
       <Effect>
-        <Effect-Type>9</Effect-Type>
+        <Effect-Type>2</Effect-Type>
         <Effect-Value>9</Effect-Value>
       </Effect>
     </Effects>
@@ -112,7 +112,7 @@
     <Color>M</Color>
     <Effects>
       <Effect>
-        <Effect-Type>10</Effect-Type>
+        <Effect-Type>0</Effect-Type>
         <Effect-Value>10</Effect-Value>
       </Effect>
     </Effects>

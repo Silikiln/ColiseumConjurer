@@ -10,17 +10,36 @@ public class VendingMachine {
     private PortalMaterial displayMaterial;
     private int displayMaterialIndex = -1;
     public int variableMachineSize = 3;
-    private Text displayText;
     private char[] colorArray = {'R','G','B'};
-    private Text[] visibleMaterialsText = new Text[3];
     private int maxPortalSize = 10;
     private int stageIndex = 1;
+
+    Image[] visibleMaterialImages = new Image[3];
+    Button[] materialSelectButtons = new Button[3];
+    Text materialNameText, materialDescriptionText, materialEffectSectionText, materialEffectTypeText, materialEffectValueText;
+
     //contructor
     public VendingMachine(GameObject pPanel, GameObject vPanel)
     {
         this.portalPanel = pPanel;
         this.vendPanel = vPanel;
-        displayText = vendPanel.transform.Find("VendDescriptionArea/PMDescriptText").GetComponent<Text>();
+
+        string vendDetailsParent = "VendDetailsPanel/Container/";
+        materialNameText = vendPanel.transform.Find(vendDetailsParent + "NameText").GetComponent<Text>();
+        materialDescriptionText = vendPanel.transform.Find(vendDetailsParent + "DescriptionText").GetComponent<Text>();
+        materialEffectSectionText = vendPanel.transform.Find(vendDetailsParent + "EffectSectionText").GetComponent<Text>();
+        materialEffectTypeText = vendPanel.transform.Find(vendDetailsParent + "EffectTypeText").GetComponent<Text>();
+        materialEffectValueText = vendPanel.transform.Find(vendDetailsParent + "EffectValueText").GetComponent<Text>();
+
+        visibleMaterialImages[0] = vendPanel.transform.Find("VendLeftOption/Image").GetComponent<Image>();
+        visibleMaterialImages[1] = vendPanel.transform.Find("VendMidOption/Image").GetComponent<Image>();
+        visibleMaterialImages[2] = vendPanel.transform.Find("VendRightOption/Image").GetComponent<Image>();
+
+        materialSelectButtons[0] = vendPanel.transform.Find("VendLeftOption").GetComponent<Button>();
+        materialSelectButtons[1] = vendPanel.transform.Find("VendMidOption").GetComponent<Button>();
+        materialSelectButtons[2] = vendPanel.transform.Find("VendRightOption").GetComponent<Button>();
+
+        ClearDisplayMaterial();
     }
 
     //Return the requested material index, then determine if it needs to be replaced
@@ -72,33 +91,26 @@ public class VendingMachine {
     //Displays the available vending machine choices
     public void DisplayPMChoices()
     {
-        //this needs to not be hard coded so it can be scalable later
-        if (vendPanel != null)
+        for (int x = 0; x < visibleMaterialImages.Length; x++)
         {
-            visibleMaterialsText[0] = vendPanel.transform.Find("VendLeftOption/LeftMaterialText").GetComponent<Text>();
-            visibleMaterialsText[1] = vendPanel.transform.Find("VendMidOption/MidMaterialText").GetComponent<Text>();
-            visibleMaterialsText[2] = vendPanel.transform.Find("VendRightOption/RightMaterialText").GetComponent<Text>();
-
-            if (visibleMaterialsText[0] != null && visibleMaterialsText[1] != null && visibleMaterialsText[2] != null)
-            {
-                for (int x=0; x<visibleMaterialsText.Length; x++){
-                    visibleMaterialsText[x].text = AccessVendingMachine(x, false).toString();
-                    visibleMaterialsText[x].color = GameController.mh.GetMaterialColor(AccessVendingMachine(x, false).color);
-                }
-            }
+            visibleMaterialImages[x].color = GameController.mh.GetMaterialColor(AccessVendingMachine(x, false).color);
         }
     }
 
     //button was clicked, called from ui button clicker
     public void VendingMachineButtonClick(int buttonIndex)
-    {
-        
+    {        
         if(buttonIndex == 100){
             //confirmed material was clicked
             ConfirmMaterialSelection();
         }
         else {
+            if (displayMaterialIndex > -1)
+                materialSelectButtons[displayMaterialIndex].image.color = materialSelectButtons[displayMaterialIndex].colors.normalColor;
+
             //a material selector was clicked
+            materialSelectButtons[buttonIndex].image.color = materialSelectButtons[buttonIndex].colors.pressedColor;
+
             displayMaterial = AccessVendingMachine(buttonIndex, false);
             displayMaterialIndex = buttonIndex;
             DisplayMaterialDescription();
@@ -108,14 +120,27 @@ public class VendingMachine {
     //displays the material information
     public void DisplayMaterialDescription()
     {
+        Color displayColor = GameController.mh.GetMaterialColor(displayMaterial.color);
+
+        materialNameText.text = displayMaterial.MaterialName;
+        materialNameText.color = displayColor;
+
+        //materialDescriptionText.text = displayMaterial.Description;
+
+        materialEffectSectionText.enabled = true;
+        materialEffectTypeText.text = displayMaterial.EffectTypeNames;
+        materialEffectValueText.text = displayMaterial.EffectFormattedValues;
+
+        /*
         if(displayText != null)
-            displayText.text = displayMaterial.toString() + "\n" + "Color: " + displayMaterial.color + "\n" + displayMaterial.GetAllEffects();
+            displayText.text =  + "\n" + "Color: " + displayMaterial.color + "\n" + displayMaterial.GetAllEffects();
+        */
     }
 
     //use the selected material for the next portal stage
     public void ConfirmMaterialSelection()
     {
-        if (displayText != null && displayMaterial != null && displayMaterialIndex != -1 && stageIndex <= maxPortalSize){
+        if (displayMaterial != null && displayMaterialIndex != -1 && stageIndex <= maxPortalSize){
             //add to the list
             //Debug.Log("Display material index: " + displayMaterialIndex);
             GameController.stageMaterials.Add(AccessVendingMachine(displayMaterialIndex, true));
@@ -148,7 +173,7 @@ public class VendingMachine {
                     portalStageInfo.GetComponent<RectTransform>().SetParent(portalPanel.GetComponent<RectTransform>(), false);
                     portalStageInfo.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, yPos, 0);
                     //set text to be the tempMaterial info
-                    portalStageInfo.transform.Find("StageText").GetComponent<Text>().text = "Stage " + stageIndex + " : " + tempMaterial.toString();
+                    portalStageInfo.transform.Find("StageText").GetComponent<Text>().text = "Stage " + stageIndex + " : " + tempMaterial.MaterialName;
                     portalStageInfo.transform.Find("StageText").GetComponent<Text>().color = GameController.mh.GetMaterialColor(tempMaterial.color);
                     stageIndex++;
                 }
@@ -158,7 +183,14 @@ public class VendingMachine {
 
     public void ClearDisplayMaterial()
     {
-        displayText.text = "";
+        if (displayMaterialIndex > -1)
+            materialSelectButtons[displayMaterialIndex].image.color = materialSelectButtons[displayMaterialIndex].colors.normalColor;
+
+        materialNameText.text = "";
+        materialDescriptionText.text = "";
+        materialEffectSectionText.enabled = false;
+        materialEffectTypeText.text = "";
+        materialEffectValueText.text = "";
         displayMaterial = null;
         displayMaterialIndex = -1;
     }
