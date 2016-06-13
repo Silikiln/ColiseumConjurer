@@ -5,7 +5,13 @@ using System.Collections.Generic;
 [RequireComponent(typeof(MeshRenderer))]
 public class ImprovedLineRenderer : MonoBehaviour
 {
-    public float LineWeight = .3f;
+    [SerializeField]
+    float _lineWeight = .3f;
+    public float LineWeight
+    {
+        get { return _lineWeight; }
+        set { _lineWeight = value; GenerateVertices(); }
+    }
 
     private bool _delayMeshUpdate = false;
     public bool DelayMeshUpdate
@@ -18,7 +24,7 @@ public class ImprovedLineRenderer : MonoBehaviour
                 UpdateMesh();
         }
     }
-    public LineColor colorHandler;
+    public LineColor LineColor;
 
     private const float PIOver2 = Mathf.PI / 2;
 
@@ -67,12 +73,13 @@ public class ImprovedLineRenderer : MonoBehaviour
 
     void UpdateColors()
     {
-        if (colorHandler == null || points.Count < 2) return;
-        GetComponent<MeshFilter>().mesh.colors = colorHandler.GetLineColors(points);
+        if (LineColor == null || points.Count < 2) return;
+        GetComponent<MeshFilter>().mesh.colors = LineColor.GetLineColors(points);
     }
 
     public void AddPoint(Vector3 point)
     {
+        point.z = transform.position.z;
         points.Add(transform.InverseTransformPoint(point));
         if (points.Count == 1) return;
         int i;
@@ -107,7 +114,7 @@ public class ImprovedLineRenderer : MonoBehaviour
 
     public void SetColor(LineColor colorHandler)
     {
-        this.colorHandler = colorHandler;
+        this.LineColor = colorHandler;
         UpdateColors();
     }
 
