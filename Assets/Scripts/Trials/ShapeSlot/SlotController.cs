@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Slot : MonoBehaviour {
+public class SlotController : MonoBehaviour {
     static float angleAcceptableError = 10;
     static float maxDistance = .5f;
 
@@ -10,13 +10,13 @@ public class Slot : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D coll)
     {
         if (filled || coll.gameObject.layer != 10) return;
-        coll.gameObject.GetComponent<Shape>().Near(this);
+        coll.gameObject.GetComponent<ShapeController>().Near(this);
     }
 
     void OnTriggerStay2D(Collider2D coll)
     {
         if (filled || coll.gameObject.layer != 10) return;
-        Shape shape = coll.gameObject.GetComponent<Shape>();
+        ShapeController shape = coll.gameObject.GetComponent<ShapeController>();
         if (!shape.Held)
             shape.Dropped();
     }
@@ -24,7 +24,7 @@ public class Slot : MonoBehaviour {
     void OnTriggerExit2D(Collider2D coll)
     {
         if (filled || coll.gameObject.layer != 10) return;
-        coll.gameObject.GetComponent<Shape>().Far();
+        coll.gameObject.GetComponent<ShapeController>().Far();
     }
 
     public bool ValidEntry(Transform t)

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Shape : Grabbable {
-    Slot nearSlot;
+public class ShapeController : Grabbable {
+    SlotController nearSlot;
 
     public override void Dropped()
     {
@@ -17,7 +17,7 @@ public class Shape : Grabbable {
         }
     }
 
-    public void Near(Slot slot) { nearSlot = slot; }
+    public void Near(SlotController slot) { nearSlot = slot; }
 
     public void Far() { nearSlot = null; }
 }

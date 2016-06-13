@@ -20,7 +20,6 @@ public class ShapeSlot : Trial
         slotPrefab = LoadResource<GameObject>("Slot");
     }
 
-    Vector2 lastPosition = PlayerController.Instance.transform.position;
     int objectivesComplete = 0;
     GameObject shapePrefab;
     GameObject slotPrefab;
