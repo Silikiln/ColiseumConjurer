@@ -65,8 +65,7 @@ public class Dodgeball : Trial
     public override void Cleanup()
     {
         StopCoroutine(spawning);
-        foreach (Transform t in transform)
-            Destroy(t.gameObject);
+        base.Cleanup();
     }
 
     public override bool RequirementsMet

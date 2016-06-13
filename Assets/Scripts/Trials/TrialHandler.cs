@@ -19,7 +19,7 @@ public class TrialHandler : MonoBehaviour {
         Instance = this;
 
         PossibleEvents = typeof(Trial).Assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(Trial))).ToArray();
-        //PossibleEvents = new Type[]{ typeof(ShapeSlot) };
+        //PossibleEvents = new Type[]{ typeof(LightReflect) };
     }
 
     void Update()
@@ -41,20 +41,11 @@ public class TrialHandler : MonoBehaviour {
     {
         CurrentTrial.Cleanup();
         Debug.Log("Trial Failed...");
-        StartCoroutine(SwapEvent());
     }
 
     public void EventFinished()
     {
         CurrentTrial.Cleanup();
         Debug.Log("Trial Complete!");
-        StartCoroutine(SwapEvent());
-    }
-
-    IEnumerator SwapEvent()
-    {
-        Destroy(CurrentTrial);
-        yield return new WaitForEndOfFrame();
-        //BeginEvent(RandomTrial);
     }
 }

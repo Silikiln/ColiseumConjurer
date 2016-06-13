@@ -95,7 +95,7 @@ public class SimonSays : Trial
         points = new SimonPointController[PointColors.Length];
         for (int i = 0; i < PointColors.Length; i++, angle -= delta) {
             position = new Vector3(radius * Mathf.Cos(angle), radius * Mathf.Sin(angle), 0);
-            points[i] = ((GameObject)GameObject.Instantiate(pointPrefab, position, Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg))).GetComponent<SimonPointController>();
+            points[i] = Instantiate(pointPrefab, position, Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg)).GetComponent<SimonPointController>();
             points[i].Initialize(i, PointColors[i]);
         }
 
@@ -108,12 +108,6 @@ public class SimonSays : Trial
 
         shownPattern = ShowPattern();
         StartCoroutine(shownPattern);
-    }
-
-    public override void Cleanup()
-    {
-        for (int i = 0; i < PointColors.Length; i++)
-            Destroy(points[i].gameObject);
     }
 
     public override bool RequirementsMet

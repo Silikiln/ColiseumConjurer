@@ -8,8 +8,8 @@ public class PlayerController : MovingEntity {
     public GameObject fireballPrefab;
     public float projectileSpeed = 500;
 
-    List<GameObject> grabbableItems = new List<GameObject>();
     GameObject grabbedObject;
+    Rigidbody2D grabbedRigidbody;
 
     override protected void Start()
     {
@@ -22,25 +22,14 @@ public class PlayerController : MovingEntity {
         FaceTowardsMouse();
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             Attack();
-        else if (Input.GetMouseButtonDown(1))
-            Grab();
         else if (Input.GetMouseButtonUp(1))
             Drop();
     }
 	
 	void FixedUpdate () {
         Movement();
-
-        if (grabbedObject != null)
-        {
-            RelativeJoint2D joint = GetComponent<RelativeJoint2D>();
-            /*
-            float angle = transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
-            Vector2 newOffset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
-            joint.linearOffset = newOffset * joint.linearOffset.magnitude;
-            */
-            joint.angularOffset = transform.rotation.eulerAngles.z;
-        }
+        if (Input.GetMouseButtonDown(1))
+            Grab();
     }
 
     void FaceTowardsMouse()
@@ -52,26 +41,41 @@ public class PlayerController : MovingEntity {
 
     void Grab()
     {
-        if (grabbableItems.Count == 0) return;
+        IEnumerable<Grabbable> sortedObjtecs = FindObjectsOfType<Grabbable>().OrderBy(obj => obj.grabDistance);
+        Grabbable toGrab = null;
 
-        // TODO: Find closest from grabbable
-        grabbedObject = grabbableItems[0];
-        grabbedObject.transform.parent = transform;
-        grabbedObject.GetComponent<Grabbable>().Grabbed();
+        float distance, minDistance = 0;
+        foreach (Grabbable grab in sortedObjtecs)
+        {
+            distance = Vector2.Distance(grab.gameObject.transform.position, transform.position);
+            if (distance <= grab.grabDistance && (!toGrab || distance < minDistance))
+            {
+                toGrab = grab;
+                minDistance = distance;
+            }
+        }
 
-        RelativeJoint2D joint = gameObject.AddComponent<RelativeJoint2D>();
-        joint.connectedBody = grabbedObject.GetComponent<Rigidbody2D>();
+        if (!toGrab) return;
+
+        grabbedObject = toGrab.gameObject;
+        toGrab.Grabbed();
+        grabbedRigidbody = grabbedObject.GetComponent<Rigidbody2D>();
+
+        if (toGrab.isStatic)
+            rigidbody.velocity = Vector2.zero;
+
+        HingeJoint2D joint = gameObject.AddComponent<HingeJoint2D>();
         joint.enableCollision = true;
-        joint.linearOffset = transform.position - grabbedObject.transform.position;
+        joint.connectedBody = grabbedRigidbody;
+        joint.connectedAnchor = grabbedObject.transform.position - transform.position;
     }
 
     void Drop()
     {
-        if (!grabbedObject) return;
+        if (grabbedObject == null) return;
 
-        Destroy(gameObject.GetComponent<RelativeJoint2D>());
+        Destroy(gameObject.GetComponent<Joint2D>());
         grabbedObject.GetComponent<Grabbable>().Dropped();
-        grabbedObject.transform.parent = null;
         grabbedObject = null;
     }
 
@@ -108,7 +112,4 @@ public class PlayerController : MovingEntity {
         if (rigidbody.velocity.magnitude > MaxSpeed)
             rigidbody.velocity = rigidbody.velocity.normalized * MaxSpeed;
     }
-
-    public void NearGrabbable(GameObject grabbable) { grabbableItems.Add(grabbable); }
-    public void LeavingGrabbable(GameObject grabbable) { grabbableItems.Remove(grabbable); }
 }
