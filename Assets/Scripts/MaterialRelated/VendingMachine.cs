@@ -68,8 +68,8 @@ public class VendingMachine {
                             break;
                     }
                 }
-                PortalMaterial replacementMaterial = GameController.mh.GenerateRandomMaterial(replacementMaterialColor);
-                visiblePMs[vpmIndex] = replacementMaterial;
+                visiblePMs[vpmIndex] = PortalMaterial.RandomMaterial;
+                //visiblePMs[vpmIndex] = PortalMaterial.RandomMaterialWithColor(replacementMaterialColor);
             }
         }
         
@@ -80,7 +80,7 @@ public class VendingMachine {
     public void RefreshVendingMachine()
     {
         foreach (char color in colorArray) {
-            PortalMaterial tempMaterial = GameController.mh.GenerateRandomMaterial(color);
+            PortalMaterial tempMaterial = PortalMaterial.RandomMaterialWithColor(color);
             visiblePMs.Add(tempMaterial);
         }
 
@@ -93,7 +93,7 @@ public class VendingMachine {
     {
         for (int x = 0; x < visibleMaterialImages.Length; x++)
         {
-            visibleMaterialImages[x].color = GameController.mh.GetMaterialColor(AccessVendingMachine(x, false).color);
+            visibleMaterialImages[x].color = PortalMaterial.GetMaterialColor(AccessVendingMachine(x, false).color);
         }
     }
 
@@ -120,7 +120,7 @@ public class VendingMachine {
     //displays the material information
     public void DisplayMaterialDescription()
     {
-        Color displayColor = GameController.mh.GetMaterialColor(displayMaterial.color);
+        Color displayColor = PortalMaterial.GetMaterialColor(displayMaterial.color);
 
         materialNameText.text = displayMaterial.MaterialName;
         materialNameText.color = displayColor;
@@ -163,7 +163,7 @@ public class VendingMachine {
         stageIndex = 1;
         //access the list of materials, loop over each one and display
         foreach (PortalMaterial tempMaterial in GameController.stageMaterials){
-            //this 10 needs to be changed for scaleability
+            //this needs to be changed for scaleability
             if(stageIndex <= maxPortalSize){
                 yPos += 40;
                 //instantiate a portalblock prefab
@@ -174,7 +174,7 @@ public class VendingMachine {
                     portalStageInfo.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, yPos, 0);
                     //set text to be the tempMaterial info
                     portalStageInfo.transform.Find("StageText").GetComponent<Text>().text = "Stage " + stageIndex + " : " + tempMaterial.MaterialName;
-                    portalStageInfo.transform.Find("StageText").GetComponent<Text>().color = GameController.mh.GetMaterialColor(tempMaterial.color);
+                    portalStageInfo.transform.Find("StageText").GetComponent<Text>().color = PortalMaterial.GetMaterialColor(tempMaterial.color);
                     stageIndex++;
                 }
             }

@@ -9,12 +9,9 @@ public class GameController : MonoBehaviour {
 
     //random other variables
     public static List<PortalMaterial> stageMaterials = new List<PortalMaterial>();
-    public static MaterialHandler mh = new MaterialHandler();
     public static VendingMachine vendor;
 
     void Start () {
-        //load the materials from the xml
-        mh.ImportMaterials();
         vendor = new VendingMachine(portalPanel, vendingPanel);
         vendor.RefreshVendingMachine();
         //Debug.Log(mh.GetMaterialByName("PMOne").toString());
