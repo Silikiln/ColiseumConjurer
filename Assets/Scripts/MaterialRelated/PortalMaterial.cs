@@ -7,17 +7,35 @@ using System;
 
 using Random = UnityEngine.Random;
 
-/* TODO: Move color conversion to a public or static method here rather than material handler */
 public class PortalMaterial {
     #region Material Handler
 
+    public enum MaterialColor { Red, Green, Blue, Yellow, Meta };
+
+    public static MaterialColor RandomColor {
+        get {
+            Array values = Enum.GetValues(typeof(MaterialColor));
+            return (MaterialColor)values.GetValue(Random.Range(0, values.Length - 1));
+        }
+    }
+
     public static List<PortalMaterial> AllMaterials { get; private set; }
+    static Color[] VisualColors = {
+        // Red
+        new Color(1.0f, 0.4f, 0.4f, 1.0f),
+
+        // Green
+        new Color(0.4f, 1.0f, 0.4f, 1.0f),
+
+        // Blue
+        new Color(0.4f, 0.4f, 1.0f, 1.0f),
+
+        // Yellow
+        new Color(1.0f, 1.0f, 0.4f, 1.0f)
+    };
 
     static PortalMaterial() {        
         ImportMaterials();
-
-        foreach (PortalMaterial pm in AllMaterials.Where(m => m.color == 'R' || m.color == 'M'))
-            Debug.Log(pm.MaterialName);
     }
 
     static void ImportMaterials()
@@ -40,10 +58,17 @@ public class PortalMaterial {
                             material = new PortalMaterial();
                             break;
                         case "Name":
-                            material.MaterialName = reader.ReadInnerXml();
+                            material.Name = reader.ReadInnerXml();
                             break;
                         case "Color":
-                            material.color = char.Parse(reader.ReadInnerXml());
+                            string color = reader.ReadInnerXml();
+                            try {
+                                
+                                material.Color = (MaterialColor)Enum.Parse(typeof(MaterialColor), color);
+                            } catch (ArgumentException)
+                            {
+                                throw new ArgumentException("Could not parse material color, \"" + color + "\" is not valid");
+                            }
                             break;
                         case "Effect":
                             effect = new MaterialEffect();
@@ -61,8 +86,6 @@ public class PortalMaterial {
                     {
                         case "Material":
                             AllMaterials.Add(material);
-                            if (material.color == 'M')
-                                Debug.Log("Loaded Meta");
                             break;
                         case "Effect":
                             material.AddEffect(effect);
@@ -82,39 +105,33 @@ public class PortalMaterial {
     public static PortalMaterial RandomMaterial { get { return RandomElement(AllMaterials); } }
 
     //select a random material of the given color
-    public static PortalMaterial RandomMaterialWithColor(char color)
+    public static PortalMaterial RandomMaterialWithColor(MaterialColor color)
     {
-        return RandomElement(AllMaterials.Where(pm => pm.color == color || pm.color == 'M'));
+        return RandomElement(AllMaterials.Where(pm => pm.Color == color || pm.Color == MaterialColor.Meta));
     }
 
     //get material by providing a name
     public static PortalMaterial GetMaterialByName(string givenName)
     {
-        return AllMaterials.Where(pm => pm.MaterialName == givenName).FirstOrDefault();
+        return AllMaterials.Where(pm => pm.Name == givenName).FirstOrDefault();
     }
 
-    public static Color GetMaterialColor(char color)
+    public static Color GetMaterialColor(MaterialColor color)
     {
-        switch (color)
-        {
-            case 'R':
-                return new Color(1.0f, 0.4f, 0.4f, 1.0f);
-            case 'G':
-                return new Color(0.4f, 1.0f, 0.4f, 1.0f);
-            case 'B':
-                return new Color(0.4f, 0.4f, 1.0f, 1.0f);
-            case 'M':
-                return new Color(1.0f, 1.0f, 0.4f, 1.0f);
-        }
-        return new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        if ((int)color >= VisualColors.Length)
+            return UnityEngine.Color.white;
+        return VisualColors[(int)color];
     }
 
     #endregion
 
-    public string MaterialName { get; set; }
-    public string imageLocation { get; set; }
-    public char color { get; set; }
+    public string Name { get; private set; }
+    public string ImageLocation { get; private set; }
+    public MaterialColor Color { get; private set; }
+
     private List<MaterialEffect> effects = new List<MaterialEffect>();
+
+    public Color VisualColor { get { return GetMaterialColor(Color); } }
 
     public void AddEffect(MaterialEffect newEffect)
     {

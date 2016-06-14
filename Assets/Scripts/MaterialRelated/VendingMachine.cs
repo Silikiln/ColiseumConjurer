@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class VendingMachine {
     private GameObject vendPanel;
     private GameObject portalPanel;
-    private List<PortalMaterial> visiblePMs = new List<PortalMaterial>();
+    private PortalMaterial[] visiblePMs = new PortalMaterial[3];
     private PortalMaterial displayMaterial;
     private int displayMaterialIndex = -1;
     public int variableMachineSize = 3;
-    private char[] colorArray = {'R','G','B'};
+
     private int maxPortalSize = 10;
     private int stageIndex = 1;
 
@@ -46,28 +46,14 @@ public class VendingMachine {
     public PortalMaterial AccessVendingMachine(int vpmIndex, bool replace)
     {
         PortalMaterial requestedPM = null;
-        if (vpmIndex >= 0 && visiblePMs.Count - 1 >= vpmIndex){
+        if (vpmIndex >= 0){
             requestedPM = visiblePMs[vpmIndex];
             //determine if we want to generate a new random material and stick it in the list
             if (replace){
                 //check the color
-                char replacementMaterialColor = requestedPM.color;
-                if (requestedPM.color == 'M'){
-                    //we want to generate a color based on the index instead, this may need to be changed to something else later.
-                    //as of now, we could just run this switch everytime to always generate the replacement by index
-                    switch(vpmIndex)
-                    {
-                        case 0:
-                            replacementMaterialColor = 'R';
-                            break;
-                        case 1:
-                            replacementMaterialColor = 'G';
-                            break;
-                        case 2:
-                            replacementMaterialColor = 'B';
-                            break;
-                    }
-                }
+                PortalMaterial.MaterialColor replacementMaterialColor = requestedPM.Color;
+                if (replacementMaterialColor == PortalMaterial.MaterialColor.Meta)
+                    replacementMaterialColor = PortalMaterial.RandomColor;
                 visiblePMs[vpmIndex] = PortalMaterial.RandomMaterial;
                 //visiblePMs[vpmIndex] = PortalMaterial.RandomMaterialWithColor(replacementMaterialColor);
             }
@@ -79,10 +65,8 @@ public class VendingMachine {
     //refresh the vending machine with x new random materials
     public void RefreshVendingMachine()
     {
-        foreach (char color in colorArray) {
-            PortalMaterial tempMaterial = PortalMaterial.RandomMaterialWithColor(color);
-            visiblePMs.Add(tempMaterial);
-        }
+        for (int i = 0; i < visiblePMs.Length; i++)
+            visiblePMs[i] = PortalMaterial.RandomMaterial;
 
         //display the current choices
         DisplayPMChoices();
@@ -93,7 +77,7 @@ public class VendingMachine {
     {
         for (int x = 0; x < visibleMaterialImages.Length; x++)
         {
-            visibleMaterialImages[x].color = PortalMaterial.GetMaterialColor(AccessVendingMachine(x, false).color);
+            visibleMaterialImages[x].color = PortalMaterial.GetMaterialColor(AccessVendingMachine(x, false).Color);
         }
     }
 
@@ -120,9 +104,9 @@ public class VendingMachine {
     //displays the material information
     public void DisplayMaterialDescription()
     {
-        Color displayColor = PortalMaterial.GetMaterialColor(displayMaterial.color);
+        Color displayColor = displayMaterial.VisualColor;
 
-        materialNameText.text = displayMaterial.MaterialName;
+        materialNameText.text = displayMaterial.Name;
         materialNameText.color = displayColor;
 
         //materialDescriptionText.text = displayMaterial.Description;
@@ -173,8 +157,8 @@ public class VendingMachine {
                     portalStageInfo.GetComponent<RectTransform>().SetParent(portalPanel.GetComponent<RectTransform>(), false);
                     portalStageInfo.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, yPos, 0);
                     //set text to be the tempMaterial info
-                    portalStageInfo.transform.Find("StageText").GetComponent<Text>().text = "Stage " + stageIndex + " : " + tempMaterial.MaterialName;
-                    portalStageInfo.transform.Find("StageText").GetComponent<Text>().color = PortalMaterial.GetMaterialColor(tempMaterial.color);
+                    portalStageInfo.transform.Find("StageText").GetComponent<Text>().text = "Stage " + stageIndex + " : " + tempMaterial.Name;
+                    portalStageInfo.transform.Find("StageText").GetComponent<Text>().color = tempMaterial.VisualColor;
                     stageIndex++;
                 }
             }

@@ -1,7 +1,7 @@
 <Materials>
 	<Material>
 		<Name>PMOne</Name>
-    <Color>R</Color>
+    <Color>Red</Color>
     <Effects>
       <Effect>
         <Effect-Type>0</Effect-Type>
@@ -11,7 +11,7 @@
 	</Material>
 	<Material>
 		<Name>PMTwo</Name>
-    <Color>R</Color>
+    <Color>Red</Color>
     <Effects>
       <Effect>
         <Effect-Type>1</Effect-Type>
@@ -27,7 +27,7 @@
 	</Material>
 	<Material>
 		<Name>PMThree</Name>
-    <Color>R</Color>
+    <Color>Red</Color>
     <Effects>
       <Effect>
         <Effect-Type>0</Effect-Type>
@@ -49,7 +49,7 @@
 	</Material>
   <Material>
     <Name>PMFour</Name>
-    <Color>G</Color>
+    <Color>Green</Color>
     <Effects>
       <Effect>
         <Effect-Type>0</Effect-Type>
@@ -59,7 +59,7 @@
   </Material>
   <Material>
     <Name>PMFive</Name>
-    <Color>G</Color>
+    <Color>Green</Color>
     <Effects>
       <Effect>
         <Effect-Type>1</Effect-Type>
@@ -69,7 +69,7 @@
   </Material>
   <Material>
     <Name>PMSix</Name>
-    <Color>G</Color>
+    <Color>Green</Color>
     <Effects>
       <Effect>
         <Effect-Type>2</Effect-Type>
@@ -79,7 +79,7 @@
   </Material>
   <Material>
     <Name>PMSeven</Name>
-    <Color>B</Color>
+    <Color>Blue</Color>
     <Effects>
       <Effect>
         <Effect-Type>0</Effect-Type>
@@ -89,7 +89,7 @@
   </Material>
   <Material>
     <Name>PMEight</Name>
-    <Color>B</Color>
+    <Color>Blue</Color>
     <Effects>
       <Effect>
         <Effect-Type>1</Effect-Type>
@@ -99,7 +99,7 @@
   </Material>
   <Material>
     <Name>PMNine</Name>
-    <Color>B</Color>
+    <Color>Blue</Color>
     <Effects>
       <Effect>
         <Effect-Type>2</Effect-Type>
@@ -109,7 +109,7 @@
   </Material>
   <Material>
     <Name>PMTen</Name>
-    <Color>M</Color>
+    <Color>Yellow</Color>
     <Effects>
       <Effect>
         <Effect-Type>0</Effect-Type>
