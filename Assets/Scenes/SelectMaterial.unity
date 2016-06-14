@@ -227,12 +227,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1811920265}
-        m_MethodName: ButtonClick
-        m_Mode: 2
+      - m_Target: {fileID: 471752502}
+        m_MethodName: SelectMaterial
+        m_Mode: 3
         m_Arguments:
-          m_ObjectArgument: {fileID: 249652396}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -356,6 +356,7 @@ GameObject:
   - 224: {fileID: 471752499}
   - 222: {fileID: 471752501}
   - 114: {fileID: 471752500}
+  - 114: {fileID: 471752502}
   m_Layer: 5
   m_Name: VendPanel
   m_TagString: Untagged
@@ -419,6 +420,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 471752498}
+--- !u!114 &471752502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 471752498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90946cbfee49428468d339013ad6405c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  variableMachineSize: 3
 --- !u!1 &495441927
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,12 +655,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1811920265}
-        m_MethodName: ButtonClick
-        m_Mode: 2
+      - m_Target: {fileID: 471752502}
+        m_MethodName: ConfirmSelection
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 625427828}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1055,13 +1068,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1811920265}
-        m_MethodName: ButtonClick
-        m_Mode: 2
+      - m_Target: {fileID: 471752502}
+        m_MethodName: SelectMaterial
+        m_Mode: 3
         m_Arguments:
-          m_ObjectArgument: {fileID: 1347555509}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1184,6 +1197,7 @@ GameObject:
   - 224: {fileID: 1497747258}
   - 222: {fileID: 1497747260}
   - 114: {fileID: 1497747259}
+  - 114: {fileID: 1497747261}
   m_Layer: 5
   m_Name: PortalPanel
   m_TagString: Untagged
@@ -1241,6 +1255,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1497747257}
+--- !u!114 &1497747261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1497747257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b5e4147dd3e4442a23db08538d7f49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TopMargin: 40
 --- !u!1 &1511630603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,13 +1558,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1811920265}
-        m_MethodName: ButtonClick
-        m_Mode: 2
+      - m_Target: {fileID: 471752502}
+        m_MethodName: SelectMaterial
+        m_Mode: 3
         m_Arguments:
-          m_ObjectArgument: {fileID: 1604242845}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1746,7 +1772,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1811920264}
   - 114: {fileID: 1811920263}
-  - 114: {fileID: 1811920265}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1765,8 +1790,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60508bed00175644aa0b62b58ce6208d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vendingPanel: {fileID: 471752498}
-  portalPanel: {fileID: 1497747257}
+  MaxPortalSize: 10
+  Portal: {fileID: 1497747261}
 --- !u!4 &1811920264
 Transform:
   m_ObjectHideFlags: 0
@@ -1779,17 +1804,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
---- !u!114 &1811920265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1811920262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb199907cb7b6f04bb94a518bcf3a9a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1954119388
 GameObject:
   m_ObjectHideFlags: 0
