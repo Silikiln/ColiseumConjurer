@@ -26,13 +26,16 @@ public class LightReflect : Trial
     GameObject mirrorPrefab;
     GameObject lightTargetPrefab;
 
-    GameObject lightTarget;
-
-    bool requirementsMet = false;
+    LightTargetController lightTarget;
 
     public void LightSourceUpdate(int objectsHit, GameObject lastObjectHit)
     {
-        if (objectsHit == ObjectCount + 1 && lastObjectHit == lightTarget)
+        lightTarget.BeingFilled = objectsHit == ObjectCount + 1 && lastObjectHit == lightTarget.gameObject;
+    }
+
+    void Update()
+    {
+        if (RequirementsMet)
             TrialHandler.Instance.EventFinished();
     }
 
@@ -56,7 +59,7 @@ public class LightReflect : Trial
             if (i == 0)
                 Instantiate(lightSourcePrefab, position, Quaternion.Euler(0, 0, Random.Range(0, 359)));
             else if (i == ObjectCount + 1)
-                lightTarget = Instantiate(lightTargetPrefab, position, Quaternion.identity);
+                lightTarget = Instantiate(lightTargetPrefab, position, Quaternion.identity).GetComponent<LightTargetController>();
             else
                 Instantiate(mirrorPrefab, position, Quaternion.Euler(0, 0, Random.Range(0, 359)));
         }
@@ -64,6 +67,6 @@ public class LightReflect : Trial
 
     public override bool RequirementsMet
     {
-        get { return false; }
+        get { return lightTarget.Full; }
     }
 }
