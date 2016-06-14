@@ -51,8 +51,7 @@ public class LineColorDrawer : PropertyDrawer
         {
             // Solid
             case 0:
-                if (colors.arraySize < 1)
-                    colors.arraySize = 1;
+                FillColorArray(colors, 1);
 
                 position.y += textHeight + fieldBuffer;
                 color = colors.GetArrayElementAtIndex(0);
@@ -61,8 +60,7 @@ public class LineColorDrawer : PropertyDrawer
 
             // Gradient
             case 1:
-                if (colors.arraySize < 2)
-                colors.arraySize = 2;
+                FillColorArray(colors, 2);
 
                 position.y += textHeight + fieldBuffer;
                 color = colors.GetArrayElementAtIndex(0);
@@ -73,8 +71,6 @@ public class LineColorDrawer : PropertyDrawer
                 color.colorValue = EditorGUI.ColorField(position, "End Color", color.colorValue);
                 break;
         }
-
-        
 
         /*
         switch (colorType.enumValueIndex)
@@ -113,49 +109,10 @@ public class LineColorDrawer : PropertyDrawer
         EditorGUI.EndProperty();
     }
 
-    void GenerateUnweightedSidesArray(SerializedProperty prop, SerializedProperty weightedValues, int sides)
+
+    void FillColorArray(SerializedProperty colors, int desiredSize)
     {
-        SerializedProperty unweightedSides = prop.FindPropertyRelative("UnweightedSides");
-        unweightedSides.arraySize = sides;
-        for (int i = 0, x = 1; i < unweightedSides.arraySize; i++, x++)
-        {
-            int w;
-            for (w = 0; w < weightedValues.arraySize; w++)
-                if (weightedValues.GetArrayElementAtIndex(w).vector2Value.x == x)
-                    break;
-
-            if (w < weightedValues.arraySize)
-            {
-                i--;
-                unweightedSides.arraySize--;
-                continue;
-            }
-            else
-                unweightedSides.GetArrayElementAtIndex(i).intValue = x;
-        }
-    }
-
-    void ReproportionWeights(SerializedProperty prop, SerializedProperty weightedValues, SerializedProperty weightedValue, float oldWeight, int checkIndex)
-    {
-        if (weightedValue.vector2Value.y > 1)
-            weightedValue.vector2Value = new Vector2(weightedValue.vector2Value.x, 1);
-        if (weightedValue.vector2Value.y < 0)
-            weightedValue.vector2Value = new Vector2(weightedValue.vector2Value.x, 0);
-
-        float totalWeight = 0;
-
-        for (int i = 0; i < weightedValues.arraySize; i++)
-            totalWeight += weightedValues.GetArrayElementAtIndex(i).vector2Value.y;
-
-        if (totalWeight <= 1) return;
-
-        float weightDiff = (totalWeight - 1) / (weightedValues.arraySize - 1);
-        for (int i = 0; i < weightedValues.arraySize; i++)
-            if (i != checkIndex)
-            {
-                Vector2 value = weightedValues.GetArrayElementAtIndex(i).vector2Value;
-                float newWeight = (value.y - weightDiff) < 0 ? 0 : (value.y - weightDiff);
-                weightedValues.GetArrayElementAtIndex(i).vector2Value = new Vector2(value.x, newWeight);
-            }
+        if (colors.arraySize < desiredSize)
+            colors.arraySize = desiredSize;
     }
 }
