@@ -33,7 +33,8 @@ public class LightSourceController : MonoBehaviour {
                 lineRenderer.AddPoint(raycastHit.point);
                 lightDirection = Vector2.Reflect(lightDirection, raycastHit.normal);
             }
-        } while (bounceCount < MaxBounce && raycastHit.collider && raycastHit.collider.gameObject.layer == 10);
+        } while (bounceCount < MaxBounce && raycastHit.collider 
+            && raycastHit.collider.gameObject != gameObject && raycastHit.collider.gameObject.layer == 10);
 
         if (raycastHit.collider)
             ((LightReflect)TrialHandler.CurrentTrial).LightSourceUpdate(bounceCount, raycastHit.collider.gameObject);
