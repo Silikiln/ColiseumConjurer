@@ -53,19 +53,14 @@
         <ValueType>Flat</ValueType>
         <Value>60</Value>
       </Effect>
-    </Effects>
-    <Effects>
       <Effect>
         <Type>12</Type>
         <ValueType>Multiplier</ValueType>
         <Value>1.25</Value>
       </Effect>
-    </Effects>
-    <Effects>
-      <Effect>
-        <Type>13</Type>
-        <ValueType>Flat</ValueType>
-        <Value>2</Value>
+      <Type>13</Type>
+      <ValueType>Flat</ValueType>
+      <Value>2</Value>
       </Effect>
     </Effects>
 	</Material>
