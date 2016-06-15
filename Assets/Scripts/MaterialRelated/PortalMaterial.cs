@@ -35,7 +35,7 @@ public class PortalMaterial {
         new Color(0.729f, 0.333f, 0.827f),
 
         // Yellow
-        new Color(1.0f, 1.0f, 0.4f, 1.0f)
+        new Color(1.0f, 1.0f, 0.4f, 1.0f),
     };
 
     static PortalMaterial() {

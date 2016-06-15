@@ -23,7 +23,9 @@ public class ShapeSlot : Trial
     int objectivesComplete = 0;
     GameObject shapePrefab;
     GameObject slotPrefab;
-    Sprite[] shapeSprites;
+
+    // TODO: Add multiple possible shapes to up the complexity
+    //Sprite[] shapeSprites;
 
     public void SlotFilled()
     {

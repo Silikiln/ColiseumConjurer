@@ -9,8 +9,19 @@ public class MaterialEffect{
 
         The type values can also be moved into an xml file if this method ends up being annoying
     */
-    enum EffectValueType { Flat, Modifier }
-    enum EffectResultType { Positive, Negative }
+    public enum EffectValueType { Flat, Multiplier }
+    
+    public struct EffectType
+    {
+        public EffectType(string name, bool positive)
+        {
+            Name = name;
+            Positive = positive;
+        }
+
+        public string Name;
+        public bool Positive;
+    }
 
     static Color negativeTextColor = Color.red;
     static Color positiveTextColor = Color.green;
@@ -24,32 +35,36 @@ public class MaterialEffect{
         return string.Format("{0:x2}{1:x2}{2:x2}{3:x2}", r, g, b, a);
     }
 
-    static string[] EffectTypeNames = {
-        "Player Health",
-        "Monster Health",
-        "Objectives"
+    static EffectType[] EffectTypes = {
+        // Player Effects
+        new EffectType("Player Health", true),      //0
+        new EffectType("Player Speed", true),       //1
+        new EffectType("Player Damage", true),      //2
+        new EffectType("Player Lives", true),       //3
+        new EffectType("Player Size", false),       //4
+        new EffectType("Attack Speed", true),       //5
+
+        // Monster Effects
+        new EffectType("Monster Health", false),    //6
+        new EffectType("Monster Speed", false),     //7
+        new EffectType("Monster Damage", false),    //8
+        new EffectType("Monster Size", false),      //9
+        new EffectType("Monster Count", false),     //10
+
+        // Trial Effects
+        new EffectType("Time Limit", true),         //11
+        new EffectType("Objectives", false),        //12
+        new EffectType("Objects", false),           //13
     };
 
-    static EffectValueType[] EffectValueTypes = {
-        EffectValueType.Modifier,
-        EffectValueType.Modifier,
-        EffectValueType.Flat
-    };
-
-    static EffectResultType[] EffectResultTypes = {
-        EffectResultType.Positive,
-        EffectResultType.Negative,
-        EffectResultType.Negative
-    };
-
-    public string ReadableType { get { return EffectTypeNames[EffectType]; } }
+    public string ReadableType { get { return EffectTypes[Type].Name; } }
     public string ReadableValue {
         get {
-            if (EffectValueTypes[EffectType] == EffectValueType.Flat)
-                return (EffectValue > 0 ? "+" : "-") + EffectValue;
+            if (ValueType == EffectValueType.Flat)
+                return (Value > 0 ? "+" : "-") + Value;
             else
             {
-                float value = (EffectValue - 1) * 100;
+                float value = (Value - 1) * 100;
                 return (value > 0 ? "+" : "") + value + "%";
             }
         }
@@ -62,23 +77,22 @@ public class MaterialEffect{
 
     public bool IsPositive {
         get {
-            bool positiveEffect = EffectResultTypes[EffectType] == EffectResultType.Positive;
-            if (EffectValueTypes[EffectType] == EffectValueType.Flat)
-                return positiveEffect == EffectValue > 0;
-            else return positiveEffect == EffectValue > 1;
+            return EffectTypes[Type].Positive == Value > (ValueType == EffectValueType.Flat ? 0 : 1);
         }
     }
 
     [XmlParse("Type")]
-    public int EffectType { get; set; }
+    public int Type { get; private set; }
+
+    [XmlParse("ValueType")]
+    public EffectValueType ValueType { get; private set; }
 
     [XmlParse("Value")]
-    public float EffectValue { get; set; }
+    public float Value { get; private set; }
 
     public string toString()
     {
-        string requestedString = "Type:" + EffectType + " Value: " + EffectValue;
-        return requestedString;
+        return string.Format("{0}\n{1}\n{2}", ReadableType, ValueType, Value);
     }
 
     public void ApplyEffect()

@@ -6,7 +6,8 @@
     <Effects>
       <Effect>
         <Type>0</Type>
-        <Value>.5</Value>
+        <ValueType>Multiplier</ValueType>
+        <Value>.9</Value>
       </Effect>
     </Effects>
 	</Material>
@@ -17,6 +18,7 @@
     <Effects>
       <Effect>
         <Type>1</Type>
+        <ValueType>Flat</ValueType>
         <Value>1</Value>
       </Effect>
     </Effects>
@@ -34,18 +36,21 @@
     <Effects>
       <Effect>
         <Type>0</Type>
+        <ValueType>Flat</ValueType>
         <Value>5</Value>
       </Effect>
     </Effects>
     <Effects>
       <Effect>
         <Type>1</Type>
+        <ValueType>Multiplier</ValueType>
         <Value>2</Value>
       </Effect>
     </Effects>
     <Effects>
       <Effect>
         <Type>2</Type>
+        <ValueType>Flat</ValueType>
         <Value>3</Value>
       </Effect>
     </Effects>
@@ -57,6 +62,7 @@
     <Effects>
       <Effect>
         <Type>0</Type>
+        <ValueType>Multiplier</ValueType>
         <Value>4</Value>
       </Effect>
     </Effects>
@@ -68,6 +74,7 @@
     <Effects>
       <Effect>
         <Type>1</Type>
+        <ValueType>Flat</ValueType>
         <Value>5</Value>
       </Effect>
     </Effects>
@@ -79,6 +86,7 @@
     <Effects>
       <Effect>
         <Type>2</Type>
+        <ValueType>Multiplier</ValueType>
         <Value>6</Value>
       </Effect>
     </Effects>
@@ -90,6 +98,7 @@
     <Effects>
       <Effect>
         <Type>0</Type>
+        <ValueType>Flat</ValueType>
         <Value>7</Value>
       </Effect>
     </Effects>
@@ -101,6 +110,7 @@
     <Effects>
       <Effect>
         <Type>1</Type>
+        <ValueType>Multiplier</ValueType>
         <Value>8</Value>
       </Effect>
     </Effects>
@@ -112,6 +122,7 @@
     <Effects>
       <Effect>
         <Type>2</Type>
+        <ValueType>Multiplier</ValueType>
         <Value>9</Value>
       </Effect>
     </Effects>
@@ -123,6 +134,7 @@
     <Effects>
       <Effect>
         <Type>0</Type>
+        <ValueType>Multiplier</ValueType>
         <Value>10</Value>
       </Effect>
     </Effects>
@@ -134,7 +146,8 @@
     <Effects>
       <Effect>
         <Type>0</Type>
-        <Value>10</Value>
+        <ValueType>Flat</ValueType>
+        <Value>100</Value>
       </Effect>
     </Effects>
   </Material>
