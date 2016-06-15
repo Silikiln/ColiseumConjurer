@@ -9,6 +9,11 @@
         <ValueType>Multiplier</ValueType>
         <Value>.9</Value>
       </Effect>
+      <Effect>
+        <Type>2</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>1.1</Value>
+      </Effect>
     </Effects>
 	</Material>
 	<Material>
@@ -17,14 +22,23 @@
     <Description>A thorny plant used in a ritual to replace the heart and become partially undead</Description>
     <Effects>
       <Effect>
+        <Type>0</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>.5</Value>
+      </Effect>
+      <Effect>
         <Type>1</Type>
         <ValueType>Flat</ValueType>
-        <Value>1</Value>
+        <Value>-2</Value>
       </Effect>
-    </Effects>
-    <Effects>
       <Effect>
         <Type>2</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>1.75</Value>
+      </Effect>
+      <Effect>
+        <Type>3</Type>
+        <ValueType>Flat</ValueType>
         <Value>2</Value>
       </Effect>
     </Effects>
@@ -35,23 +49,23 @@
     <Description>A glowing red herb that emits an off-key chime when approached</Description>
     <Effects>
       <Effect>
-        <Type>0</Type>
+        <Type>11</Type>
         <ValueType>Flat</ValueType>
-        <Value>5</Value>
+        <Value>60</Value>
       </Effect>
     </Effects>
     <Effects>
       <Effect>
-        <Type>1</Type>
+        <Type>12</Type>
         <ValueType>Multiplier</ValueType>
-        <Value>2</Value>
+        <Value>1.25</Value>
       </Effect>
     </Effects>
     <Effects>
       <Effect>
-        <Type>2</Type>
+        <Type>13</Type>
         <ValueType>Flat</ValueType>
-        <Value>3</Value>
+        <Value>2</Value>
       </Effect>
     </Effects>
 	</Material>
@@ -62,8 +76,13 @@
     <Effects>
       <Effect>
         <Type>0</Type>
+        <ValueType>Flat</ValueType>
+        <Value>25</Value>
+      </Effect>
+      <Effect>
+        <Type>4</Type>
         <ValueType>Multiplier</ValueType>
-        <Value>4</Value>
+        <Value>2</Value>
       </Effect>
     </Effects>
   </Material>
@@ -73,9 +92,19 @@
     <Description>A normal looking leaf, its fibers can be woven into magical garments</Description>
     <Effects>
       <Effect>
-        <Type>1</Type>
-        <ValueType>Flat</ValueType>
-        <Value>5</Value>
+        <Type>5</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>3</Value>
+      </Effect>
+      <Effect>
+        <Type>7</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>3</Value>
+      </Effect>
+      <Effect>
+        <Type>8</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>1.25</Value>
       </Effect>
     </Effects>
   </Material>
@@ -85,9 +114,19 @@
     <Description>The egg of a large spider, yet to be hatched</Description>
     <Effects>
       <Effect>
-        <Type>2</Type>
+        <Type>3</Type>
         <ValueType>Multiplier</ValueType>
-        <Value>6</Value>
+        <Value>2</Value>
+      </Effect>
+      <Effect>
+        <Type>10</Type>
+        <ValueType>Flat</ValueType>
+        <Value>5</Value>
+      </Effect>
+      <Effect>
+        <Type>9</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>.25</Value>
       </Effect>
     </Effects>
   </Material>
@@ -97,9 +136,14 @@
     <Description>A feathered herb, capable of surviving in barren climates</Description>
     <Effects>
       <Effect>
-        <Type>0</Type>
+        <Type>1</Type>
         <ValueType>Flat</ValueType>
-        <Value>7</Value>
+        <Value>-5</Value>
+      </Effect>
+      <Effect>
+        <Type>7</Type>
+        <ValueType>Flat</ValueType>
+        <Value>-5</Value>
       </Effect>
     </Effects>
   </Material>
@@ -109,9 +153,19 @@
     <Description>Stories claim this flower grows where untimely deaths have occurred</Description>
     <Effects>
       <Effect>
-        <Type>1</Type>
+        <Type>0</Type>
         <ValueType>Multiplier</ValueType>
-        <Value>8</Value>
+        <Value>.4</Value>
+      </Effect>
+      <Effect>
+        <Type>6</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>.25</Value>
+      </Effect>
+      <Effect>
+        <Type>10</Type>
+        <ValueType>Flat</ValueType>
+        <Value>3</Value>
       </Effect>
     </Effects>
   </Material>
@@ -121,9 +175,19 @@
     <Description>Teeth taken from a deceased ice wraith, still freezing to the touch</Description>
     <Effects>
       <Effect>
-        <Type>2</Type>
+        <Type>1</Type>
         <ValueType>Multiplier</ValueType>
-        <Value>9</Value>
+        <Value>3</Value>
+      </Effect>
+      <Effect>
+        <Type>7</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>.7</Value>
+      </Effect>
+      <Effect>
+        <Type>11</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>.5</Value>
       </Effect>
     </Effects>
   </Material>
@@ -135,7 +199,7 @@
       <Effect>
         <Type>0</Type>
         <ValueType>Multiplier</ValueType>
-        <Value>10</Value>
+        <Value>3</Value>
       </Effect>
     </Effects>
   </Material>
@@ -148,6 +212,16 @@
         <Type>0</Type>
         <ValueType>Flat</ValueType>
         <Value>100</Value>
+      </Effect>
+      <Effect>
+        <Type>2</Type>
+        <ValueType>Flat</ValueType>
+        <Value>10</Value>
+      </Effect>
+      <Effect>
+        <Type>12</Type>
+        <ValueType>Flat</ValueType>
+        <Value>5</Value>
       </Effect>
     </Effects>
   </Material>

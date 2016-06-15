@@ -61,7 +61,7 @@ public class MaterialEffect{
     public string ReadableValue {
         get {
             if (ValueType == EffectValueType.Flat)
-                return (Value > 0 ? "+" : "-") + Value;
+                return (Value > 0 ? "+" : "") + Value;
             else
             {
                 float value = (Value - 1) * 100;
