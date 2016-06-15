@@ -58,9 +58,10 @@
         <ValueType>Multiplier</ValueType>
         <Value>1.25</Value>
       </Effect>
-      <Type>13</Type>
-      <ValueType>Flat</ValueType>
-      <Value>2</Value>
+      <Effect>
+        <Type>13</Type>
+        <ValueType>Flat</ValueType>
+        <Value>2</Value>
       </Effect>
     </Effects>
 	</Material>
