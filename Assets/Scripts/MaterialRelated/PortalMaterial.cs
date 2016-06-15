@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 public class PortalMaterial {
     #region Material Handler
 
-    public enum MaterialColor { Red, Green, Blue, Yellow, Meta };
+    public enum MaterialColor { Red, Green, Blue, Purple, Yellow, Meta };
 
     public static MaterialColor RandomColor {
         get {
@@ -29,6 +29,9 @@ public class PortalMaterial {
 
         // Blue
         new Color(0.4f, 0.4f, 1.0f, 1.0f),
+
+        // Purple
+        new Color(0.6f, 0.196f, 0.8f),
 
         // Yellow
         new Color(1.0f, 1.0f, 0.4f, 1.0f)
@@ -70,16 +73,18 @@ public class PortalMaterial {
                                 throw new ArgumentException("Could not parse material color, \"" + color + "\" is not valid");
                             }
                             break;
+                        case "Description":
+                            material.Description = reader.ReadInnerXml();
+                            break;
                         case "Effect":
                             effect = new MaterialEffect();
                             break;
-                        case "Effect-Type":
+                        case "Type":
                             effect.effectType = int.Parse(reader.ReadInnerXml());
                             break;
-                        case "Effect-Value":
+                        case "Value":
                             effect.effectValue = float.Parse(reader.ReadInnerXml());
                             break;
-
                     }
                 else
                     switch (reader.Name)
@@ -126,6 +131,7 @@ public class PortalMaterial {
     #endregion
 
     public string Name { get; private set; }
+    public string Description { get; private set; }
     public string ImageLocation { get; private set; }
     public MaterialColor Color { get; private set; }
 

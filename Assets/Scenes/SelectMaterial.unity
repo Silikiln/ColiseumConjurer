@@ -431,7 +431,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90946cbfee49428468d339013ad6405c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  variableMachineSize: 3
 --- !u!1 &495441927
 GameObject:
   m_ObjectHideFlags: 0
@@ -1441,8 +1440,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.7, y: 53.6}
-  m_SizeDelta: {x: 2120.3, y: 379.8}
+  m_AnchoredPosition: {x: 0.8, y: 46.5}
+  m_SizeDelta: {x: 2101.3, y: 568.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1581470302
 MonoBehaviour:
@@ -1471,12 +1470,12 @@ MonoBehaviour:
     m_MinSize: 0
     m_MaxSize: 200
     m_Alignment: 0
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Selection Description
+  m_Text: Selection Description will go here and talk about the material
 --- !u!222 &1581470303
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1790,8 +1789,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60508bed00175644aa0b62b58ce6208d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxPortalSize: 10
   Portal: {fileID: 1497747261}
+  MaxPortalSize: 10
 --- !u!4 &1811920264
 Transform:
   m_ObjectHideFlags: 0

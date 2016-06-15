@@ -1,119 +1,140 @@
 <Materials>
 	<Material>
-		<Name>PMOne</Name>
+		<Name>Rose Petal</Name>
     <Color>Red</Color>
+    <Description>A singular petal from a rose</Description>
     <Effects>
       <Effect>
-        <Effect-Type>0</Effect-Type>
-        <Effect-Value>.5</Effect-Value>
+        <Type>0</Type>
+        <Value>.5</Value>
       </Effect>
     </Effects>
 	</Material>
 	<Material>
-		<Name>PMTwo</Name>
+		<Name>Briar Heart</Name>
     <Color>Red</Color>
+    <Description>A thorny plant used in a ritual to replace the heart and become partially undead</Description>
     <Effects>
       <Effect>
-        <Effect-Type>1</Effect-Type>
-        <Effect-Value>1</Effect-Value>
+        <Type>1</Type>
+        <Value>1</Value>
       </Effect>
     </Effects>
     <Effects>
       <Effect>
-        <Effect-Type>2</Effect-Type>
-        <Effect-Value>2</Effect-Value>
+        <Type>2</Type>
+        <Value>2</Value>
       </Effect>
     </Effects>
 	</Material>
 	<Material>
-		<Name>PMThree</Name>
+		<Name>Crimson Nimroot</Name>
     <Color>Red</Color>
+    <Description>A glowing red herb that emits an off-key chime when approached</Description>
     <Effects>
       <Effect>
-        <Effect-Type>0</Effect-Type>
-        <Effect-Value>5</Effect-Value>
+        <Type>0</Type>
+        <Value>5</Value>
       </Effect>
     </Effects>
     <Effects>
       <Effect>
-        <Effect-Type>1</Effect-Type>
-        <Effect-Value>2</Effect-Value>
+        <Type>1</Type>
+        <Value>2</Value>
       </Effect>
     </Effects>
     <Effects>
       <Effect>
-        <Effect-Type>2</Effect-Type>
-        <Effect-Value>3</Effect-Value>
+        <Type>2</Type>
+        <Value>3</Value>
       </Effect>
     </Effects>
 	</Material>
   <Material>
-    <Name>PMFour</Name>
+    <Name>Earthroot</Name>
     <Color>Green</Color>
+    <Description>Thick tangled roots that grow on cliffs and hills</Description>
     <Effects>
       <Effect>
-        <Effect-Type>0</Effect-Type>
-        <Effect-Value>4</Effect-Value>
+        <Type>0</Type>
+        <Value>4</Value>
       </Effect>
     </Effects>
   </Material>
   <Material>
-    <Name>PMFive</Name>
+    <Name>Fool's Parsley Leaf</Name>
     <Color>Green</Color>
+    <Description>A normal looking leaf, its fibers can be woven into magical garments</Description>
     <Effects>
       <Effect>
-        <Effect-Type>1</Effect-Type>
-        <Effect-Value>5</Effect-Value>
+        <Type>1</Type>
+        <Value>5</Value>
       </Effect>
     </Effects>
   </Material>
   <Material>
-    <Name>PMSix</Name>
+    <Name>Spider Egg</Name>
     <Color>Green</Color>
+    <Description>The egg of a large spider, yet to be hatched</Description>
     <Effects>
       <Effect>
-        <Effect-Type>2</Effect-Type>
-        <Effect-Value>6</Effect-Value>
+        <Type>2</Type>
+        <Value>6</Value>
       </Effect>
     </Effects>
   </Material>
   <Material>
-    <Name>PMSeven</Name>
+    <Name>Dreamfoil</Name>
     <Color>Blue</Color>
+    <Description>A feathered herb, capable of surviving in barren climates</Description>
     <Effects>
       <Effect>
-        <Effect-Type>0</Effect-Type>
-        <Effect-Value>7</Effect-Value>
+        <Type>0</Type>
+        <Value>7</Value>
       </Effect>
     </Effects>
   </Material>
   <Material>
-    <Name>PMEight</Name>
+    <Name>Deathbell</Name>
     <Color>Blue</Color>
+    <Description>Stories claim this flower grows where untimely deaths have occurred</Description>
     <Effects>
       <Effect>
-        <Effect-Type>1</Effect-Type>
-        <Effect-Value>8</Effect-Value>
+        <Type>1</Type>
+        <Value>8</Value>
       </Effect>
     </Effects>
   </Material>
   <Material>
-    <Name>PMNine</Name>
+    <Name>Ice Wraith Teeth</Name>
     <Color>Blue</Color>
+    <Description>Teeth taken from a deceased ice wraith, still freezing to the touch</Description>
     <Effects>
       <Effect>
-        <Effect-Type>2</Effect-Type>
-        <Effect-Value>9</Effect-Value>
+        <Type>2</Type>
+        <Value>9</Value>
       </Effect>
     </Effects>
   </Material>
   <Material>
-    <Name>PMTen</Name>
+    <Name>Purple Lotus</Name>
+    <Color>Purple</Color>
+    <Description>A mythical flower that is very powerful and difficult to acquire in pristine condition</Description>
+    <Effects>
+      <Effect>
+        <Type>0</Type>
+        <Value>10</Value>
+      </Effect>
+    </Effects>
+  </Material>
+  <Material>
+    <Name>Wild Steelbloom</Name>
     <Color>Yellow</Color>
+    <Description>Found growing on steep hills, this flower requires tough navigation of slopes to acquire</Description>
     <Effects>
       <Effect>
-        <Effect-Type>0</Effect-Type>
-        <Effect-Value>10</Effect-Value>
+        <Type>0</Type>
+        <Value>10</Value>
       </Effect>
     </Effects>
   </Material>
