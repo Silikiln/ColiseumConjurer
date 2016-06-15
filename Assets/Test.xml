@@ -1,0 +1,36 @@
+﻿<Tests>
+  <Test>
+    <Name>Hello</Name>
+    <Description>This is the description</Description>
+    <Items>
+      <Item>10</Item>
+      <Item>8</Item>
+      <Item>6</Item>
+      <Item>4</Item>
+      <Item>2</Item>
+      <Item>0</Item>
+    </Items>
+    <Value>20</Value>
+    <Enum>Have</Enum>
+    <SubTests>
+      <SubTest>
+        <Reason>Testing of course</Reason>
+      </SubTest>
+      <SubTest>
+        <Reason>Testing again</Reason>
+      </SubTest>
+    </SubTests>
+  </Test>
+  <Test>
+    <Name>Goodbye</Name>
+    <Description>This is a different description</Description>
+    <Value>-1</Value>
+    <Enum>Neither</Enum>
+    <SubTests>
+      <SubTest>
+        <Reason>Testing once more</Reason>
+      </SubTest>
+    </SubTests>
+    <Items></Items>
+  </Test>
+</Tests>
