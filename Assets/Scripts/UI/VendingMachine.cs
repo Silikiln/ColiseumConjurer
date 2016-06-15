@@ -47,6 +47,7 @@ public class VendingMachine : MonoBehaviour {
         {
             AvailableMaterials[i] = PortalMaterial.RandomMaterial;
             visibleMaterialImages[i].color = AvailableMaterials[i].VisualColor;
+            //visibleMaterialImages[i].sprite = AvailableMaterials[i].Image;
         }
     }
 

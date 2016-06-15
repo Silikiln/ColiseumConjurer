@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[XmlParse("Effect")]
 public class MaterialEffect{
     /*
         These probably can just be boolean values, but its a bit more readable at the moment
@@ -41,14 +42,14 @@ public class MaterialEffect{
         EffectResultType.Negative
     };
 
-    public string ReadableType { get { return EffectTypeNames[effectType]; } }
+    public string ReadableType { get { return EffectTypeNames[EffectType]; } }
     public string ReadableValue {
         get {
-            if (EffectValueTypes[effectType] == EffectValueType.Flat)
-                return (effectValue > 0 ? "+" : "-") + effectValue;
+            if (EffectValueTypes[EffectType] == EffectValueType.Flat)
+                return (EffectValue > 0 ? "+" : "-") + EffectValue;
             else
             {
-                float value = (effectValue - 1) * 100;
+                float value = (EffectValue - 1) * 100;
                 return (value > 0 ? "+" : "") + value + "%";
             }
         }
@@ -61,19 +62,22 @@ public class MaterialEffect{
 
     public bool IsPositive {
         get {
-            bool positiveEffect = EffectResultTypes[effectType] == EffectResultType.Positive;
-            if (EffectValueTypes[effectType] == EffectValueType.Flat)
-                return positiveEffect == effectValue > 0;
-            else return positiveEffect == effectValue > 1;
+            bool positiveEffect = EffectResultTypes[EffectType] == EffectResultType.Positive;
+            if (EffectValueTypes[EffectType] == EffectValueType.Flat)
+                return positiveEffect == EffectValue > 0;
+            else return positiveEffect == EffectValue > 1;
         }
     }
 
-    public int effectType { get; set; }
-    public float effectValue { get; set; }
+    [XmlParse("Type")]
+    public int EffectType { get; set; }
+
+    [XmlParse("Value")]
+    public float EffectValue { get; set; }
 
     public string toString()
     {
-        string requestedString = "Type:" + effectType + " Value: " + effectValue;
+        string requestedString = "Type:" + EffectType + " Value: " + EffectValue;
         return requestedString;
     }
 
