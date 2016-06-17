@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 using Random = UnityEngine.Random;
 
@@ -30,8 +31,20 @@ public class TrialHandler : MonoBehaviour {
 
     public Trial CreateTrial(Type t) { return (Trial)Activator.CreateInstance(t); }
 
+    //this could be better
+    public void LoadEvent(Type t){gameObject.AddComponent(t);}
+    public void BeginPreloadedEvent()
+    {
+        if (CurrentTrial != null){
+            Debug.Log("Beginning Preloaded Trial: " + CurrentTrial.Name);
+            CurrentTrial.Setup();
+        }
+    }
+
     public void BeginEvent(Type t)
     {
+        if (CurrentTrial != null)
+            CurrentTrial.Cleanup();
         gameObject.AddComponent(t);
         Debug.Log("Beginning Trial: " + CurrentTrial.Name);
         CurrentTrial.Setup();
@@ -47,5 +60,18 @@ public class TrialHandler : MonoBehaviour {
     {
         CurrentTrial.Cleanup();
         Debug.Log("Trial Complete!");
+    }
+
+    public void loadTrialScene()
+    {
+        if (CurrentTrial != null)
+        {
+            //start the animation(couroutine?)
+            //load scene as additive
+            SceneManager.LoadSceneAsync("TrialScene", LoadSceneMode.Additive);
+            GameController.Instance.mainCanvas.enabled = false;
+        }
+        else
+            Debug.Log("No Specified Scene");
     }
 }
