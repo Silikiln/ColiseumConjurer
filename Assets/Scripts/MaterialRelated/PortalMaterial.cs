@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 public class PortalMaterial : IEnumerable<MaterialEffect> {
     #region Material Handler
 
-    public enum MaterialColor { Red, Green, Blue, Purple, Yellow, Meta };
+    public enum MaterialColor { Red = 0, Green = 1, Blue = 2, Purple = 3, Yellow = 4, Pink = 5};
 
     public static MaterialColor RandomColor {
         get {
@@ -36,6 +36,9 @@ public class PortalMaterial : IEnumerable<MaterialEffect> {
 
         // Yellow
         new Color(1.0f, 1.0f, 0.4f, 1.0f),
+        
+        //pink
+        new Color(1.0f, 0.55f, 0.78f, 1.0f)
     };
 
     static PortalMaterial() {
@@ -54,7 +57,7 @@ public class PortalMaterial : IEnumerable<MaterialEffect> {
     //select a random material of the given color
     public static PortalMaterial RandomMaterialWithColor(MaterialColor color)
     {
-        return RandomElement(AllMaterials.Where(pm => pm.Color == color || pm.Color == MaterialColor.Meta));
+        return RandomElement(AllMaterials.Where(pm => pm.Color == color));
     }
 
     //get material by providing a name

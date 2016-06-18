@@ -226,4 +226,26 @@
       </Effect>
     </Effects>
   </Material>
+  <Material>
+    <Name>Talandra's Rose</Name>
+    <Color>Pink</Color>
+    <Description>A rose, owned by Talandra.  Requires 385 herbalism to gather</Description>
+    <Effects>
+      <Effect>
+        <Type>0</Type>
+        <ValueType>Flat</ValueType>
+        <Value>100</Value>
+      </Effect>
+      <Effect>
+        <Type>1</Type>
+        <ValueType>Flat</ValueType>
+        <Value>4</Value>
+      </Effect>
+      <Effect>
+        <Type>3</Type>
+        <ValueType>Flat</ValueType>
+        <Value>5</Value>
+      </Effect>
+    </Effects>
+  </Material>
 </Materials>
