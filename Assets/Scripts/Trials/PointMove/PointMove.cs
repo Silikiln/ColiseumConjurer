@@ -32,6 +32,7 @@ public class PointMove : Trial {
     {
         if(lastPosition==null)
             lastPosition = PlayerController.Instance.transform.position;
+
         Vector2 position;
         do
         {

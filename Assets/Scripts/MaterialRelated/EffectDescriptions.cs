@@ -54,6 +54,6 @@ public static class EffectDescriptions {
 
     private static MemberInfo ForValue(EffectDescription p)
     {
-        return typeof(EffectAttribute).GetField(Enum.GetName(typeof(EffectAttribute), p));
+        return typeof(EffectDescription).GetField(Enum.GetName(typeof(EffectDescription), p));
     }
 }
