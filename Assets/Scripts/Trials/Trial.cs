@@ -24,8 +24,8 @@ public abstract class Trial : MonoBehaviour {
         return modifiedCount < ObjectCountMax ? modifiedCount : ObjectCountMax;
     }}
 
-    public abstract void Setup();
-    public abstract bool RequirementsMet { get; }
+    public virtual void Setup() { }
+    public virtual bool RequirementsMet { get { return false; } }
     public virtual void Cleanup() {
         TrialHandler.Instance.UnloadTrialScene();
     }

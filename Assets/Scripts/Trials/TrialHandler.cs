@@ -33,7 +33,11 @@ public class TrialHandler : MonoBehaviour {
         Instance = this;
         ObjectiveMultiplier = 1;
 
-        PossibleEvents = typeof(Trial).Assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(Trial))).ToArray();
+        PossibleEvents = typeof(Trial).Assembly.GetTypes().Where(type => 
+            type != typeof(Boss) &&
+            type.IsSubclassOf(typeof(Trial)) && 
+            !type.IsSubclassOf(typeof(Boss))
+        ).ToArray();
         //PossibleEvents = new Type[]{ typeof(HideAndSeek) };
     }
 
