@@ -30,7 +30,7 @@ public class PointMove : Trial {
 
     public override void Setup()
     {
-        if(lastPosition==null)
+        if(lastPosition == Vector2.zero)
             lastPosition = PlayerController.Instance.transform.position;
 
         Vector2 position;
