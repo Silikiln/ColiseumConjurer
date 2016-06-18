@@ -11,13 +11,16 @@ public abstract class Trial : MonoBehaviour {
     protected int BaseObjectCount;
     protected int ObjectCountMax = int.MaxValue;
 
+    protected float BaseTimeLimit;
+    protected float TimeLimitMin = 15;
+
     public int ObjectiveCount { get {
-        int modifiedCount = Mathf.Clamp((int)((BaseObjectiveCount + TrialHandler.ObjectivesAdded) * TrialHandler.ObjectiveMultiplier), 0, int.MaxValue);
+        int modifiedCount = Mathf.Clamp((int)(BaseObjectiveCount * TrialHandler.ObjectiveMultiplier + TrialHandler.ObjectivesAdded), 0, int.MaxValue);
         return modifiedCount < ObjectiveCountMax ? modifiedCount : ObjectiveCountMax;
     } }
 
     public int ObjectCount { get {
-        int modifiedCount = Mathf.Clamp((int)((BaseObjectCount + TrialHandler.ObjectsAdded) * TrialHandler.ObjectMultiplier), 0, int.MaxValue);
+        int modifiedCount = Mathf.Clamp((int)(BaseObjectCount * TrialHandler.ObjectMultiplier + TrialHandler.ObjectsAdded), 0, int.MaxValue);
         return modifiedCount < ObjectCountMax ? modifiedCount : ObjectCountMax;
     }}
 

@@ -3,33 +3,43 @@ using System.Collections;
 
 public class Entity : MonoBehaviour {
     [SerializeField]
-    private int BaseHealth = 1;
+    protected int BaseHealth = 1;
 
     [SerializeField]
-    private int BaseDamage = 1;
+    protected int BaseDamage = 1;
+
+    protected float BaseSize;
 
     public int Health { get; protected set; }
 
     protected virtual void Start()
     {
-        Health = BaseHealth;
+        Health = MaxHealth;
+        BaseSize = transform.localScale.x;
+        transform.localScale = new Vector3(Size, Size, 1);
+
+        Debug.Log(string.Format("Entity: {0}\nHealth: {1}\nDamage: {2}", name, Health, Damage));
     }
 
-    public float HealthMultiplier = 1;
-    public int HealthAdded = 0;
+    protected virtual float HealthMultiplier { get { return 1; } }
+    protected virtual float HealthAdded { get { return 0; } }
 
-    public float DamageDealtMultiplier = 1;
-    public int DamageDealtAdded = 0;
+    protected virtual float DamageDealtMultiplier { get { return 1; } }
+    protected virtual float DamageDealtAdded { get { return 0; } }
 
-    public float DamageRecievedMultiplier = 1;
-    public int DamageRecievedAdded = 0;
+    protected virtual float DamageRecievedMultiplier { get { return 1; } }
+    protected virtual float DamageRecievedAdded { get { return 0; } }
 
-    public float HealMultiplier = 1;
-    public int HealAdded = 0;
+    protected virtual float HealMultiplier { get { return 1; } }
+    protected virtual float HealAdded { get { return 0; } }
+
+    protected virtual float SizeMultiplier { get { return 1; } }
+    protected virtual float SizeAdded { get { return 0; } }
 
     public float HealthPercent { get { return (float)Health / MaxHealth; } }
-    public int Damage { get { return Mathf.Clamp((int)(BaseDamage * DamageDealtMultiplier) + DamageDealtAdded, 0, int.MaxValue); } }
+    public int Damage { get { return Mathf.Clamp((int)(BaseDamage * DamageDealtMultiplier + DamageDealtAdded), 0, int.MaxValue); } }
     public int MaxHealth { get { return (int)(BaseHealth * HealthMultiplier + HealthAdded); } }
+    public float Size { get { return BaseSize * SizeMultiplier + SizeAdded; } }
 
     public void Hurt(int damage)
     {
