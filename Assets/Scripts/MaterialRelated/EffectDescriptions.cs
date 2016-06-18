@@ -19,6 +19,7 @@ public static class EffectDescriptions {
     {
         [Effect("Player Health", true)]     PlayerHealth,      //0
         [Effect("Player Speed", true)]      PlayerSpeed,       //1
+        
         [Effect("Player Damage", true)]     PlayerDamage,      //2
         [Effect("Player Lives", true)]      PlayerLives,       //3
         [Effect("Player Size", false)]      PlayerSize,       //4
@@ -35,6 +36,9 @@ public static class EffectDescriptions {
         [Effect("Time Limit", true)]        TimeLimit,         //11
         [Effect("Objectives", false)]       ObjectiveCount,        //12
         [Effect("Objects", false)]          ObjectCount,           //13
+
+        [Effect("Player Max Speed", true)]
+        PlayerMaxSpeed,
     }
 
     public static string GetDisplayName(this EffectDescription p)

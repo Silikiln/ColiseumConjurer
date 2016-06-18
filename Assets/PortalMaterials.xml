@@ -185,6 +185,11 @@
         <ValueType>Multiplier</ValueType>
         <Value>.5</Value>
       </Effect>
+      <Effect>
+        <Type>PlayerMaxSpeed</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>101</Value>
+      </Effect>
     </Effects>
   </Material>
   <Material>

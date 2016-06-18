@@ -40,6 +40,15 @@ public class PlayerController : MovingEntity {
     public static float PlayerSizeMultiplier = 1;
     public static float PlayerSizeAdded = 0;
 
+    public static void ApplyModifiers()
+    {
+        Instance.MoveSpeedAdded = PlayerMoveSpeedAdded;
+        Instance.MoveSpeedModifier = PlayerMoveSpeedMultiplier;
+
+        Instance.MaxSpeedAdded = PlayerMaxSpeedAdded;
+        Instance.MaxSpeedModifier = PlayerMaxSpeedMultiplier;
+    }
+
     #endregion
 
     public GameObject fireballPrefab;
@@ -52,6 +61,7 @@ public class PlayerController : MovingEntity {
     {
         base.Start();
         Instance = this;
+        ApplyModifiers();
     }
 
     void Update()
