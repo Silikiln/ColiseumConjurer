@@ -8,7 +8,8 @@ public class Entity : MonoBehaviour {
     [SerializeField]
     protected int BaseDamage = 1;
 
-    protected float BaseSize;
+    [SerializeField]
+    protected float BaseSize = 1;
 
     public int Health { get; protected set; }
 

@@ -73,16 +73,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3b42682912fb445b0670bec309ed3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseHealth: 1
-  BaseDamage: 1
-  _healthModifier: 1
-  DamageReceivedPercent: 1
-  DamageDealtPercent: 1
-  HealModifier: 1
+  BaseHealth: 10
+  BaseDamage: 2
+  BaseSize: 1
   BaseSpeed: 20
   BaseMaxSpeed: 4
-  MoveSpeedModifier: 1
-  MaxSpeedModifier: 1
   fireballPrefab: {fileID: 192154, guid: 37117fd4e6a81434ca34ddf073130528, type: 2}
   projectileSpeed: 500
 --- !u!212 &21239988
@@ -121,7 +116,19 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: BaseHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BaseDamage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BaseSize
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 116068}
