@@ -38,13 +38,13 @@ public static class MaterialColors
             Pink = 10,
 
         [MaterialColor(1, 0.549f, 0)]
-            Orange = 10,
+            Orange = 12,
 
         [MaterialColor(0, 0, 0)]
-            Black = 10,
+            Black = 14,
 
         [MaterialColor(1, 1, 1)]
-            White = 10,
+            White = 16,
     };
 
     public static Color GetVisualColor(this MaterialColor mc)
