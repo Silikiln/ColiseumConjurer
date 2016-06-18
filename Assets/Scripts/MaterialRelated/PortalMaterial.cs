@@ -5,41 +5,14 @@ using System.Linq;
 using System.Xml;
 using System;
 
+using MaterialColor = MaterialColors.MaterialColor;
 using Random = UnityEngine.Random;
 
 [XmlParse("Material")]
 public class PortalMaterial : IEnumerable<MaterialEffect> {
     #region Material Handler
 
-    public enum MaterialColor { Red = 0, Green = 1, Blue = 2, Purple = 3, Yellow = 4, Pink = 5};
-
-    public static MaterialColor RandomColor {
-        get {
-            Array values = Enum.GetValues(typeof(MaterialColor));
-            return (MaterialColor)values.GetValue(Random.Range(0, values.Length - 1));
-        }
-    }
-
     public static List<PortalMaterial> AllMaterials { get; private set; }
-    static Color[] VisualColors = {
-        // Red
-        new Color(1.0f, 0.4f, 0.4f, 1.0f),
-
-        // Green
-        new Color(0.4f, 1.0f, 0.4f, 1.0f),
-
-        // Blue
-        new Color(0.4f, 0.4f, 1.0f, 1.0f),
-
-        // Purple
-        new Color(0.729f, 0.333f, 0.827f),
-
-        // Yellow
-        new Color(1.0f, 1.0f, 0.4f, 1.0f),
-        
-        //pink
-        new Color(1.0f, 0.55f, 0.78f, 1.0f)
-    };
 
     static PortalMaterial() {
         AllMaterials = XmlParseAttribute.ReadFileIntoList<PortalMaterial>("Assets/PortalMaterials.xml");
@@ -66,13 +39,6 @@ public class PortalMaterial : IEnumerable<MaterialEffect> {
         return AllMaterials.Where(pm => pm.Name == givenName).FirstOrDefault();
     }
 
-    public static Color GetMaterialColor(MaterialColor color)
-    {
-        if ((int)color >= VisualColors.Length)
-            return UnityEngine.Color.white;
-        return VisualColors[(int)color];
-    }
-
     #endregion
 
     [XmlParse("Name")]
@@ -90,7 +56,7 @@ public class PortalMaterial : IEnumerable<MaterialEffect> {
     [XmlParse("Effects")]
     private List<MaterialEffect> effects = new List<MaterialEffect>();
 
-    public Color VisualColor { get { return GetMaterialColor(Color); } }
+    public Color VisualColor { get { return Color.GetVisualColor(); } }
 
     public Sprite Image { get { return Resources.Load<Sprite>("Materials/" + ImagePath); } }
 

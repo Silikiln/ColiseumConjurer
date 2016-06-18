@@ -46,18 +46,18 @@ public static class EffectDescriptions {
         return GetAttr(p).DisplayName;
     }
 
-    public static bool IsPositive(this EffectDescription p)
+    public static bool IsPositive(this EffectDescription ed)
     {
-        return GetAttr(p).IsPositive;
+        return GetAttr(ed).IsPositive;
     }
 
-    private static EffectAttribute GetAttr(EffectDescription p)
+    private static EffectAttribute GetAttr(EffectDescription ed)
     {
-        return (EffectAttribute)Attribute.GetCustomAttribute(ForValue(p), typeof(EffectAttribute));
+        return (EffectAttribute)Attribute.GetCustomAttribute(ForValue(ed), typeof(EffectAttribute));
     }
 
-    private static MemberInfo ForValue(EffectDescription p)
+    private static MemberInfo ForValue(EffectDescription ed)
     {
-        return typeof(EffectDescription).GetField(Enum.GetName(typeof(EffectDescription), p));
+        return typeof(EffectDescription).GetField(Enum.GetName(typeof(EffectDescription), ed));
     }
 }
