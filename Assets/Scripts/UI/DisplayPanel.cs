@@ -28,8 +28,10 @@ public class DisplayPanel : PanelUtility {
         materialEffectValueText.text = displayMaterial.EffectFormattedValues;
 
         //clear selected vend button
-        if(fromPortal)
+        if (fromPortal)
             GameController.Instance.vendPanel.UnselectCurrentButton();
+        else
+            GameController.Instance.Portal.UnselectCurrentButton();
     }
 
     public void ClearDisplay()

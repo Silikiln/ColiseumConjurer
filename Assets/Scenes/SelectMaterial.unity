@@ -196,7 +196,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 249652396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 57e348748e5620a46b0912541cb29452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -208,8 +208,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.26822016, g: 0.8897059, b: 0.58110607, a: 1}
+    m_HighlightedColor: {r: 0.26822016, g: 0.8897059, b: 0.58110607, a: 1}
+    m_PressedColor: {r: 0.19220372, g: 0.5808823, b: 0.38788328, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1499,7 +1499,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1347555509}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 57e348748e5620a46b0912541cb29452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1511,8 +1511,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.26666668, g: 0.8862745, b: 0.5803922, a: 1}
+    m_HighlightedColor: {r: 0.26822016, g: 0.8897059, b: 0.58110607, a: 1}
+    m_PressedColor: {r: 0.19220372, g: 0.5808823, b: 0.38788328, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1834,7 +1834,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1604242845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 57e348748e5620a46b0912541cb29452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1846,8 +1846,8 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.26666668, g: 0.8862745, b: 0.5803922, a: 1}
+    m_HighlightedColor: {r: 0.26822016, g: 0.8897059, b: 0.58110607, a: 1}
+    m_PressedColor: {r: 0.19220372, g: 0.5808823, b: 0.38788328, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1

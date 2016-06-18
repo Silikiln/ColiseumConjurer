@@ -6,7 +6,7 @@ public class VendingMachine : MonoBehaviour {
     // TODO: Add option for more than 3 materials at a time
     //public int MaterialSlotCount = 3;
 
-    Button[] materialSelectButtons = new Button[3];
+    SelectButton[] materialSelectButtons = new SelectButton[3];
     Image[] visibleMaterialImages = new Image[3];
     
     PortalMaterial[] AvailableMaterials = new PortalMaterial[3];
@@ -17,9 +17,9 @@ public class VendingMachine : MonoBehaviour {
     void Start()
     {
         // Find material select buttons
-        materialSelectButtons[0] = transform.Find("VendLeftOption").GetComponent<Button>();
-        materialSelectButtons[1] = transform.Find("VendMidOption").GetComponent<Button>();
-        materialSelectButtons[2] = transform.Find("VendRightOption").GetComponent<Button>();
+        materialSelectButtons[0] = transform.Find("VendLeftOption").GetComponent<SelectButton>();
+        materialSelectButtons[1] = transform.Find("VendMidOption").GetComponent<SelectButton>();
+        materialSelectButtons[2] = transform.Find("VendRightOption").GetComponent<SelectButton>();
 
         // Find material select button images
         visibleMaterialImages[0] = transform.Find("VendLeftOption/Image").GetComponent<Image>();
@@ -48,7 +48,7 @@ public class VendingMachine : MonoBehaviour {
         UnselectCurrentButton();
         
         SelectedMaterialIndex = index;
-        UpdateMaterialDescription();
+        GameController.Instance.displayPanel.UpdateDisplayPanel(DisplayMaterial);
     }
 
     // Confirm the current selection
@@ -75,26 +75,7 @@ public class VendingMachine : MonoBehaviour {
     public void UnselectCurrentButton()
     {
         if (SelectedMaterialIndex > -1)
-            SetSelectButtonColor(false);
-    }
-
-    // Change the color of a select button
-    void SetSelectButtonColor(int index, bool pressed)
-    {
-        materialSelectButtons[SelectedMaterialIndex].image.color =
-            pressed ? 
-            materialSelectButtons[SelectedMaterialIndex].colors.pressedColor :
-            materialSelectButtons[SelectedMaterialIndex].colors.normalColor;
-    }
-
-    // Change the color of the current button
-    void SetSelectButtonColor(bool pressed) { SetSelectButtonColor(SelectedMaterialIndex, pressed); }
-
-    //displays the material information
-    public void UpdateMaterialDescription()
-    {
-        SetSelectButtonColor(true);
-        GameController.Instance.displayPanel.UpdateDisplayPanel(DisplayMaterial);
+            materialSelectButtons[SelectedMaterialIndex].Select(false);
     }
 
     public void ClearDisplayPanel()

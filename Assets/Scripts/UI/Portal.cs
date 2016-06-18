@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class Portal : MonoBehaviour {
     public float TopMargin = 40;
+
+    List<SelectButton> infoButtons = new List<SelectButton>();
+    int selectedButton = -1;
 
     public void AddMaterial(int currentStage, PortalMaterial material)
     {
@@ -19,10 +22,23 @@ public class Portal : MonoBehaviour {
         portalStageText.color = material.VisualColor;
 
         //update portal button
-        portalStageInfo.GetComponent<Button>().targetGraphic = portalStageInfo.GetComponent<Image>();
-        portalStageInfo.GetComponent<Button>().onClick.AddListener(delegate {
-            GameController.Instance.displayPanel.UpdateDisplayPanel(GameController.Instance.stageMaterials[currentStage - 1], true);
-        });
+        infoButtons.Add(portalStageInfo.GetComponent<SelectButton>());
+        infoButtons[currentStage - 1].targetGraphic = portalStageInfo.GetComponent<Image>();
+        infoButtons[currentStage - 1].onClick.AddListener(delegate { InfoSelected(currentStage - 1); });
+    }
+
+    public void UnselectCurrentButton()
+    {
+        if (selectedButton == -1) return;
+        infoButtons[selectedButton].Select(false);
+        selectedButton = -1;
+    }
+
+    public void InfoSelected(int stage)
+    {
+        UnselectCurrentButton();
+        selectedButton = stage;
+        GameController.Instance.displayPanel.UpdateDisplayPanel(GameController.Instance.stageMaterials[stage], true);
     }
 
     public void ClearMaterials()
