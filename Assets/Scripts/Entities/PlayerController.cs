@@ -145,6 +145,7 @@ public class PlayerController : MovingEntity {
     void Attack()
     {
         GameObject fireball = (GameObject)Instantiate(fireballPrefab, transform.position, Quaternion.identity);
+        fireball.transform.parent = transform;
         fireball.GetComponent<FireballController>().parent = GetComponent<Entity>();
         float angle = transform.localRotation.eulerAngles.z * Mathf.Deg2Rad;
         Vector2 aim = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
