@@ -1,27 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+
+using EffectDescription = EffectDescriptions.EffectDescription;
 
 [XmlParse("Effect")]
 public class MaterialEffect{
-    /*
-        These probably can just be boolean values, but its a bit more readable at the moment
-
-        The type values can also be moved into an xml file if this method ends up being annoying
-    */
     public enum EffectValueType { Flat, Multiplier }
-    
-    public struct EffectType
-    {
-        public EffectType(string name, bool positive)
-        {
-            Name = name;
-            Positive = positive;
-        }
-
-        public string Name;
-        public bool Positive;
-    }
 
     static Color negativeTextColor = Color.red;
     static Color positiveTextColor = Color.green;
@@ -35,29 +21,9 @@ public class MaterialEffect{
         return string.Format("{0:x2}{1:x2}{2:x2}{3:x2}", r, g, b, a);
     }
 
-    static EffectType[] EffectTypes = {
-        // Player Effects
-        new EffectType("Player Health", true),      //0
-        new EffectType("Player Speed", true),       //1
-        new EffectType("Player Damage", true),      //2
-        new EffectType("Player Lives", true),       //3
-        new EffectType("Player Size", false),       //4
-        new EffectType("Attack Speed", true),       //5
 
-        // Monster Effects
-        new EffectType("Monster Health", false),    //6
-        new EffectType("Monster Speed", false),     //7
-        new EffectType("Monster Damage", false),    //8
-        new EffectType("Monster Size", false),      //9
-        new EffectType("Monster Count", false),     //10
 
-        // Trial Effects
-        new EffectType("Time Limit", true),         //11
-        new EffectType("Objectives", false),        //12
-        new EffectType("Objects", false),           //13
-    };
-
-    public string ReadableType { get { return EffectTypes[Type].Name; } }
+    public string ReadableType { get { return Effect.GetDisplayName(); } }
     public string ReadableValue {
         get {
             if (ValueType == EffectValueType.Flat)
@@ -77,12 +43,12 @@ public class MaterialEffect{
 
     public bool IsPositive {
         get {
-            return EffectTypes[Type].Positive == Value > (ValueType == EffectValueType.Flat ? 0 : 1);
+            return Effect.IsPositive() == Value > (ValueType == EffectValueType.Flat ? 0 : 1);
         }
     }
 
     [XmlParse("Type")]
-    public int Type { get; private set; }
+    public EffectDescription Effect { get; private set; }
 
     [XmlParse("ValueType")]
     public EffectValueType ValueType { get; private set; }
@@ -95,9 +61,70 @@ public class MaterialEffect{
         return string.Format("{0}\n{1}\n{2}", ReadableType, ValueType, Value);
     }
 
-    public void ApplyEffect()
+    void ApplyEffect(ref float flatValue, ref float multiplierValue)
     {
+        if (ValueType == EffectValueType.Flat)
+            flatValue += Value;
+        else
+            multiplierValue *= Value;
+    }
 
+    void RemoveEffect(ref float flatValue, ref float multiplierValue)
+    {
+        if (ValueType == EffectValueType.Flat)
+            flatValue -= Value;
+        else
+            multiplierValue /= Value;
+    }
+
+    void EffectAction(ref float flatValue, ref float multiplierValue, bool apply)
+    {
+        if (apply)
+            ApplyEffect(ref flatValue, ref multiplierValue);
+        else
+            RemoveEffect(ref flatValue, ref multiplierValue);
+    }
+
+    void PassEffectValues(bool apply)
+    {
+        switch (Effect)
+        {
+            // Player Effects
+            case EffectDescription.PlayerHealth:
+                EffectAction(ref PlayerController.PlayerHealthAdded, ref PlayerController.PlayerHealthMultiplier, apply);
+                break;
+            case EffectDescription.PlayerSpeed:
+                break;
+            case EffectDescription.PlayerDamage:
+                break;
+            case EffectDescription.PlayerLives:
+                break;
+            case EffectDescription.PlayerSize:
+                break;
+            case EffectDescription.PlayerAttackSpeed:
+                break;
+
+            // Monster Effects
+            case EffectDescription.MonsterHealth:
+                break;
+            case EffectDescription.MonsterSpeed:
+                break;
+            case EffectDescription.MonsterDamage:
+                break;
+            case EffectDescription.MonsterSize:
+                break;
+            case EffectDescription.MonsterCount:
+                break;
+
+            // Trial Effects
+            case EffectDescription.TimeLimit:
+                break;
+            case EffectDescription.ObjectiveCount:
+                break;
+            case EffectDescription.ObjectCount:
+                break;
+
+        }
     }
 
     public void RemoveEffect()

@@ -5,6 +5,39 @@ using System.Linq;
 public class PlayerController : MovingEntity {
     public static PlayerController Instance { get; private set; }
 
+    #region Material Modifiers
+
+    static PlayerController()
+    {
+        PlayerDamageDealtMultiplier = 1;
+
+        PlayerDamageRecievedMultiplier = 1;
+        PlayerHealMultiplier = 1;
+    }
+
+    public static int Lives = 1;
+    public static float AttackSpeed = 1;
+
+    public static float PlayerHealthMultiplier = 1;
+    public static float PlayerHealthAdded = 0;
+
+    public static float PlayerDamageDealtMultiplier = 1;
+    public static float PlayerDamageDealtAdded = 0;
+
+    public static float PlayerDamageRecievedMultiplier = 1;
+    public static float PlayerDamageReceivedAdded = 0;
+
+    public static float PlayerHealMultiplier = 1;
+    public static float PlayerHealAdded = 0;
+
+    public static float PlayerMoveSpeedMultiplier = 1;
+    public static float PlayerMoveSpeedAdded = 0;
+
+    public static float PlayerMaxSpeedMultiplier = 1;
+    public static float PlayerMaxSpeedAdded = 0;
+
+    #endregion
+
     public GameObject fireballPrefab;
     public float projectileSpeed = 500;
 
@@ -87,7 +120,6 @@ public class PlayerController : MovingEntity {
         Vector2 aim = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         fireball.GetComponent<Rigidbody2D>().AddForce(aim.normalized * projectileSpeed);
         Physics2D.IgnoreCollision(fireball.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-
     }
 
     void Movement()

@@ -7,21 +7,17 @@ public abstract class Trial : MonoBehaviour {
 
     protected int BaseObjectiveCount;
     protected int ObjectiveCountMax = int.MaxValue;
-    public int ObjectiveCountAdded = 0;
-    public float ObjectiveCountModifier = 1;
 
     protected int BaseObjectCount;
     protected int ObjectCountMax = int.MaxValue;
-    public int ObjectCountAdded = 0;
-    public float ObjectCountModifier = 1;
 
     public int ObjectiveCount { get {
-        int modifiedCount = (int)((BaseObjectiveCount + ObjectiveCountAdded) * ObjectiveCountModifier);
+        int modifiedCount = (int)((BaseObjectiveCount + TrialHandler.ObjectivesAdded) * TrialHandler.ObjectiveMultiplier);
         return modifiedCount < ObjectiveCountMax ? modifiedCount : ObjectiveCountMax;
     } }
 
     public int ObjectCount { get {
-        int modifiedCount = (int)((BaseObjectCount + ObjectCountAdded) * ObjectCountModifier);
+        int modifiedCount = (int)((BaseObjectCount + TrialHandler.ObjectsAdded) * TrialHandler.ObjectMultiplier);
         return modifiedCount < ObjectCountMax ? modifiedCount : ObjectCountMax;
     }}
 
