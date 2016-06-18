@@ -3,17 +3,19 @@ using System.Collections;
 
 public class MovingEntity : Entity {
     [SerializeField]
-    private float BaseSpeed = 1;
+    protected float BaseSpeed = 1;
 
     [SerializeField]
-    private float BaseMaxSpeed = 1.5f;
+    protected float BaseMaxSpeed = 1.5f;
 
     public float MoveSpeedModifier = 1;
+    public float MoveSpeedAdded = 0;
+
     public float MaxSpeedModifier = 1;
+    public float MaxSpeedAdded = 0;
 
-    public float MoveSpeed { get { return BaseSpeed * MoveSpeedModifier; } }
-
-    public float MaxSpeed { get { return BaseMaxSpeed * MaxSpeedModifier; } }
+    public float MoveSpeed { get { return BaseSpeed * MoveSpeedModifier + MoveSpeedAdded; } }
+    public float MaxSpeed { get { return BaseMaxSpeed * MaxSpeedModifier + MaxSpeedAdded; } }
 
     protected new Rigidbody2D rigidbody;
 
@@ -21,6 +23,8 @@ public class MovingEntity : Entity {
     protected override void Start () {
         base.Start();
         rigidbody = GetComponent<Rigidbody2D>();
+        MoveSpeedModifier = 1;
+        MaxSpeedModifier = 1;
 	}
 	
 	// Update is called once per frame
