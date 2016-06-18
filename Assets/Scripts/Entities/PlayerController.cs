@@ -15,6 +15,8 @@ public class PlayerController : MovingEntity {
         PlayerHealMultiplier = 1;
     }
 
+    public static float CurrentHealthPercent = 100;
+
     public static int Lives = 1;
     public static float PlayerAttackSpeedMultiplier = 1;
     public static float PlayerAttackSpeedAdded = 0;
@@ -40,6 +42,29 @@ public class PlayerController : MovingEntity {
     public static float PlayerSizeMultiplier = 1;
     public static float PlayerSizeAdded = 0;
 
+    // Player Controller Properties
+
+    protected override float HealthMultiplier { get { return PlayerHealthMultiplier; } }
+    protected override float HealthAdded { get { return PlayerHealthAdded; } }
+
+    protected override float DamageDealtMultiplier { get { return PlayerDamageDealtMultiplier; } }
+    protected override float DamageDealtAdded { get { return PlayerDamageDealtAdded; } }
+
+    protected override float DamageRecievedMultiplier { get { return PlayerDamageRecievedMultiplier; } }
+    protected override float DamageRecievedAdded { get { return PlayerDamageReceivedAdded; } }
+
+    protected override float HealMultiplier { get { return PlayerHealMultiplier; } }
+    protected override float HealAdded { get { return PlayerHealAdded; } }
+
+    protected override float SizeMultiplier { get { return PlayerSizeMultiplier; } }
+    protected override float SizeAdded { get { return PlayerSizeAdded; } }
+
+    protected override float MoveSpeedMultiplier { get { return PlayerMoveSpeedMultiplier; } }
+    protected override float MoveSpeedAdded { get { return PlayerMoveSpeedAdded; } }
+
+    protected override float MaxSpeedMultiplier { get { return PlayerMaxSpeedMultiplier; } }
+    protected override float MaxSpeedAdded { get { return PlayerMaxSpeedAdded; } }
+
     #endregion
 
     public GameObject fireballPrefab;
@@ -52,6 +77,7 @@ public class PlayerController : MovingEntity {
     {
         base.Start();
         Instance = this;
+        Health = (int)(MaxHealth * CurrentHealthPercent);
     }
 
     void Update()
@@ -147,5 +173,11 @@ public class PlayerController : MovingEntity {
         rigidbody.AddForce(moveDirection);
         if (rigidbody.velocity.magnitude > MaxSpeed)
             rigidbody.velocity = rigidbody.velocity.normalized * MaxSpeed;
+    }
+
+    void OnDestroy()
+    {
+        Instance = null;
+        CurrentHealthPercent = HealthPercent;
     }
 }

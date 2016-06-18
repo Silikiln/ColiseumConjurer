@@ -15,6 +15,9 @@ public class EnemyController : MovingEntity
     public static float EnemyDamageMultiplier = 1;
     public static float EnemyDamageAdded = 0;
 
+    public static float EnemyDamageReceivedMultiplier = 1;
+    public static float EnemyDamageReceivedAdded = 0;
+
     public static float EnemySizeMultiplier = 1;
     public static float EnemySizeAdded = 0;
 
@@ -31,18 +34,31 @@ public class EnemyController : MovingEntity
 
     #endregion
 
+    protected override float HealthMultiplier { get { return EnemyHealthMultiplier; } }
+    protected override float HealthAdded { get { return EnemyHealthAdded; } }
+
+    protected override float DamageDealtMultiplier { get { return EnemyDamageMultiplier; } }
+    protected override float DamageDealtAdded { get { return EnemyDamageAdded; } }
+
+    protected override float DamageRecievedMultiplier { get { return EnemyDamageReceivedMultiplier; } }
+    protected override float DamageRecievedAdded { get { return EnemyDamageReceivedAdded; } }
+
+    protected override float SizeMultiplier { get { return EnemySizeMultiplier; } }
+    protected override float SizeAdded { get { return EnemySizeAdded; } }
+
     public float knockbackPower = 5;
 
     public Transform target;
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     void FixedUpdate()
     {
-        if (target == null) return;
+        if (target == null)
+        {
+            if (PlayerController.Instance != null)
+                target = PlayerController.Instance.transform;
+            else
+                return;
+        }
 
         Vector2 moveDirection = target.position - transform.position;
         rigidbody.AddForce(moveDirection.normalized * MoveSpeed);

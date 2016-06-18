@@ -114,6 +114,9 @@ public class MaterialEffect{
             case EffectDescription.PlayerAttackSpeed:
                 EffectAction(ref PlayerController.PlayerAttackSpeedAdded, ref PlayerController.PlayerAttackSpeedMultiplier, apply);
                 break;
+            case EffectDescription.PlayerMaxSpeed:
+                EffectAction(ref PlayerController.PlayerMaxSpeedAdded, ref PlayerController.PlayerMaxSpeedMultiplier, apply);
+                break;
 
             // Monster Effects
             case EffectDescription.MonsterHealth:

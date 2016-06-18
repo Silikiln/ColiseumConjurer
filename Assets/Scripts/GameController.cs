@@ -27,6 +27,9 @@ public class GameController : MonoBehaviour {
         stageMaterials.Add(material);
         Portal.AddMaterial(stageMaterials.Count, material);
 
+        foreach (MaterialEffect effect in material)
+            effect.ApplyEffect();
+
         //load a new trial
         Type RandomTrial = TrialHandler.Instance.RandomTrial;
         TrialHandler.Instance.LoadEvent(RandomTrial);

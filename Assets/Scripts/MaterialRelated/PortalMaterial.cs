@@ -8,7 +8,7 @@ using System;
 using Random = UnityEngine.Random;
 
 [XmlParse("Material")]
-public class PortalMaterial {
+public class PortalMaterial : IEnumerable<MaterialEffect> {
     #region Material Handler
 
     public enum MaterialColor { Red, Green, Blue, Purple, Yellow, Meta };
@@ -94,6 +94,16 @@ public class PortalMaterial {
     public void AddEffect(MaterialEffect newEffect)
     {
         effects.Add(newEffect);
+    }
+
+    public IEnumerator<MaterialEffect> GetEnumerator()
+    {
+        return ((IEnumerable<MaterialEffect>)effects).GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
     }
 
     public string EffectTypeNames {

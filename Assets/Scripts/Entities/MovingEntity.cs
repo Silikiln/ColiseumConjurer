@@ -8,14 +8,14 @@ public class MovingEntity : Entity {
     [SerializeField]
     protected float BaseMaxSpeed = 1.5f;
 
-    public float MoveSpeedModifier = 1;
-    public float MoveSpeedAdded = 0;
+    protected virtual float MoveSpeedMultiplier { get { return 1; } }
+    protected virtual float MoveSpeedAdded { get { return 0; } }
 
-    public float MaxSpeedModifier = 1;
-    public float MaxSpeedAdded = 0;
+    protected virtual float MaxSpeedMultiplier { get { return 1; } }
+    protected virtual float MaxSpeedAdded { get { return 0; } }
 
-    public float MoveSpeed { get { return BaseSpeed * MoveSpeedModifier + MoveSpeedAdded; } }
-    public float MaxSpeed { get { return BaseMaxSpeed * MaxSpeedModifier + MaxSpeedAdded; } }
+    public float MoveSpeed { get { return BaseSpeed * MoveSpeedMultiplier + MoveSpeedAdded; } }
+    public float MaxSpeed { get { return BaseMaxSpeed * MaxSpeedMultiplier + MaxSpeedAdded; } }
 
     protected new Rigidbody2D rigidbody;
 
@@ -23,8 +23,8 @@ public class MovingEntity : Entity {
     protected override void Start () {
         base.Start();
         rigidbody = GetComponent<Rigidbody2D>();
-        MoveSpeedModifier = 1;
-        MaxSpeedModifier = 1;
+
+        Debug.Log(string.Format("Speed: {0}\nMax Speed: {1}", MoveSpeed, MaxSpeed));
 	}
 	
 	// Update is called once per frame
