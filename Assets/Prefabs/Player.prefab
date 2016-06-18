@@ -73,8 +73,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3b42682912fb445b0670bec309ed3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 20
-  MaxSpeed: 4
+  BaseHealth: 1
+  BaseDamage: 1
+  _healthModifier: 1
+  DamageReceivedPercent: 1
+  DamageDealtPercent: 1
+  HealModifier: 1
+  BaseSpeed: 20
+  BaseMaxSpeed: 4
+  MoveSpeedModifier: 1
+  MaxSpeedModifier: 1
   fireballPrefab: {fileID: 192154, guid: 37117fd4e6a81434ca34ddf073130528, type: 2}
   projectileSpeed: 500
 --- !u!212 &21239988

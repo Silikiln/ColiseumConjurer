@@ -6,18 +6,16 @@ using Random = UnityEngine.Random;
 
 public class PointMove : Trial {
     static float MinimumDistance = 1;
-
+    Vector2 lastPosition;
     public PointMove()
     {
         Name = "Move to Point";
         Description = "Move to the highlighted point(s)";
 
         BaseObjectiveCount = 1;
-
         pointPrefab = LoadResource<GameObject>("Point");
     }
 
-    Vector2 lastPosition = PlayerController.Instance.transform.position;
     int objectivesComplete = 0;
     GameObject pointPrefab;
 
@@ -32,6 +30,8 @@ public class PointMove : Trial {
 
     public override void Setup()
     {
+        if(lastPosition==null)
+            lastPosition = PlayerController.Instance.transform.position;
         Vector2 position;
         do
         {
