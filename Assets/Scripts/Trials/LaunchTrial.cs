@@ -7,6 +7,6 @@ public class LaunchTrial : MonoBehaviour {
     void Start()
     {
         //launch ritual stuff
-        TrialHandler.Instance.BeginPreloadedEvent();
+        TrialHandler.Instance.BeginPreloadedEvent(gameObject);
     }
 }

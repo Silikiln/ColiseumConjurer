@@ -45,7 +45,8 @@ public class TrialPanel : PanelUtility {
         textTimeCaption.enabled = false;
         TogglePanel();
         ResetText();
-        TrialHandler.Instance.loadTrialScene();
+        TrialHandler.Instance.LoadTrialScene();
+        GameController.Instance.mainCanvas.enabled = false;
     }
 
 }

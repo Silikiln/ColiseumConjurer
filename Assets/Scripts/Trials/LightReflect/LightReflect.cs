@@ -67,6 +67,6 @@ public class LightReflect : Trial
 
     public override bool RequirementsMet
     {
-        get { return lightTarget.Full; }
+        get { return lightTarget != null ? lightTarget.Full : false; }
     }
 }

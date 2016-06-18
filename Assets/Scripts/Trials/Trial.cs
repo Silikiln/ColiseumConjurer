@@ -28,15 +28,13 @@ public abstract class Trial : MonoBehaviour {
     public abstract void Setup();
     public abstract bool RequirementsMet { get; }
     public virtual void Cleanup() {
-        foreach (Transform t in transform)
-            Destroy(t.gameObject);
-        Destroy(this);
+        TrialHandler.Instance.UnloadTrialScene();
     }
 
     protected GameObject Instantiate(GameObject source, Vector3 position, Quaternion rotation)
     {
         GameObject temp = (GameObject)GameObject.Instantiate(source, position, rotation);
-        temp.transform.parent = transform;
+        temp.transform.parent = TrialHandler.Instance.loadOnThis.transform;
         return temp;
     }
     protected GameObject Instantiate(GameObject source)
