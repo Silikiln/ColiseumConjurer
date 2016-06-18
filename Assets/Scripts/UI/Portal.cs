@@ -17,11 +17,20 @@ public class Portal : MonoBehaviour {
         Text portalStageText = portalStageInfo.Find("StageText").GetComponent<Text>();
         portalStageText.text = "Stage " + currentStage + " : " + material.Name;
         portalStageText.color = material.VisualColor;
+
+        //update portal button
+        portalStageInfo.GetComponent<Button>().targetGraphic = portalStageInfo.GetComponent<Image>();
+        portalStageInfo.GetComponent<Button>().onClick.AddListener(delegate { DisplayStageMaterial(currentStage); });
     }
 
     public void ClearMaterials()
     {
         foreach (Transform t in transform)
             Destroy(t.gameObject);
+    }
+
+    public void DisplayStageMaterial(int currentStage)
+    {
+        Debug.Log("Clicked Stage: " + currentStage);
     }
 }
