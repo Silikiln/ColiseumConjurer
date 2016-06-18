@@ -46,7 +46,10 @@ public class TrialHandler : MonoBehaviour {
     public Trial CreateTrial(Type t) { return (Trial)Activator.CreateInstance(t); }
 
     //this could be better
-    public void LoadEvent(Type t){gameObject.AddComponent(t);}
+    public void LoadEvent(Type t)
+    {
+        gameObject.AddComponent(t);
+    }
     public void BeginPreloadedEvent(GameObject loadToMe)
     {
         loadOnThis = loadToMe;
@@ -65,16 +68,24 @@ public class TrialHandler : MonoBehaviour {
         CurrentTrial.Setup();
     }
 
+    public void UnloadTrial()
+    {
+        if (CurrentTrial != null)
+            Destroy(CurrentTrial);
+    }
+
     public void EventFailed()
     {
         CurrentTrial.Cleanup();
         Debug.Log("Trial Failed...");
+        UnloadTrial();
     }
 
     public void EventFinished()
     {
         CurrentTrial.Cleanup();
         Debug.Log("Trial Complete!");
+        UnloadTrial();
     }
 
     public void LoadTrialScene()

@@ -20,7 +20,9 @@ public class Portal : MonoBehaviour {
 
         //update portal button
         portalStageInfo.GetComponent<Button>().targetGraphic = portalStageInfo.GetComponent<Image>();
-        portalStageInfo.GetComponent<Button>().onClick.AddListener(delegate { DisplayStageMaterial(currentStage); });
+        portalStageInfo.GetComponent<Button>().onClick.AddListener(delegate {
+            GameController.Instance.displayPanel.UpdateDisplayPanel(GameController.Instance.stageMaterials[currentStage - 1], true);
+        });
     }
 
     public void ClearMaterials()
@@ -29,8 +31,4 @@ public class Portal : MonoBehaviour {
             Destroy(t.gameObject);
     }
 
-    public void DisplayStageMaterial(int currentStage)
-    {
-        Debug.Log("Clicked Stage: " + currentStage);
-    }
 }
