@@ -16,23 +16,14 @@ public class TrialHandler : MonoBehaviour {
 
     #region Material Modifiers
 
-    static int _objectivesAdded = 0;
-    public static int ObjectivesAdded
-    {
-        get { return _objectivesAdded > 0 ? _objectivesAdded : 0; }
-        set { _objectivesAdded = value; }
-    }
+    public static float ObjectiveMultiplier = 1;
+    public static float ObjectivesAdded = 0;
 
-    public static float ObjectiveMultiplier { get; set; }
+    public static float ObjectMultiplier = 1;
+    public static float ObjectsAdded = 0;
 
-    static int _objectsAdded = 0;
-    public static int ObjectsAdded
-    {
-        get { return _objectsAdded > 0 ? _objectsAdded : 0; }
-        set { _objectsAdded = value; }
-    }
-
-    public static float ObjectMultiplier { get; set; }
+    public static float TimeLimitMultiplier = 1;
+    public static float TimeLimitAdded = 0;
 
     #endregion
 

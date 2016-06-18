@@ -16,7 +16,8 @@ public class PlayerController : MovingEntity {
     }
 
     public static int Lives = 1;
-    public static float AttackSpeed = 1;
+    public static float PlayerAttackSpeedMultiplier = 1;
+    public static float PlayerAttackSpeedAdded = 0;
 
     public static float PlayerHealthMultiplier = 1;
     public static float PlayerHealthAdded = 0;
@@ -35,6 +36,9 @@ public class PlayerController : MovingEntity {
 
     public static float PlayerMaxSpeedMultiplier = 1;
     public static float PlayerMaxSpeedAdded = 0;
+
+    public static float PlayerSizeMultiplier = 1;
+    public static float PlayerSizeAdded = 0;
 
     #endregion
 

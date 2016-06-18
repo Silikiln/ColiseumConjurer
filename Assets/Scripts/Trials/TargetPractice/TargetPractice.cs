@@ -6,8 +6,6 @@ using Random = UnityEngine.Random;
 
 public class TargetPractice : Trial
 {
-    static float MinimumDistance = 1;
-
     public TargetPractice()
     {
         Name = "Target Practice";
@@ -18,7 +16,6 @@ public class TargetPractice : Trial
         dummyPrefab = LoadResource<GameObject>("Dummy");
     }
 
-    Vector2 lastPosition = PlayerController.Instance.transform.position;
     int objectivesComplete = 0;
     GameObject dummyPrefab;
 

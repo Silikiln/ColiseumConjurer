@@ -94,41 +94,65 @@ public class MaterialEffect{
                 EffectAction(ref PlayerController.PlayerHealthAdded, ref PlayerController.PlayerHealthMultiplier, apply);
                 break;
             case EffectDescription.PlayerSpeed:
+                EffectAction(ref PlayerController.PlayerMoveSpeedAdded, ref PlayerController.PlayerMoveSpeedMultiplier, apply);
                 break;
             case EffectDescription.PlayerDamage:
+                EffectAction(ref PlayerController.PlayerDamageDealtAdded, ref PlayerController.PlayerDamageDealtMultiplier, apply);
                 break;
             case EffectDescription.PlayerLives:
+                if (apply)
+                {
+                    if (ValueType == EffectValueType.Flat)
+                        PlayerController.Lives += (int)Value;
+                    else
+                        PlayerController.Lives = (int)(PlayerController.Lives * Value);
+                }
                 break;
             case EffectDescription.PlayerSize:
+                EffectAction(ref PlayerController.PlayerSizeAdded, ref PlayerController.PlayerSizeMultiplier, apply);
                 break;
             case EffectDescription.PlayerAttackSpeed:
+                EffectAction(ref PlayerController.PlayerAttackSpeedAdded, ref PlayerController.PlayerAttackSpeedMultiplier, apply);
                 break;
 
             // Monster Effects
             case EffectDescription.MonsterHealth:
+                EffectAction(ref EnemyController.EnemyHealthAdded, ref EnemyController.EnemyHealthMultiplier, apply);
                 break;
             case EffectDescription.MonsterSpeed:
+                EffectAction(ref EnemyController.EnemyMoveSpeedAdded, ref EnemyController.EnemyMoveSpeedMultiplier, apply);
                 break;
             case EffectDescription.MonsterDamage:
+                EffectAction(ref EnemyController.EnemyDamageAdded, ref EnemyController.EnemyDamageMultiplier, apply);
                 break;
             case EffectDescription.MonsterSize:
+                EffectAction(ref EnemyController.EnemySizeAdded, ref EnemyController.EnemySizeMultiplier, apply);
                 break;
             case EffectDescription.MonsterCount:
+                EffectAction(ref EnemyController.EnemyCountAdded, ref EnemyController.EnemyCountMultiplier, apply);
                 break;
 
             // Trial Effects
             case EffectDescription.TimeLimit:
+                EffectAction(ref TrialHandler.TimeLimitAdded, ref TrialHandler.TimeLimitMultiplier, apply);
                 break;
             case EffectDescription.ObjectiveCount:
+                EffectAction(ref TrialHandler.ObjectivesAdded, ref TrialHandler.ObjectiveMultiplier, apply);
                 break;
             case EffectDescription.ObjectCount:
+                EffectAction(ref TrialHandler.ObjectsAdded, ref TrialHandler.ObjectMultiplier, apply);
                 break;
 
         }
     }
 
+    public void ApplyEffect()
+    {
+        PassEffectValues(true);
+    }
+
     public void RemoveEffect()
     {
-
+        PassEffectValues(false);
     }
 }

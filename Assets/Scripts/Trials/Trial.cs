@@ -12,12 +12,12 @@ public abstract class Trial : MonoBehaviour {
     protected int ObjectCountMax = int.MaxValue;
 
     public int ObjectiveCount { get {
-        int modifiedCount = (int)((BaseObjectiveCount + TrialHandler.ObjectivesAdded) * TrialHandler.ObjectiveMultiplier);
+        int modifiedCount = Mathf.Clamp((int)((BaseObjectiveCount + TrialHandler.ObjectivesAdded) * TrialHandler.ObjectiveMultiplier), 0, int.MaxValue);
         return modifiedCount < ObjectiveCountMax ? modifiedCount : ObjectiveCountMax;
     } }
 
     public int ObjectCount { get {
-        int modifiedCount = (int)((BaseObjectCount + TrialHandler.ObjectsAdded) * TrialHandler.ObjectMultiplier);
+        int modifiedCount = Mathf.Clamp((int)((BaseObjectCount + TrialHandler.ObjectsAdded) * TrialHandler.ObjectMultiplier), 0, int.MaxValue);
         return modifiedCount < ObjectCountMax ? modifiedCount : ObjectCountMax;
     }}
 
