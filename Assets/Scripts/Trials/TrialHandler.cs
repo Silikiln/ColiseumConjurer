@@ -42,7 +42,7 @@ public class TrialHandler : MonoBehaviour {
         ObjectiveMultiplier = 1;
 
         PossibleEvents = typeof(Trial).Assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(Trial))).ToArray();
-        //PossibleEvents = new Type[]{ typeof(LightReflect) };
+        //PossibleEvents = new Type[]{ typeof(TargetPractice) };
     }
 
     void Update()
