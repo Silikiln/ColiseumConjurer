@@ -47,6 +47,7 @@ public class VendingMachine : MonoBehaviour {
         {
             AvailableMaterials[i] = PortalMaterial.RandomMaterial;
             visibleMaterialImages[i].color = AvailableMaterials[i].VisualColor;
+            //visibleMaterialImages[i].sprite = AvailableMaterials[i].Image;
         }
     }
 
@@ -109,7 +110,7 @@ public class VendingMachine : MonoBehaviour {
         materialNameText.text = DisplayMaterial.Name;
         materialNameText.color = displayColor;
 
-        //materialDescriptionText.text = displayMaterial.Description;
+        materialDescriptionText.text = DisplayMaterial.Description;
 
         materialEffectSectionText.enabled = true;
         materialEffectTypeText.text = DisplayMaterial.EffectTypeNames;

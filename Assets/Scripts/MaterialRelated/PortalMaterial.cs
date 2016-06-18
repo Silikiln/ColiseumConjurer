@@ -7,10 +7,11 @@ using System;
 
 using Random = UnityEngine.Random;
 
+[XmlParse("Material")]
 public class PortalMaterial {
     #region Material Handler
 
-    public enum MaterialColor { Red, Green, Blue, Yellow, Meta };
+    public enum MaterialColor { Red, Green, Blue, Purple, Yellow, Meta };
 
     public static MaterialColor RandomColor {
         get {
@@ -30,69 +31,15 @@ public class PortalMaterial {
         // Blue
         new Color(0.4f, 0.4f, 1.0f, 1.0f),
 
+        // Purple
+        new Color(0.729f, 0.333f, 0.827f),
+
         // Yellow
-        new Color(1.0f, 1.0f, 0.4f, 1.0f)
+        new Color(1.0f, 1.0f, 0.4f, 1.0f),
     };
 
-    static PortalMaterial() {        
-        ImportMaterials();
-    }
-
-    static void ImportMaterials()
-    {
-        AllMaterials = new List<PortalMaterial>();
-
-        //import some stuff
-        using (XmlReader reader = XmlReader.Create("Assets/PortalMaterials.xml"))
-        {
-            PortalMaterial material = new PortalMaterial();
-            MaterialEffect effect = new MaterialEffect();
-            reader.ReadToFollowing("Material");
-            while (!reader.EOF)
-            {
-                reader.Read();
-                if (reader.NodeType != XmlNodeType.EndElement)
-                    switch (reader.Name)
-                    {
-                        case "Material":
-                            material = new PortalMaterial();
-                            break;
-                        case "Name":
-                            material.Name = reader.ReadInnerXml();
-                            break;
-                        case "Color":
-                            string color = reader.ReadInnerXml();
-                            try {
-                                
-                                material.Color = (MaterialColor)Enum.Parse(typeof(MaterialColor), color);
-                            } catch (ArgumentException)
-                            {
-                                throw new ArgumentException("Could not parse material color, \"" + color + "\" is not valid");
-                            }
-                            break;
-                        case "Effect":
-                            effect = new MaterialEffect();
-                            break;
-                        case "Effect-Type":
-                            effect.effectType = int.Parse(reader.ReadInnerXml());
-                            break;
-                        case "Effect-Value":
-                            effect.effectValue = float.Parse(reader.ReadInnerXml());
-                            break;
-
-                    }
-                else
-                    switch (reader.Name)
-                    {
-                        case "Material":
-                            AllMaterials.Add(material);
-                            break;
-                        case "Effect":
-                            material.AddEffect(effect);
-                            break;
-                    }
-            }
-        }
+    static PortalMaterial() {
+        AllMaterials = XmlParseAttribute.ReadFileIntoList<PortalMaterial>("Assets/PortalMaterials.xml");
     }
 
     static T RandomElement<T>(IEnumerable<T> enumerable)
@@ -125,13 +72,24 @@ public class PortalMaterial {
 
     #endregion
 
+    [XmlParse("Name")]
     public string Name { get; private set; }
-    public string ImageLocation { get; private set; }
+
+    [XmlParse("Description")]
+    public string Description { get; private set; }
+
+    [XmlParse("ImagePath")]
+    public string ImagePath { get; private set; }
+
+    [XmlParse("Color")]
     public MaterialColor Color { get; private set; }
 
+    [XmlParse("Effects")]
     private List<MaterialEffect> effects = new List<MaterialEffect>();
 
     public Color VisualColor { get { return GetMaterialColor(Color); } }
+
+    public Sprite Image { get { return Resources.Load<Sprite>("Materials/" + ImagePath); } }
 
     public void AddEffect(MaterialEffect newEffect)
     {

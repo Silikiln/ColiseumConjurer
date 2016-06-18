@@ -114,5 +114,6 @@ public class LineColorDrawer : PropertyDrawer
     {
         if (colors.arraySize < desiredSize)
             colors.arraySize = desiredSize;
+        colors.GetArrayElementAtIndex(colors.arraySize - 1).colorValue = defaultColor;
     }
 }
