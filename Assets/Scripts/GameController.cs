@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour {
 
     public int MaxPortalSize = 10;
     public List<PortalMaterial> stageMaterials = new List<PortalMaterial>();
-
+    public int portalStability = 0;
     public int CurrentStage { get { return stageMaterials.Count + 1; } }
 
     void Start () {
@@ -43,4 +43,17 @@ public class GameController : MonoBehaviour {
 
     }
 
+    public void CalculatePortalStability()
+    {
+        portalStability = 0;
+        foreach (PortalMaterial pm in stageMaterials)
+           portalStability += (int)pm.Color;
+    }
+
+    public Type FindBossToSummon(int stability)
+    {
+        Type bt;
+        while (Boss.PossibleBosses.TryGetValue(stability--, out bt)) ;
+        return bt;
+    }
 }

@@ -5,11 +5,11 @@ using System.Linq;
 
 public class Boss : Trial
 {
-    public static Dictionary<int, Type> PossibleBosses { get; private set; }
+    public static SortedDictionary<int, Type> PossibleBosses { get; private set; }
 
     static Boss()
     {
-        PossibleBosses = new Dictionary<int, Type>();
+        PossibleBosses = new SortedDictionary<int, Type>();
         foreach (Type t in typeof(Trial).Assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(Boss))))
         {
             int bossValue = ((BossAttribute)t.GetCustomAttributes(false).Where(attr => attr is BossAttribute)).BossValue;
@@ -26,4 +26,5 @@ public class Boss : Trial
 
         public int BossValue { get; set; }
     }
+
 }
