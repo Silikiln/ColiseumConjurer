@@ -248,4 +248,43 @@
       </Effect>
     </Effects>
   </Material>
+  <Material>
+    <Name>Goldthorn</Name>
+    <Color>Orange</Color>
+    <Description>A thorn that is gold</Description>
+    <Effects>
+      <Effect>
+        <Type>6</Type>
+        <ValueType>Flat</ValueType>
+        <Value>3</Value>
+      </Effect>
+      <Effect>
+        <Type>11</Type>
+        <ValueType>Flat</ValueType>
+        <Value>-2</Value>
+      </Effect>
+      <Effect>
+        <Type>7</Type>
+        <ValueType>Flat</ValueType>
+        <Value>-1</Value>
+      </Effect>
+    </Effects>
+  </Material>
+  <Material>
+    <Name>Firebloom</Name>
+    <Color>Orange</Color>
+    <Description>A flower that grows deep within dormant volcanos</Description>
+    <Effects>
+      <Effect>
+        <Type>9</Type>
+        <ValueType>Flat</ValueType>
+        <Value>-1</Value>
+      </Effect>
+      <Effect>
+        <Type>10</Type>
+        <ValueType>Flat</ValueType>
+        <Value>4</Value>
+      </Effect>
+    </Effects>
+  </Material>
 </Materials>
