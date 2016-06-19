@@ -54,7 +54,7 @@ public class SimonSays : Trial
             StartCoroutine(shownPattern);
         }
         else if (RequirementsMet)
-            TrialHandler.Instance.EventFinished();
+            TrialHandler.Instance.TrialFinished();
     }
 
     bool InvalidPattern

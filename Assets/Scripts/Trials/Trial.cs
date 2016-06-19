@@ -30,18 +30,23 @@ public abstract class Trial : MonoBehaviour {
         TrialHandler.Instance.UnloadTrialScene();
     }
 
-    protected GameObject Instantiate(GameObject source, Vector3 position, Quaternion rotation)
+    protected GameObject Instantiate(GameObject source, Vector3 position, Quaternion rotation, Transform parent)
     {
         GameObject temp = (GameObject)GameObject.Instantiate(source, position, rotation);
-        temp.transform.parent = TrialHandler.Instance.loadOnThis.transform;
+        temp.transform.parent = parent;
         return temp;
+    }
+
+    protected GameObject Instantiate(GameObject source, Vector3 position, Quaternion rotation)
+    {
+        return Instantiate(source, source.transform.position, source.transform.rotation, TrialHandler.Instance.loadOnThis.transform);
     }
     protected GameObject Instantiate(GameObject source)
     {
         return Instantiate(source, source.transform.position, source.transform.rotation);
     }
 
-    protected T LoadResource<T>(string resource) where T : UnityEngine.Object
+    protected virtual T LoadResource<T>(string resource) where T : Object
     {
         return Resources.Load<T>("Trials/" + GetType().Name + "/" + resource);
     }

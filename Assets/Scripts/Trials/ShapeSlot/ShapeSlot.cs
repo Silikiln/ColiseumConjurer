@@ -31,7 +31,7 @@ public class ShapeSlot : Trial
     {
         objectivesComplete++;
         if (RequirementsMet)
-            TrialHandler.Instance.EventFinished();
+            TrialHandler.Instance.TrialFinished();
     }
 
     public override void Setup()

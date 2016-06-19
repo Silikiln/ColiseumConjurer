@@ -48,7 +48,7 @@ public class HideAndSeek : Trial
         {
             objectivesComplete++;
             if (RequirementsMet)
-                TrialHandler.Instance.EventFinished();
+                TrialHandler.Instance.TrialFinished();
             else
             {
                 targetPosition = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), 0);

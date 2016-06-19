@@ -36,7 +36,7 @@ public class LightReflect : Trial
     void Update()
     {
         if (RequirementsMet)
-            TrialHandler.Instance.EventFinished();
+            TrialHandler.Instance.TrialFinished();
     }
 
     public override void Setup()
