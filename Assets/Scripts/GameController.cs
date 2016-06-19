@@ -31,8 +31,11 @@ public class GameController : MonoBehaviour {
             effect.ApplyEffect();
 
         //load a new trial
-        Type RandomTrial = TrialHandler.Instance.RandomTrial;
-        TrialHandler.Instance.LoadEvent(RandomTrial);
+        Type trialToLoad = TrialHandler.Instance.RandomTrial;
+        if (stageMaterials.Count == MaxPortalSize)
+            trialToLoad = FindBossToSummon();
+
+        TrialHandler.Instance.LoadEvent(trialToLoad);
 
         //Display a new panel with trial information and start count down
         trialPanel.UpdatePanelDisplay(TrialHandler.CurrentTrial);
@@ -50,10 +53,12 @@ public class GameController : MonoBehaviour {
            portalStability += (int)pm.Color;
     }
 
-    public Type FindBossToSummon(int stability)
+    public Type FindBossToSummon()
     {
         Type bt;
-        while (Boss.PossibleBosses.TryGetValue(stability--, out bt)) ;
+        CalculatePortalStability();
+        int tempPortalStability = portalStability;
+        while (!Boss.PossibleBosses.TryGetValue(tempPortalStability--, out bt));
         return bt;
     }
 }

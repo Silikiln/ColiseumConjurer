@@ -176,12 +176,6 @@ public class PlayerController : MovingEntity {
             rigidbody.velocity = rigidbody.velocity.normalized * MaxSpeed;
     }
 
-    public override void Hurt(int damage)
-    {
-        base.Hurt(damage);
-        Debug.Log(Health);
-    }
-
     void OnDestroy()
     {
         Instance = null;
