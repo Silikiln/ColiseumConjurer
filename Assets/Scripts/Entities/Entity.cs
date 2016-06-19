@@ -11,6 +11,12 @@ public class Entity : MonoBehaviour {
     [SerializeField]
     protected float BaseSize = 1;
 
+    [SerializeField]
+    protected float MinimumSize = .5f;
+
+    [SerializeField]
+    protected float MaximumSize = 2f; 
+
     public int Health { get; protected set; }
 
     protected virtual void Start()
@@ -18,8 +24,6 @@ public class Entity : MonoBehaviour {
         Health = MaxHealth;
         BaseSize = transform.localScale.x;
         transform.localScale = new Vector3(Size, Size, 1);
-
-        Debug.Log(string.Format("Entity: {0}\nHealth: {1}\nDamage: {2}", name, Health, Damage));
     }
 
     protected virtual float HealthMultiplier { get { return 1; } }
@@ -40,16 +44,16 @@ public class Entity : MonoBehaviour {
     public float HealthPercent { get { return (float)Health / MaxHealth; } }
     public int Damage { get { return Mathf.Clamp((int)(BaseDamage * DamageDealtMultiplier + DamageDealtAdded), 0, int.MaxValue); } }
     public int MaxHealth { get { return (int)(BaseHealth * HealthMultiplier + HealthAdded); } }
-    public float Size { get { return BaseSize * SizeMultiplier + SizeAdded; } }
+    public float Size { get { return Mathf.Clamp(BaseSize * SizeMultiplier + SizeAdded, MinimumSize, MaximumSize); } }
 
-    public void Hurt(int damage)
+    public virtual void Hurt(int damage)
     {
         damage = (int)(damage * DamageRecievedMultiplier + DamageRecievedAdded);
         if ((Health -= damage) <= 0)
             Destroy(gameObject);
     }
 
-    public void Heal(int amount)
+    public virtual void Heal(int amount)
     {
         amount = (int)(amount * HealMultiplier + HealAdded);
         if ((Health += amount) > MaxHealth)

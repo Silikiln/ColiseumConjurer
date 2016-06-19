@@ -28,13 +28,13 @@ public class Dodgeball : Trial
     {
         if (hitPlayer)
         {
-            TrialHandler.Instance.EventFailed();
+            TrialHandler.Instance.TrialFailed();
             return;
         }
 
         projectilesLaunched++;
         if (RequirementsMet)
-            TrialHandler.Instance.EventFinished();
+            TrialHandler.Instance.TrialFinished();
     }
 
     IEnumerator SpawnProjectiles()

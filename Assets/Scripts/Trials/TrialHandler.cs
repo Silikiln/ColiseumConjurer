@@ -10,7 +10,7 @@ public class TrialHandler : MonoBehaviour {
 
     public static TrialHandler Instance { get; private set; }
     public static Type[] PossibleEvents { get; private set; }
-    public GameObject loadOnThis;
+    public Transform loadOnThis;
     public static Trial CurrentTrial { get { return Instance.GetComponent<Trial>(); } }
 
     public Type RandomTrial { get { return PossibleEvents[Random.Range(0, PossibleEvents.Length)]; } }
@@ -33,12 +33,14 @@ public class TrialHandler : MonoBehaviour {
         Instance = this;
         ObjectiveMultiplier = 1;
 
+        /*
         PossibleEvents = typeof(Trial).Assembly.GetTypes().Where(type => 
             type != typeof(Boss) &&
             type.IsSubclassOf(typeof(Trial)) && 
             !type.IsSubclassOf(typeof(Boss))
         ).ToArray();
-        //PossibleEvents = new Type[]{ typeof(HideAndSeek) };
+        */
+        PossibleEvents = new Type[]{ typeof(Blimmy) };
     }
 
     void Update()
@@ -54,7 +56,7 @@ public class TrialHandler : MonoBehaviour {
     {
         gameObject.AddComponent(t);
     }
-    public void BeginPreloadedEvent(GameObject loadToMe)
+    public void BeginPreloadedEvent(Transform loadToMe)
     {
         loadOnThis = loadToMe;
         if (CurrentTrial != null){
@@ -78,14 +80,14 @@ public class TrialHandler : MonoBehaviour {
             Destroy(CurrentTrial);
     }
 
-    public void EventFailed()
+    public void TrialFailed()
     {
         CurrentTrial.Cleanup();
         Debug.Log("Trial Failed...");
         UnloadTrial();
     }
 
-    public void EventFinished()
+    public void TrialFinished()
     {
         CurrentTrial.Cleanup();
         Debug.Log("Trial Complete!");
@@ -99,7 +101,6 @@ public class TrialHandler : MonoBehaviour {
 
     public void UnloadTrialScene()
     {
-        Debug.Log("Number Of Scenes: " + SceneManager.sceneCount + " Scene To Remove: " + SceneManager.GetSceneAt(SceneManager.sceneCount - 1).name);
         StartCoroutine(UnloadScene());
         GameController.Instance.mainCanvas.enabled = true;
     }

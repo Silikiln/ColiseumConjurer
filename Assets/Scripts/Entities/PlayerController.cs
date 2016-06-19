@@ -15,7 +15,7 @@ public class PlayerController : MovingEntity {
         PlayerHealMultiplier = 1;
     }
 
-    public static float CurrentHealthPercent = 100;
+    public static float CurrentHealthPercent = 1;
 
     public static int Lives = 1;
     public static float PlayerAttackSpeedMultiplier = 1;
@@ -174,6 +174,12 @@ public class PlayerController : MovingEntity {
         rigidbody.AddForce(moveDirection);
         if (rigidbody.velocity.magnitude > MaxSpeed)
             rigidbody.velocity = rigidbody.velocity.normalized * MaxSpeed;
+    }
+
+    public override void Hurt(int damage)
+    {
+        base.Hurt(damage);
+        Debug.Log(Health);
     }
 
     void OnDestroy()

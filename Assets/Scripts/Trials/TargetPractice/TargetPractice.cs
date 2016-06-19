@@ -23,7 +23,7 @@ public class TargetPractice : Trial
     {
         objectivesComplete++;
         if (RequirementsMet)
-            TrialHandler.Instance.EventFinished();
+            TrialHandler.Instance.TrialFinished();
         else
             Setup();
     }

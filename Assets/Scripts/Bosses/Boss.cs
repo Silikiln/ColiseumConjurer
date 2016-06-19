@@ -12,12 +12,12 @@ public class Boss : Trial
         PossibleBosses = new SortedDictionary<int, Type>();
         foreach (Type t in typeof(Trial).Assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(Boss))))
         {
-            int bossValue = ((BossAttribute)t.GetCustomAttributes(false).Where(attr => attr is BossAttribute)).BossValue;
+            int bossValue = ((BossAttribute)t.GetCustomAttributes(false).Where(attr => attr is BossAttribute).First()).BossValue;
             PossibleBosses.Add(bossValue, t);
         }            
     }
 
-    public class BossAttribute
+    public class BossAttribute : Attribute
     {
         internal BossAttribute(int bossValue)
         {
@@ -27,4 +27,8 @@ public class Boss : Trial
         public int BossValue { get; set; }
     }
 
+    protected override T LoadResource<T>(string resource)
+    {
+        return Resources.Load<T>("Bosses/" + GetType().Name + "/" + resource);
+    }
 }

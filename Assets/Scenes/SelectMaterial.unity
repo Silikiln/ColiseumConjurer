@@ -1698,6 +1698,7 @@ MonoBehaviour:
   displayPanel: {fileID: 1024770878}
   vendPanel: {fileID: 471752502}
   MaxPortalSize: 10
+  portalStability: 0
 --- !u!4 &1360382192
 Transform:
   m_ObjectHideFlags: 0
