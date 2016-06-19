@@ -287,4 +287,82 @@
       </Effect>
     </Effects>
   </Material>
+  <Material>
+    <Name>Deadnettle</Name>
+    <Color>Black</Color>
+    <Description>When ground, this nettle produces a powder that induces horrific nightmares</Description>
+    <Effects>
+      <Effect>
+        <Type>3</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>.75</Value>
+      </Effect>
+      <Effect>
+        <Type>4</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>.35</Value>
+      </Effect>
+      <Effect>
+        <Type>5</Type>
+        <ValueType>Flat</ValueType>
+        <Value>3</Value>
+      </Effect>
+    </Effects>
+  </Material>
+  <Material>
+    <Name>LichBloom</Name>
+    <Color>Black</Color>
+    <Description>An invasive vine that is keen to burial grounds</Description>
+    <Effects>
+      <Effect>
+        <Type>7</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>.1</Value>
+      </Effect>
+      <Effect>
+        <Type>8</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>.1</Value>
+      </Effect>
+      <Effect>
+        <Type>9</Type>
+        <ValueType>Flat</ValueType>
+        <Value>2</Value>
+      </Effect>
+    </Effects>
+  </Material>
+  <Material>
+    <Name>Snow Lily</Name>
+    <Color>White</Color>
+    <Description>A flower that only grows on the top of Mt. Frosty Nips</Description>
+    <Effects>
+      <Effect>
+        <Type>6</Type>
+        <ValueType>Flat</ValueType>
+        <Value>15</Value>
+      </Effect>
+      <Effect>
+        <Type>0</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>.25</Value>
+      </Effect>
+    </Effects>
+  </Material>
+  <Material>
+    <Name>Silken Flytrap</Name>
+    <Color>White</Color>
+    <Description>A flower that preys on bugs that try to sleep on its pillow-like petals</Description>
+    <Effects>
+      <Effect>
+        <Type>2</Type>
+        <ValueType>Multiplier</ValueType>
+        <Value>.90</Value>
+      </Effect>
+      <Effect>
+        <Type>1</Type>
+        <ValueType>Flat</ValueType>
+        <Value>-10</Value>
+      </Effect>
+    </Effects>
+  </Material>
 </Materials>
