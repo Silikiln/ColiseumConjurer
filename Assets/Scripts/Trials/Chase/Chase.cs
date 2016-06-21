@@ -59,7 +59,7 @@ public class Chase : Trial
     void Update()
     {
         if (RequirementsMet)
-            TrialHandler.Instance.EventFinished();
+            TrialHandler.Instance.TrialFinished();
 
         if (!begin)
             return;
