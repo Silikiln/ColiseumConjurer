@@ -37,6 +37,8 @@ public class HideAndSeek : Trial
 
         detectorRenderer = detector.GetComponent<SpriteRenderer>();
         loaded = true;
+
+        base.Setup();
     }
 
     void Update()

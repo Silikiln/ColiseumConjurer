@@ -46,7 +46,8 @@ public class ShapeSlot : Trial
             } while (Vector3.Distance(shapePosition, slotPosition) <= MinimumDistance);
             Instantiate(shapePrefab, shapePosition, Quaternion.Euler(0, 0, Random.Range(0, 359)));
             Instantiate(slotPrefab, slotPosition, Quaternion.Euler(0, 0, Random.Range(0, 359)));
-        }        
+        }
+        base.Setup();
     }
 
     public override bool RequirementsMet

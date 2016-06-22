@@ -31,6 +31,7 @@ public class TargetPractice : Trial
     public override void Setup()
     {
         Instantiate(dummyPrefab, new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), 0), Quaternion.identity);
+        base.Setup();
     }
 
     public override bool RequirementsMet

@@ -63,6 +63,7 @@ public class LightReflect : Trial
             else
                 Instantiate(mirrorPrefab, position, Quaternion.Euler(0, 0, Random.Range(0, 359)));
         }
+        base.Setup();
     }
 
     public override bool RequirementsMet

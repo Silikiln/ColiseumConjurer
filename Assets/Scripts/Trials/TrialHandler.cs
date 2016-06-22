@@ -5,12 +5,12 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class TrialHandler : MonoBehaviour {
 
     public static TrialHandler Instance { get; private set; }
     public static Type[] PossibleEvents { get; private set; }
-    public Transform loadOnThis;
     public static Trial CurrentTrial { get { return Instance.GetComponent<Trial>(); } }
 
     public Type RandomTrial { get { return PossibleEvents[Random.Range(0, PossibleEvents.Length)]; } }
@@ -28,6 +28,11 @@ public class TrialHandler : MonoBehaviour {
 
     #endregion
 
+    public Transform loadOnThis;
+    public Text timeText;
+    public float TimeRemaining { get; private set; }
+    public float PercentTimeRemaining { get { return TimeRemaining / CurrentTrial.TimeLimit; } }
+
     // Use this for initialization
     void Start() {
         Instance = this;
@@ -44,11 +49,16 @@ public class TrialHandler : MonoBehaviour {
 
     void Update()
     {
-        if (CurrentTrial == null && Input.GetKeyDown(KeyCode.B))
-            BeginEvent(RandomTrial);
-    }
+        if (CurrentTrial == null || CurrentTrial.CurrentState != Trial.TrialState.Active) return;
 
-    public Trial CreateTrial(Type t) { return (Trial)Activator.CreateInstance(t); }
+        if ((TimeRemaining -= Time.deltaTime) <= 0)
+        {
+            TimeRemaining = 0;
+            TrialFailed();
+        }
+        else if (timeText != null)
+            timeText.text = string.Format("Time Left: {0:0.0}s", TimeRemaining);
+    }
 
     //this could be better
     public void LoadEvent(Type t)
@@ -58,19 +68,12 @@ public class TrialHandler : MonoBehaviour {
     public void BeginPreloadedEvent(Transform loadToMe)
     {
         loadOnThis = loadToMe;
+        timeText = loadToMe.FindChild("TimeText").GetComponent<Text>();
         if (CurrentTrial != null){
-            Debug.Log("Beginning Preloaded Trial: " + CurrentTrial.Name);
+            Debug.Log("Beginning Trial: " + CurrentTrial.Name);
             CurrentTrial.Setup();
+            TimeRemaining = CurrentTrial.TimeLimit;
         }
-    }
-
-    public void BeginEvent(Type t)
-    {
-        if (CurrentTrial != null)
-            CurrentTrial.Cleanup();
-        gameObject.AddComponent(t);
-        Debug.Log("Beginning Trial: " + CurrentTrial.Name);
-        CurrentTrial.Setup();
     }
 
     public void UnloadTrial()
@@ -100,13 +103,13 @@ public class TrialHandler : MonoBehaviour {
 
     public void UnloadTrialScene()
     {
-        StartCoroutine(UnloadScene());
-        GameController.Instance.mainCanvas.enabled = true;
+        StartCoroutine(UnloadScene());        
     }
     
     IEnumerator UnloadScene()
     {
         yield return new WaitForSeconds(.1f);
         SceneManager.UnloadScene(SceneManager.GetSceneAt(SceneManager.sceneCount - 1).name);
+        GameController.Instance.mainCanvas.enabled = true;
     }
 }

@@ -30,9 +30,9 @@ public class Chase : Trial
     GameObject detector;
     GameObject detectorPrefab;
     SpriteRenderer detectorRenderer;
-    Boolean begin = false;
-    Boolean moving = false;
     ChasePointController chasePoint;
+
+    bool moving;
 
     public override void Setup()
     {
@@ -53,15 +53,15 @@ public class Chase : Trial
         newScale.z = 1;
         detector.transform.localScale = newScale;
 
-        begin = true;
+        base.Setup();
     }
 
     void Update()
     {
         if (RequirementsMet)
-            TrialHandler.Instance.EventFinished();
+            TrialHandler.Instance.TrialFinished();
 
-        if (!begin)
+        if (CurrentState == TrialState.Loading)
             return;
 
         distance = Vector2.Distance(PlayerController.Instance.transform.position, chasePoint.transform.position);

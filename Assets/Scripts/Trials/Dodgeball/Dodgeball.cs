@@ -60,6 +60,7 @@ public class Dodgeball : Trial
     {
         spawning = SpawnProjectiles();
         StartCoroutine(spawning);
+        base.Setup();
     }
 
     public override void Cleanup()
