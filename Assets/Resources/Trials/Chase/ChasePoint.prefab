@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 448194}
   - 212: {fileID: 21262804}
   - 58: {fileID: 5865456}
-  - 114: {fileID: 11421060}
+  - 114: {fileID: 11497078}
   m_Layer: 0
   m_Name: ChasePoint
   m_TagString: Untagged
@@ -44,7 +44,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
---- !u!114 &11421060
+--- !u!114 &11497078
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -52,10 +52,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 164370}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b5af7153719eec479289210d2d3a0c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d6b14db4cd051949b252a20d6e6b346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FillColor: {r: 1, g: 0.80689657, b: 0, a: 1}
+  FillColor: {r: 1, g: 0.872, b: 0.09558821, a: 1}
 --- !u!212 &21262804
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -92,7 +92,23 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: FillColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FillColor.g
+      value: 0.872
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FillColor.b
+      value: 0.09558821
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FillColor.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 164370}

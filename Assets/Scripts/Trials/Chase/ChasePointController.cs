@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ChasePointController : MonoBehaviour
 {
-    static float LightFillDuration = 10;
+    static float LightFillDuration = 5;
 
     public Color FillColor;
 

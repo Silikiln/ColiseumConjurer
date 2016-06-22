@@ -4,6 +4,12 @@ using System.Collections;
 public abstract class Trial : MonoBehaviour {
     public enum TrialState { Loading, Active, Ending }
 
+    static Trial() {
+        BasicMonsterPrefab = Resources.Load<GameObject>("Trials/Enemy");
+    }
+
+    private static GameObject BasicMonsterPrefab;
+
     public string Name { get; protected set; }
     public string Description { get; protected set; }
     public TrialState CurrentState = TrialState.Loading;
@@ -32,8 +38,15 @@ public abstract class Trial : MonoBehaviour {
             return Mathf.Clamp(BaseTimeLimit * TrialHandler.TimeLimitMultiplier + TrialHandler.TimeLimitAdded, TimeLimitMin, TimeLimitMax);
     } }
 
-    public virtual void Setup() { CurrentState = TrialState.Active; }
+    public virtual void Setup() {
+        for (int i = 0; i < EnemyController.TotalEnemyCount; i++)
+            Instantiate(BasicMonsterPrefab, new Vector3(Random.Range(-3, 3), Random.Range(-3, 3)), Quaternion.identity);            
+
+        CurrentState = TrialState.Active;
+    }
+
     public virtual bool RequirementsMet { get { return false; } }
+
     public virtual void Cleanup() {
         CurrentState = TrialState.Ending;
         TrialHandler.Instance.UnloadTrialScene();
@@ -48,7 +61,7 @@ public abstract class Trial : MonoBehaviour {
 
     protected GameObject Instantiate(GameObject source, Vector3 position, Quaternion rotation)
     {
-        return Instantiate(source, source.transform.position, source.transform.rotation, TrialHandler.Instance.loadOnThis.transform);
+        return Instantiate(source, position, rotation, TrialHandler.Instance.loadOnThis.transform);
     }
     protected GameObject Instantiate(GameObject source)
     {

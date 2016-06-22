@@ -179,6 +179,9 @@ public class PlayerController : MovingEntity {
     void OnDestroy()
     {
         Instance = null;
-        CurrentHealthPercent = HealthPercent;
+        if (Health <= 0)
+            TrialHandler.Instance.PlayerKilled();
+        else
+            CurrentHealthPercent = HealthPercent;
     }
 }

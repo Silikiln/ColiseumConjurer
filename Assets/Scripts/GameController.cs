@@ -30,12 +30,14 @@ public class GameController : MonoBehaviour {
         foreach (MaterialEffect effect in material)
             effect.ApplyEffect();
 
+        EnemyController.CurrentEnemyCount++;
+
         //load a new trial
         Type trialToLoad = TrialHandler.Instance.RandomTrial;
         if (stageMaterials.Count == MaxPortalSize)
             trialToLoad = FindBossToSummon();
 
-        TrialHandler.Instance.LoadEvent(trialToLoad);
+        TrialHandler.Instance.LoadTrial(trialToLoad);
 
         //Display a new panel with trial information and start count down
         trialPanel.UpdatePanelDisplay(TrialHandler.CurrentTrial);

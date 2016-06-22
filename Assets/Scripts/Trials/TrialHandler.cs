@@ -38,13 +38,15 @@ public class TrialHandler : MonoBehaviour {
         Instance = this;
         ObjectiveMultiplier = 1;
 
+        
         PossibleEvents = typeof(Trial).Assembly.GetTypes().Where(type => 
             type != typeof(Boss) &&
             type.IsSubclassOf(typeof(Trial)) && 
             !type.IsSubclassOf(typeof(Boss))
         ).ToArray();
+        
 
-        //PossibleEvents = new Type[]{ typeof(Blimmy) };
+        //PossibleEvents = new Type[]{ typeof(LightReflect) };
     }
 
     void Update()
@@ -54,21 +56,21 @@ public class TrialHandler : MonoBehaviour {
         if ((TimeRemaining -= Time.deltaTime) <= 0)
         {
             TimeRemaining = 0;
-            TrialFailed();
+            TrialFailed("You ran out of time");
         }
         else if (timeText != null)
             timeText.text = string.Format("Time Left: {0:0.0}s", TimeRemaining);
     }
 
     //this could be better
-    public void LoadEvent(Type t)
+    public void LoadTrial(Type t)
     {
         gameObject.AddComponent(t);
     }
-    public void BeginPreloadedEvent(Transform loadToMe)
+    public void BeginTrial(Transform loadToMe, Text textOnMe)
     {
         loadOnThis = loadToMe;
-        timeText = loadToMe.FindChild("TimeText").GetComponent<Text>();
+        timeText = textOnMe;
         if (CurrentTrial != null){
             Debug.Log("Beginning Trial: " + CurrentTrial.Name);
             CurrentTrial.Setup();
@@ -76,24 +78,25 @@ public class TrialHandler : MonoBehaviour {
         }
     }
 
-    public void UnloadTrial()
+    public void PlayerKilled()
     {
-        if (CurrentTrial != null)
-            Destroy(CurrentTrial);
+        TrialFailed("You died");
     }
 
-    public void TrialFailed()
+    public void TrialFailed(string reason = "")
     {
+        if (CurrentTrial.CurrentState == Trial.TrialState.Ending) return;
+
         CurrentTrial.Cleanup();
-        Debug.Log("Trial Failed...");
-        UnloadTrial();
+        Debug.Log("Trial Failed... " + reason);
     }
 
     public void TrialFinished()
     {
+        if (CurrentTrial.CurrentState == Trial.TrialState.Ending) return;
+
         CurrentTrial.Cleanup();
         Debug.Log("Trial Complete!");
-        UnloadTrial();
     }
 
     public void LoadTrialScene()
@@ -111,5 +114,7 @@ public class TrialHandler : MonoBehaviour {
         yield return new WaitForSeconds(.1f);
         SceneManager.UnloadScene(SceneManager.GetSceneAt(SceneManager.sceneCount - 1).name);
         GameController.Instance.mainCanvas.enabled = true;
+        if (CurrentTrial != null)
+            Destroy(CurrentTrial);
     }
 }
