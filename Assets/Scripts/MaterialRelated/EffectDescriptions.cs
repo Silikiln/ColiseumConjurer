@@ -23,7 +23,7 @@ public static class EffectDescriptions {
         [Effect("Player Damage", true)]     PlayerDamage,      //2
         [Effect("Player Lives", true)]      PlayerLives,       //3
         [Effect("Player Size", false)]      PlayerSize,       //4
-        [Effect("Attack Speed", true)]      PlayerAttackSpeed,       //5
+        [Effect("Attack Speed", false)]     PlayerAttackSpeed,       //5
 
         // Monster Effects
         [Effect("Monster Health", false)]   MonsterHealth,    //6

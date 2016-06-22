@@ -7,17 +7,9 @@ public class PlayerController : MovingEntity {
 
     #region Material Modifiers
 
-    static PlayerController()
-    {
-        PlayerDamageDealtMultiplier = 1;
-
-        PlayerDamageRecievedMultiplier = 1;
-        PlayerHealMultiplier = 1;
-    }
-
     public static float CurrentHealthPercent = 1;
-
     public static int Lives = 1;
+
     public static float PlayerAttackSpeedMultiplier = 1;
     public static float PlayerAttackSpeedAdded = 0;
 
@@ -50,6 +42,9 @@ public class PlayerController : MovingEntity {
     protected override float DamageDealtMultiplier { get { return PlayerDamageDealtMultiplier; } }
     protected override float DamageDealtAdded { get { return PlayerDamageDealtAdded; } }
 
+    protected override float AttackSpeedMultiplier { get { return PlayerAttackSpeedMultiplier; } }
+    protected override float AttackSpeedAdded { get { return PlayerAttackSpeedAdded; } }
+
     protected override float DamageRecievedMultiplier { get { return PlayerDamageRecievedMultiplier; } }
     protected override float DamageRecievedAdded { get { return PlayerDamageReceivedAdded; } }
 
@@ -72,6 +67,7 @@ public class PlayerController : MovingEntity {
 
     GameObject grabbedObject;
     Rigidbody2D grabbedRigidbody;
+    float attackTimer = 0;
 
     override protected void Start()
     {
@@ -82,9 +78,15 @@ public class PlayerController : MovingEntity {
 
     void Update()
     {
+        if ((attackTimer -= Time.deltaTime) < 0)
+            attackTimer = 0;
+
         FaceTowardsMouse();
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && attackTimer == 0)
+        {
+            attackTimer = AttackSpeed;
             Attack();
+        }
         else if (Input.GetMouseButtonUp(1))
             Drop();
     }
@@ -146,7 +148,7 @@ public class PlayerController : MovingEntity {
     {
         GameObject fireball = (GameObject)Instantiate(fireballPrefab, transform.position, Quaternion.identity);
         fireball.transform.parent = TrialHandler.Instance.loadOnThis.transform;
-        fireball.GetComponent<FireballController>().parent = GetComponent<Entity>();
+        fireball.GetComponent<FireballController>().parent = this;
         float angle = transform.localRotation.eulerAngles.z * Mathf.Deg2Rad;
         Vector2 aim = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         fireball.GetComponent<Rigidbody2D>().AddForce(aim.normalized * projectileSpeed);
@@ -179,6 +181,9 @@ public class PlayerController : MovingEntity {
     void OnDestroy()
     {
         Instance = null;
-        CurrentHealthPercent = HealthPercent;
+        if (Health <= 0)
+            TrialHandler.Instance.PlayerKilled();
+        else
+            CurrentHealthPercent = HealthPercent;
     }
 }

@@ -25,14 +25,11 @@ public class PointMove : Trial {
         if (RequirementsMet)
             TrialHandler.Instance.TrialFinished();
         else
-            Setup();
+            CreatePoint();
     }
 
-    public override void Setup()
+    void CreatePoint()
     {
-        if(lastPosition == Vector2.zero)
-            lastPosition = PlayerController.Instance.transform.position;
-
         Vector2 position;
         do
         {
@@ -40,6 +37,13 @@ public class PointMove : Trial {
         } while (Vector3.Distance(lastPosition, position) <= MinimumDistance);
         lastPosition = position;
         Instantiate(pointPrefab, position, Quaternion.identity);
+    }
+
+    public override void Setup()
+    {
+        lastPosition = PlayerController.Instance.transform.position;
+        CreatePoint();
+        base.Setup();
     }
 
     public override bool RequirementsMet

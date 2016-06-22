@@ -26,7 +26,6 @@ public class HideAndSeek : Trial
     SpriteRenderer detectorRenderer;
     Vector2 targetPosition;
     IEnumerator objectiveCompleteCoroutine;
-    bool loaded = false;
 
     public override void Setup()
     {
@@ -36,12 +35,13 @@ public class HideAndSeek : Trial
         detector.transform.parent = PlayerController.Instance.transform;
 
         detectorRenderer = detector.GetComponent<SpriteRenderer>();
-        loaded = true;
+
+        base.Setup();
     }
 
     void Update()
     {
-        if (!loaded) return;
+        if (CurrentState != TrialState.Active) return;
 
         float distance = Vector2.Distance(PlayerController.Instance.transform.position, targetPosition);
         if (distance <= MinimumDistance)

@@ -9,6 +9,9 @@ public class Entity : MonoBehaviour {
     protected int BaseDamage = 1;
 
     [SerializeField]
+    protected float BaseAttackSpeed = .25f;
+
+    [SerializeField]
     protected float BaseSize = 1;
 
     [SerializeField]
@@ -32,6 +35,9 @@ public class Entity : MonoBehaviour {
     protected virtual float DamageDealtMultiplier { get { return 1; } }
     protected virtual float DamageDealtAdded { get { return 0; } }
 
+    protected virtual float AttackSpeedMultiplier { get { return 1; } }
+    protected virtual float AttackSpeedAdded { get { return 0; } }
+
     protected virtual float DamageRecievedMultiplier { get { return 1; } }
     protected virtual float DamageRecievedAdded { get { return 0; } }
 
@@ -43,6 +49,7 @@ public class Entity : MonoBehaviour {
 
     public float HealthPercent { get { return (float)Health / MaxHealth; } }
     public int Damage { get { return Mathf.Clamp((int)(BaseDamage * DamageDealtMultiplier + DamageDealtAdded), 0, int.MaxValue); } }
+    public float AttackSpeed { get { return BaseAttackSpeed * AttackSpeedMultiplier + AttackSpeedAdded; } }
     public int MaxHealth { get { return (int)(BaseHealth * HealthMultiplier + HealthAdded); } }
     public float Size { get { return Mathf.Clamp(BaseSize * SizeMultiplier + SizeAdded, MinimumSize, MaximumSize); } }
 

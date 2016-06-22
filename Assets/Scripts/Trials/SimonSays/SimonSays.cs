@@ -108,6 +108,7 @@ public class SimonSays : Trial
 
         shownPattern = ShowPattern();
         StartCoroutine(shownPattern);
+        base.Setup();
     }
 
     public override bool RequirementsMet

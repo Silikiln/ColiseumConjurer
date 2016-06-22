@@ -15,6 +15,8 @@ public class LightSourceController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (TrialHandler.CurrentTrial.CurrentState != Trial.TrialState.Active) return;
+
         lineRenderer.Clear();
         lineRenderer.AddPoint(transform.position);
 
