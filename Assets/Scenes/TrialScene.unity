@@ -353,6 +353,10 @@ Prefab:
       propertyPath: BaseHealth
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 11443372, guid: cc6ba274ffe6d7b48b67083fff7f4906, type: 2}
+      propertyPath: BaseAttackSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc6ba274ffe6d7b48b67083fff7f4906, type: 2}
   m_IsPrefabParent: 0
