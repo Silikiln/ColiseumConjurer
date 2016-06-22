@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
     public VendingMachine vendPanel;
     public GameObject gameOverPanel; 
 
+    public bool IsGameOver { get; private set; }
     public int MaxPortalSize = 10;
     public List<PortalMaterial> stageMaterials = new List<PortalMaterial>();
     public int portalStability = 0;
@@ -51,6 +52,7 @@ public class GameController : MonoBehaviour {
 
     public void GameOver()
     {
+        IsGameOver = true;
         gameOverPanel.SetActive(true);
         vendPanel.DisableConfirm();
         Debug.Log("Game Over!");
