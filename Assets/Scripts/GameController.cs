@@ -48,6 +48,12 @@ public class GameController : MonoBehaviour {
 
     }
 
+    public void GameOver()
+    {
+        vendPanel.DisableConfirm();
+        Debug.Log("Game Over!");
+    }
+
     public void CalculatePortalStability()
     {
         portalStability = 0;

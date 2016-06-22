@@ -86,7 +86,7 @@ public class TrialHandler : MonoBehaviour {
     public void TrialFailed(string reason = "")
     {
         if (CurrentTrial.CurrentState == Trial.TrialState.Ending) return;
-
+        PlayerController.Lives--;
         CurrentTrial.Cleanup();
         Debug.Log("Trial Failed... " + reason);
     }
@@ -114,6 +114,10 @@ public class TrialHandler : MonoBehaviour {
         yield return new WaitForSeconds(.1f);
         SceneManager.UnloadScene(SceneManager.GetSceneAt(SceneManager.sceneCount - 1).name);
         GameController.Instance.mainCanvas.enabled = true;
+
+        if (PlayerController.Lives <= 0)
+            GameController.Instance.GameOver();
+
         if (CurrentTrial != null)
             Destroy(CurrentTrial);
     }

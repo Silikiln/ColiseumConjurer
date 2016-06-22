@@ -75,6 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BaseHealth: 15
   BaseDamage: 5
+  BaseAttackSpeed: 0.25
   BaseSize: 1
   MinimumSize: 0.25
   MaximumSize: 3
@@ -111,7 +112,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 12810d7bfe490e243a0936f8c64349ea, type: 3}
   m_Color: {r: 0.014273351, g: 0.32352942, b: 0.02920298, a: 1}
   m_FlipX: 0
@@ -158,6 +159,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: MaxMaxSpeed
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -6,6 +6,7 @@ public class VendingMachine : MonoBehaviour {
     // TODO: Add option for more than 3 materials at a time
     //public int MaterialSlotCount = 3;
 
+    Button confirmButton;
     SelectButton[] materialSelectButtons = new SelectButton[3];
     Image[] visibleMaterialImages = new Image[3];
     
@@ -16,6 +17,8 @@ public class VendingMachine : MonoBehaviour {
 
     void Start()
     {
+        confirmButton = transform.Find("VendConfirm").GetComponent<Button>();
+
         // Find material select buttons
         materialSelectButtons[0] = transform.Find("VendLeftOption").GetComponent<SelectButton>();
         materialSelectButtons[1] = transform.Find("VendMidOption").GetComponent<SelectButton>();
@@ -83,5 +86,10 @@ public class VendingMachine : MonoBehaviour {
         UnselectCurrentButton();
         SelectedMaterialIndex = -1;
         GameController.Instance.displayPanel.ClearDisplay();
+    }
+
+    public void DisableConfirm()
+    {
+        confirmButton.interactable = false;
     }
 }
