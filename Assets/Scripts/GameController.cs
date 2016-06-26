@@ -13,10 +13,11 @@ public class GameController : MonoBehaviour {
     public Canvas mainCanvas;
     public DisplayPanel displayPanel;
     public VendingMachine vendPanel;
-
+<<<<<<< HEAD
     public GameObject gameOverPanel; 
-
+=======
     public Slider stableSlider;
+>>>>>>> feature/stability_meter
 
     public bool IsGameOver { get; private set; }
     public int MaxPortalSize = 10;
@@ -39,11 +40,12 @@ public class GameController : MonoBehaviour {
         foreach (MaterialEffect effect in material)
             effect.ApplyEffect();
 
+<<<<<<< HEAD
         EnemyController.CurrentEnemyCount++;
-
+=======
         //update the stability meter
         CalculatePortalStability();
-
+>>>>>>> feature/stability_meter
 
         //load a new trial
         Type trialToLoad = TrialHandler.Instance.RandomTrial;
