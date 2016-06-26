@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
     public static GameController Instance { get; private set; }
@@ -12,16 +13,20 @@ public class GameController : MonoBehaviour {
     public Canvas mainCanvas;
     public DisplayPanel displayPanel;
     public VendingMachine vendPanel;
-    public GameObject gameOverPanel; 
+    public GameObject gameOverPanel;
+    public Slider stableSlider;
 
     public bool IsGameOver { get; private set; }
     public int MaxPortalSize = 10;
     public List<PortalMaterial> stageMaterials = new List<PortalMaterial>();
-    public int portalStability = 0;
+    public float portalStability = 0;
     public int CurrentStage { get { return stageMaterials.Count + 1; } }
+
+    private Text stableSliderText;
 
     void Start () {
         Instance = this;
+        stableSliderText = stableSlider.transform.Find("stabilityText").GetComponent<Text>();
     }
 
     public void AddMaterial(PortalMaterial material)
@@ -32,7 +37,8 @@ public class GameController : MonoBehaviour {
         foreach (MaterialEffect effect in material)
             effect.ApplyEffect();
 
-        EnemyController.CurrentEnemyCount++;
+        //update the stability meter
+        CalculatePortalStability();
 
         //load a new trial
         Type trialToLoad = TrialHandler.Instance.RandomTrial;
@@ -63,13 +69,15 @@ public class GameController : MonoBehaviour {
         portalStability = 0;
         foreach (PortalMaterial pm in stageMaterials)
            portalStability += (int)pm.Color;
+        stableSlider.value = portalStability/160;
+        stableSliderText.text = "Portal Stability: " + ((portalStability / 160)*100) + "%";
     }
 
     public Type FindBossToSummon()
     {
         Type bt;
         CalculatePortalStability();
-        int tempPortalStability = portalStability;
+        int tempPortalStability = (int)portalStability;
         while (!Boss.PossibleBosses.TryGetValue(tempPortalStability--, out bt));
         return bt;
     }
