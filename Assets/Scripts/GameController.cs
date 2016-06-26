@@ -37,6 +37,8 @@ public class GameController : MonoBehaviour {
         foreach (MaterialEffect effect in material)
             effect.ApplyEffect();
 
+        EnemyController.CurrentEnemyCount++;
+
         //update the stability meter
         CalculatePortalStability();
 
