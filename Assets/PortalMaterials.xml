@@ -249,6 +249,23 @@
     </Effects>
   </Material>
   <Material>
+    <Name>Objectivus Herbious</Name>
+    <Color>Pink</Color>
+    <Description>A small budding herb.  Known for being objectively judgemental.</Description>
+    <Effects>
+      <Effect>
+        <Type>13</Type>
+        <ValueType>Flat</ValueType>
+        <Value>5</Value>
+      </Effect>
+      <Effect>
+        <Type>12</Type>
+        <ValueType>Flat</ValueType>
+        <Value>5</Value>
+      </Effect>
+    </Effects>
+  </Material>
+  <Material>
     <Name>Goldthorn</Name>
     <Color>Orange</Color>
     <Description>A thorn that is gold</Description>
