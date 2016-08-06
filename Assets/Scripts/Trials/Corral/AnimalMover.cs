@@ -17,8 +17,7 @@ public class AnimalMover : MovingEntity {
 
             //check if the player is within the detection range and facing the animal
             float playerDistance = Vector2.Distance(target.position, transform.position);
-            if (playerDistance < 2)
-            {
+            if (playerDistance < 2){
                 //the animal needs to move
                 Vector2 moveDirection = transform.position - target.position;
                 rigidbody.AddForce(moveDirection.normalized * MoveSpeed);
@@ -26,5 +25,32 @@ public class AnimalMover : MovingEntity {
                     rigidbody.velocity = rigidbody.velocity.normalized * MaxSpeed;
             }
         }
+    }
+
+    public void modifyStatsByAnimal()
+    {
+        int size = 0;
+        switch (tag)
+        {
+            case "Cow":
+                size = 20;
+                break;
+            case "Pig":
+                size = 15;
+                break;
+            case "Chicken":
+                size = 5;
+                break;
+            case "Sheep":
+                size = 10;
+                break;
+            case "Rabbit":
+                size = 1;
+                break;
+            default:
+                break;
+        }
+
+        GetComponent<AnimalMover>().BaseSize = size;
     }
 }

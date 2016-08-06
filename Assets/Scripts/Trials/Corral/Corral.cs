@@ -95,32 +95,7 @@ public class Corral : Trial {
             GameObject tempAnimal = Instantiate(animal, position, Quaternion.identity);
             tempAnimal.tag = animalTypes[Random.Range(0, animalTypes.Length)];
             tempAnimal.GetComponentInChildren<TextMesh>().text = tempAnimal.tag;
+            tempAnimal.GetComponent<AnimalMover>().modifyStatsByAnimal();
         }
-    }
-
-    public void modifyStatsByAnimal(GameObject tempAnimal){
-        int size = 0;
-        switch (tempAnimal.tag)
-        {
-            case "Cow":
-                size = 20;
-                break;
-            case "Pig":
-                size = 15;
-                break;
-            case "Chicken":
-                size = 5;
-                break;
-            case "Sheep":
-                size = 10;
-                break;
-            case "Rabbit":
-                size = 1;
-                break;
-            default:
-                break;
-        }
-
-        //tempAnimal.GetComponent<AnimalMover>().Size = size;
     }
 }

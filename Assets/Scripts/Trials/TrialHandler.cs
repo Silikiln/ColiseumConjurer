@@ -46,7 +46,7 @@ public class TrialHandler : MonoBehaviour {
         ).ToArray();
         
 
-        //PossibleEvents = new Type[]{ typeof(LightReflect) };
+        //PossibleEvents = new Type[]{ typeof(Corral) };
     }
 
     void Update()
