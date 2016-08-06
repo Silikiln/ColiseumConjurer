@@ -19,7 +19,7 @@ public class Chase : Trial
     public Chase()
     {
         Name = "Chase";
-        Description = "Follow The Leader";
+        Description = "Stay near the object";
 
         BaseObjectiveCount = 1;
         chasePrefab = LoadResource<GameObject>("ChasePoint");
